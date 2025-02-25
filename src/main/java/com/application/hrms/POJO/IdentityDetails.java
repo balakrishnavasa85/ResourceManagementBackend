@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,13 +33,12 @@ import lombok.Setter;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name = "identity")
+@Table(name = "identitydetails")
 public class IdentityDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//  @GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDENTITYDETAILS_SEQ")
 	@SequenceGenerator(name = "IDENTITYDETAILS_SEQ", sequenceName = "IDENTITYDETAILS_SEQ", allocationSize = 1)
 	@Column(name = "id")
@@ -54,16 +54,17 @@ public class IdentityDetails implements Serializable {
 	private String passport;
 
 	@Column(name = "expiry")
-	private String expiry;	
+	private String expiry;		
 
-	@Column(name = "user")
-	private Integer user;
+	@OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 	public void setId(Integer inte) {
 		this.id = inte;
 	}
 	
-	public void setUser(Integer inte) {
+	public void setUser(User inte) {
 		this.user = inte;
 	}
 	
@@ -87,9 +88,9 @@ public class IdentityDetails implements Serializable {
 		return id;
 	}
 	
-	public Integer getUser() {
-		return user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
 
 	public String getPan() {
 		return pan;

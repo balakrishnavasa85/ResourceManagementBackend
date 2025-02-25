@@ -65,7 +65,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 //				userdao.updateLoginStatus("1", id);
 						LeaveRequest ets = new LeaveRequest();
 						ets.setStatus(requestMap.get("status"));
-						ets.setUser(id);
+						ets.setUser(useri.get());
 						ets.setUsername(useri.get().getName());
 						ets.setReason(requestMap.get("reason"));
 						ets.setComment("");
@@ -112,7 +112,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 					lrd.save(ets);
 					if ("approved".equalsIgnoreCase(requestMap.get("status"))) {
 	                JSONObject jsonObject = new JSONObject();
-	                jsonObject.put("user", ets.getUser());
+	                jsonObject.put("user", ets.getUser().getId());
 	                jsonObject.put("noofdays", lr.get().getNoofdays());
 	                jsonObject.put("status", requestMap.get("status"));
 	                jsonArray.put(jsonObject);

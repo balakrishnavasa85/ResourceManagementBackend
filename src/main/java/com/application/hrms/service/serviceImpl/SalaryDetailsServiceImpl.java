@@ -62,7 +62,8 @@ public class SalaryDetailsServiceImpl implements SalaryDetailsService {
 				sdData.setIfsccode(
 						requestMap.containsKey("ifsccode") ? requestMap.get("ifsccode") : "");
 			}
-			sdData.setUser(user);
+//			sdData.setUser(user);
+			sdData.setUser(optional.get());
 			sdd.save(sdData);
 			return HrmsUtils.getResponeEntity("Profile picture uploaded successfully", HttpStatus.OK);
 		} else {

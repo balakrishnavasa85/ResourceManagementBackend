@@ -34,11 +34,11 @@ public interface EmpTImeSheetDao extends JpaRepository<EmpTimeSheet, Integer> {
     @Query(value = "select * from EmpTimeSheet u where u.user =:id and u.status =:status order by asc", nativeQuery = true)
     List<EmpTimeSheet> findByEmpIdStatus(@Param("id") Integer id, @Param("status") Integer status);
 
-    @Query(value = "select * from EmpTimeSheet u where u.user =:id and u.logouttime =:checkout", nativeQuery = true)
+    @Query(value = "select * from emptimesheet u where u.user_id =:id and u.logouttime =:checkout", nativeQuery = true)
     EmpTimeSheet findByLogedItem(@Param("id") Integer id, @Param("checkout") String checkout);
 
     @Query(value = "SELECT " +
-            "user, " +
+            "user_id, " +
             "STR_TO_DATE(logintime, '%d-%m-%Y') AS workingdate, " +
             "CONCAT(" +
             "LEAST(FLOOR(SUM(workinghours) / 3600000), 9), 'h ', " +
@@ -55,9 +55,9 @@ public interface EmpTImeSheetDao extends JpaRepository<EmpTimeSheet, Integer> {
             "WHEN SUM(workinghours) > 18000000 THEN 'fullday' " +
             "ELSE 'halfday' " +
             "END AS mode " +
-            "FROM EmpTimeSheet " +
+            "FROM emptimesheet " +
             "WHERE logouttime != 'checkout' " +
-            "GROUP BY user, STR_TO_DATE(logintime, '%d-%m-%Y') " +
-            "ORDER BY user, workingdate", nativeQuery = true)
+            "GROUP BY user_id, STR_TO_DATE(logintime, '%d-%m-%Y') " +
+            "ORDER BY user_id	, workingdate", nativeQuery = true)
     List<Object[]> findUserWorkingHours();
 }

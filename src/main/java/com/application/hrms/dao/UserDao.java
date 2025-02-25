@@ -4,6 +4,8 @@ import com.application.hrms.POJO.User;
 import javax.transaction.Transactional;
 
 import com.application.hrms.wrapper.UserWrapper;
+
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -43,11 +45,16 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query(value="select * from User u where u.email=:email", nativeQuery=true)
     User findByEmailId(String email);
 
+//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     @Query("select u  from User u  where u.id =:id")
 	List<User> getUserById(@Param("id") Integer id);
     
+//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     @Query("select u  from User u  where u.manager = 'y'")
 	List<User> findAllAdmins();
+    
+    @Query("select u  from User u  where u.name =:user")
+    User findByUsername(@Param("user") String user);
     
 
     @Query("select u  from User u  where u.id =:id")
@@ -63,6 +70,20 @@ public interface UserDao extends JpaRepository<User, Integer> {
     
     @Query("select u.name from User u where u.id =:reporting")
     String getReporterName(@Param("reporting") Integer reporting);
+    
+//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
+    List<User> findAll();
+ 
+
+//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductionGroup"})
+//    List<User> getUserById(Integer id);
+
+//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductionGroup"})
+//    List<User> findAllAdmins();
+
+//    @Query("SELECT u.reportername FROM User u WHERE u.id = :id")
+//    String getReporterName(@Param("id") Integer id);
+
     
 }
 

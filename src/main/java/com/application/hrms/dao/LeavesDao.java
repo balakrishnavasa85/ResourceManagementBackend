@@ -41,7 +41,7 @@ public interface LeavesDao extends JpaRepository<Leaves, Integer> {
 //	@Query("FLUSH")
 //	void flush();
 	  
-	@Query("select u  from Leaves u  where u.user =:id")
+	@Query("select u  from Leaves u  where u.user.id =:id")
 	Leaves getLeavesByUserId(@Param("id") Integer id);
 	 
 	 

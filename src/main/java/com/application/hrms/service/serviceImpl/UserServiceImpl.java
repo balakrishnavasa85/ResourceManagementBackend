@@ -138,6 +138,7 @@ public class UserServiceImpl implements UserService {
 				+ jsonObjectv.getDouble("leavetravelallowance") * 12 + jsonObjectv.getDouble("telephoneinternet") * 12
 				+ jsonObjectv.getDouble("childreneducationallowance") * 12;
 		System.out.println("Sum of selected keys: " + sum);
+		
 		Double basic = (Double.parseDouble(requestMap.get("salarypa").replace(",", "")) - sum);
 		System.out.println("Basic of selected keys: " + basic);
 		user.setBasicpa(basic.toString());

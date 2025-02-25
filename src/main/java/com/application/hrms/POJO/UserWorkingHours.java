@@ -43,9 +43,10 @@ public class UserWorkingHours implements Serializable {
 	@SequenceGenerator(name = "USERWORKINGHOURS_SEQ", sequenceName = "USERWORKINGHOURS_SEQ", allocationSize = 1)
 	@Column(name = "id")
 	private Integer id;
-
-	@Column(name = "user")
-	private Integer user;
+	
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 	@Column(name = "workingdate")
 	private String workingdate;
@@ -63,7 +64,7 @@ public class UserWorkingHours implements Serializable {
 		this.id = inte;
 	}
 
-	public void setUser(Integer str) {
+	public void setUser(User str) {
 		this.user = str;
 	}
 
@@ -87,7 +88,7 @@ public class UserWorkingHours implements Serializable {
 		return id;
 	}
 
-	public Integer getUser() {
+	public User getUser() {
 		return user;
 	}
 

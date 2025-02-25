@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,6 +50,11 @@ public class Department implements Serializable {
 
 	@Column(name = "status")
 	private String status;
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> users;
+
+//    private User user;
 
 	public void setName(String name) {
 		this.name = name;

@@ -30,10 +30,10 @@ import java.util.Optional;
 @Repository
 public interface UserWorkingDaysDao extends JpaRepository<UserWorkingDays, Integer> { 
 	
-	@Query("select u from UserWorkingDays u where u.user =:id and u.year =:year and u.month=:monthname")
+	@Query("select u from UserWorkingDays u where u.user.id =:id and u.year =:year and u.month=:monthname")
     List<UserWorkingDays> getPayslip(@Param("id") Integer id, @Param("monthname") String monthname, @Param("year") Integer year);
 
-	@Query("select u from UserWorkingDays u where u.user =:id")
+	@Query("select u from UserWorkingDays u where u.user.id =:id")
     List<UserWorkingDays> getPayslipById(@Param("id") Integer id);
 
 }

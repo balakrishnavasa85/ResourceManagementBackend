@@ -19,9 +19,10 @@ public class UserWorkingDays implements Serializable {
     @SequenceGenerator(name = "USERWORKINGDAYS_SEQ", sequenceName = "USERWORKINGDAYS_SEQ", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
-
-    @Column(name = "user")
-    private Integer user;
+   
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
     
     @Column(name = "name")
     private String name;
@@ -98,11 +99,11 @@ public class UserWorkingDays implements Serializable {
         this.id = id;
     }
 
-    public Integer getUser() {
+    public User getUser() {
         return user;
     }
     
-    public void setUser(Integer user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

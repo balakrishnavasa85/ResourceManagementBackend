@@ -60,7 +60,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 
                     EmpTimeSheet ets = new EmpTimeSheet();
                     ets.setStatus("1");
-                    ets.setUser(id);
+                    ets.setUser(useri.get());
                     ets.setLogouttime("checkout");
                     ets.setWorkinghours("0");
 
@@ -94,7 +94,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
                 if (etso != null) {
                     EmpTimeSheet ets = new EmpTimeSheet();
                     ets.setStatus("0");
-                    ets.setUser(id);
+                    ets.setUser(useri.get());
                     ets.setId(etso.getId());
                     ets.setLogintime(etso.getLogintime());
 
@@ -132,6 +132,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             for (Object[] result : results) {
                 Integer user = (Integer) result[0];
+                Optional<User> useri = userdao.findById(user);
                 Date workingdate = (Date) result[1];
                 String workingHours = (String) result[2];
                 String totalworkinghours = (String) result[3];
@@ -140,7 +141,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 
                 // Create a new UserWorkingHours object
                 UserWorkingHours userWorkingHour = new UserWorkingHours();
-                userWorkingHour.setUser(user);
+                userWorkingHour.setUser(useri.get());
                 userWorkingHour.setWorkingdate(formattedWorkingdate);
                 userWorkingHour.setWorkinghours(workingHours);
                 userWorkingHour.setTotalworkinghours(totalworkinghours);

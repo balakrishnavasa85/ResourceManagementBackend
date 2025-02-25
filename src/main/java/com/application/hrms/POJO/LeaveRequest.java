@@ -59,10 +59,7 @@ public class LeaveRequest implements Serializable {
 	private String reason;
 	
 	@Column(name = "comment")
-	private String comment;
-
-	@Column(name = "user")
-	private Integer user;
+	private String comment; 
 	
 	@Column(name = "username")
 	private String username;
@@ -75,6 +72,10 @@ public class LeaveRequest implements Serializable {
 
 	@Column(name = "approver")
 	private String approver;
+
+	@ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 	public void setRequestFromDate(String name) {
 		this.requestfromdate = name;
@@ -95,7 +96,7 @@ public class LeaveRequest implements Serializable {
 		this.id = inte;
 	}
 
-	public void setUser(Integer user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	
@@ -138,7 +139,7 @@ public class LeaveRequest implements Serializable {
 		return id;
 	}
 
-	public Integer getUser() {
+	public User getUser() {
 		return user;
 	}
 

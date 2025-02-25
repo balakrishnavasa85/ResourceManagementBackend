@@ -42,9 +42,9 @@ public interface DeductionGroupDao extends JpaRepository<DeductionGroup, Integer
 	@Query("select new com.application.hrms.wrapper.DeductionGroupWrapper(u.id , u.name ,u.value, u.status) from DeductionGroup u  where u.id =:id")
 	List<DeductionGroupWrapper> getDeductionGroupById(@Param("id") Integer id);
 
-	@Query(value = "select * from DeductionGroup u where u.name=:name", nativeQuery = true)
+	@Query("select u from DeductionGroup u where u.name=:name")
 	DeductionGroup findByName(String name);
 
-	@Query(value = "select * from DeductionGroup u  where u.id =:id", nativeQuery = true)
+	@Query("select u from DeductionGroup u  where u.id =:id")
 	DeductionGroup getDeductionGroupInfoById(@Param("id") Integer id);
 }

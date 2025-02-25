@@ -22,7 +22,7 @@ import java.util.Optional;
 @Repository
 public interface IdentityDetailsDao extends JpaRepository<IdentityDetails, Integer> {
 	
-	@Query("select u from IdentityDetails u where u.user=:user")
+	@Query(value="select * from identitydetails u where u.user_id=:user",nativeQuery=true)
 	Optional<IdentityDetails> findByUser(Integer user);
 	 
 }

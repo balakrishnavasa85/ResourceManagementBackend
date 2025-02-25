@@ -35,32 +35,48 @@ import lombok.Setter;
 @DynamicInsert
 @Table(name = "leaves")
 public class Leaves implements Serializable {
-       
-    private static final long serialVersionUID = 1L;
 
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
 //  @GeneratedValue(strategy = GenerationType.AUTO)
-  @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="LEAVES_SEQ")
-  @SequenceGenerator(name="LEAVES_SEQ",sequenceName="LEAVES_SEQ",allocationSize=1)
-    @Column(name = "id")
-    private Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LEAVES_SEQ")
+	@SequenceGenerator(name = "LEAVES_SEQ", sequenceName = "LEAVES_SEQ", allocationSize = 1)
+	@Column(name = "id")
+	private Integer id;
 
-    @Column(name = "balance")
-    private Integer balance;
-    
-    @Column (name = "user")
-    private Integer user;
-    
+	@Column(name = "balance")
+	private Integer balance;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+
 //    @ManyToOne
 //    private User user;
-   
-     
- 	public void setId(Integer inte) {this.id = inte;	}
- 	public void setBalance(Integer str) {this.balance= str;}
-    public void setUser(Integer user) {this.user = user;}
 
-	public Integer getId() {		return id;			}	
-	public Integer getBalance() {return balance;}
-	public Integer getUser() { return user; }
-	
+	public void setId(Integer inte) {
+		this.id = inte;
+	}
+
+	public void setBalance(Integer str) {
+		this.balance = str;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
 }

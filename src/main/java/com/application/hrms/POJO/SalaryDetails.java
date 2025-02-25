@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -59,14 +60,15 @@ public class SalaryDetails implements Serializable {
 	@Column(name = "ifsccode")
 	private String ifsccode;	
 
-	@Column(name = "user")
-	private Integer user;
+	@OneToOne
+	@JoinColumn(name = "user_id", unique = true, nullable = false)
+	private User user;
 
 	public void setId(Integer inte) {
 		this.id = inte;
 	}
 	
-	public void setUser(Integer inte) {
+	public void setUser(User inte) {
 		this.user = inte;
 	}
 	
@@ -94,9 +96,9 @@ public class SalaryDetails implements Serializable {
 		return id;
 	}
 	
-	public Integer getUser() {
-		return user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
 
 	public String getUan() {
 		return uan;

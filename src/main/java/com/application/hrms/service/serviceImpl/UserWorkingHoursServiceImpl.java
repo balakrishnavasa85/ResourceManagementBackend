@@ -86,8 +86,8 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				System.out.println(result[1]);
 				BigInteger dayscountBigInt = (BigInteger) result[0];
 				Integer dayscount = dayscountBigInt.intValue();
-				String userStr = (String) result[1];
-				Integer user = Integer.parseInt(userStr);
+//				Integer userStr = (Integer) result[1];
+				Integer user =  (Integer) result[1];
 				String month = (String) result[2];
 				String yearStr = (String) result[3];
 				Integer year = Integer.parseInt(yearStr);
@@ -153,7 +153,7 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 						.setScale(2, RoundingMode.HALF_UP);
 
 				UserWorkingDays userWorkingDay = new UserWorkingDays();
-				userWorkingDay.setUser(user);
+				userWorkingDay.setUser(userDetails);
 				userWorkingDay.setDayscount(dayscount + numberofholidays + approvedLeaves + weekendCount);
 				userWorkingDay.setName(name);
 				userWorkingDay.setMonth(month);

@@ -65,7 +65,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	public boolean isAdmin() {
 		System.out.println("admin".equalsIgnoreCase((String) claims.get("role")));
-		return "admin".equalsIgnoreCase((String) claims.get("role"));
+		return "admin".equalsIgnoreCase((String) claims.get("role")) || "superadmin".equalsIgnoreCase((String) claims.get("role"));
 	}
 
 	public boolean isUser() {

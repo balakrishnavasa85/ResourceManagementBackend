@@ -63,7 +63,7 @@ public class IdentityDetailsServiceImpl implements IdentityDetailsService {
 				sdData.setExpiry(
 						requestMap.containsKey("expiry") ? requestMap.get("ifsccode") : "");
 			}
-			sdData.setUser(user);
+			sdData.setUser(optional.get());
 			idd.save(sdData);
 			return HrmsUtils.getResponeEntity("Identiy Details uploaded successfully", HttpStatus.OK);
 		} else {

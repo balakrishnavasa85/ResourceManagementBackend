@@ -21,7 +21,7 @@ import java.util.Optional;
 @Repository
 public interface SalaryDetailsDao extends JpaRepository<SalaryDetails, Integer> {
 	
-	@Query("select u from SalaryDetails u where u.user=:user")
+	@Query(value="select * from salarydetails u where u.user_id=:user",nativeQuery=true)
 	Optional<SalaryDetails> findByUser(Integer user);
 	 
 }

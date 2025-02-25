@@ -77,7 +77,7 @@ public class LeavesServiceImpl implements LeavesService {
 			if (useri.isPresent() && !leavesi.isPresent()) {
 				Leaves ls = new Leaves();
 				ls.setBalance(2);
-				ls.setUser(id);
+				ls.setUser(useri.get());
 				leavesdao.save(ls);
 				return HrmsUtils.getResponeEntity("Successfully Leave Balance Submited.", HttpStatus.OK);
 			} else {

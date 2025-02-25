@@ -42,7 +42,7 @@ public interface LeaveRequestDao extends JpaRepository<LeaveRequest, Integer> {
 	Integer updateApproveReject(@Param("leaverequestid") Integer leaverequestid, @Param("approverid") Integer approverid,
 			@Param("comment") String comment, @Param("status") String status);
 	
-	@Query("select u  from LeaveRequest u  where u.user =:id")
+	@Query("select u  from LeaveRequest u  where u.user.id =:id")
 	List<LeaveRequest> 	findApplyedLeaveInfo(@Param("id") Integer id);
 	
 
@@ -51,7 +51,7 @@ public interface LeaveRequestDao extends JpaRepository<LeaveRequest, Integer> {
 
 	@Query(value = "SELECT SUM(noofdays) AS approveddays " +
                    "FROM LeaveRequest " +
-                   "WHERE status = 'approved' and user =:id " +
+                   "WHERE status = 'approved' and user_id =:id " +
                    "AND STR_TO_DATE(requestfromdate, '%d-%m-%Y') >= STR_TO_DATE(CONCAT('25-', MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH)), '-', YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))), '%d-%m-%Y') " +
                    "AND STR_TO_DATE(requesttodate, '%d-%m-%Y') <= STR_TO_DATE(CONCAT('24-', MONTH(CURDATE()), '-', YEAR(CURDATE())), '%d-%m-%Y')", nativeQuery = true)
     Integer countApprovedLeaves(@Param("id") Integer id);
@@ -59,8 +59,8 @@ public interface LeaveRequestDao extends JpaRepository<LeaveRequest, Integer> {
 	@Query(value = "WITH RECURSIVE DateSeries AS ( "
 			+ "SELECT STR_TO_DATE(l.requestfromdate, '%d-%m-%Y') AS date_value, "
 			+ "STR_TO_DATE(l.requesttodate, '%d-%m-%Y') AS requesttodate "
-			+ "FROM hrms.leaverequest l "
-			+ "WHERE l.status !='rejected' and l.user = :userId "
+			+ "FROM hrmsnew.leaverequest l "
+			+ "WHERE l.status !='rejected' and l.user_id = :userId "
 			+ "UNION ALL "
 			+ "SELECT DATE_ADD(date_value, INTERVAL 1 DAY), requesttodate "
 			+ "FROM DateSeries "
