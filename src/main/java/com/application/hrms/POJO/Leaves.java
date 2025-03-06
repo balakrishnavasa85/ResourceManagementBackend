@@ -63,10 +63,6 @@ public class Leaves implements Serializable {
 		this.balance = str;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -77,6 +73,10 @@ public class Leaves implements Serializable {
 
 	public User getUser() {
 		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

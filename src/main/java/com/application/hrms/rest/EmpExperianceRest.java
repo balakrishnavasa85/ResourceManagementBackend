@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.application.hrms.wrapper.EmpExperianceWrapper;
+import com.application.hrms.POJO.EmpExperiance;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 public interface EmpExperianceRest {
 
 	@GetMapping(path = "/getInfo/{id}")
-	public ResponseEntity<List<EmpExperianceWrapper>> getEmpExperianceInfo(@PathVariable Integer id);
+	public ResponseEntity<List<EmpExperiance>> getEmpExperianceInfo(@PathVariable Integer id);
 
 	@PutMapping(path = "/updateInfo/{id}")
 	public ResponseEntity<String> updateEmpExperiance(@PathVariable Integer id,
@@ -28,5 +28,5 @@ public interface EmpExperianceRest {
 	public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
 
 	@GetMapping(path = "/getEmpExperianceInfo/{id}")
-	public ResponseEntity<List<EmpExperianceWrapper>> getUserEmpExperianceInfo(@PathVariable Integer id);
+	public ResponseEntity<List<EmpExperiance>> getUserEmpExperianceInfo(@PathVariable Integer id);
 }

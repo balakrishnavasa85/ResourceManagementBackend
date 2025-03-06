@@ -29,6 +29,6 @@ public interface UserService {
 	ResponseEntity<List<User>> getUserInfo(Integer id); 
 	
 	ResponseEntity <String> uploadProfilePicture(Integer id,MultipartFile file);
-
-
+	
+	ResponseEntity <String> uploadUsers(List<Map<String, Object>> users);
 }

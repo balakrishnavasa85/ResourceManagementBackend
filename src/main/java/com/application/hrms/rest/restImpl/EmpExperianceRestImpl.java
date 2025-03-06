@@ -14,7 +14,7 @@ import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.EmpExperianceRest;
 import com.application.hrms.service.EmpExperianceService;
 import com.application.hrms.utils.HrmsUtils;
-import com.application.hrms.wrapper.EmpExperianceWrapper;
+import com.application.hrms.POJO.EmpExperiance;
 
 @RestController
 public class EmpExperianceRestImpl implements EmpExperianceRest {
@@ -23,13 +23,13 @@ public class EmpExperianceRestImpl implements EmpExperianceRest {
 	EmpExperianceService relationService;
 
 	@Override
-	public ResponseEntity<List<EmpExperianceWrapper>> getEmpExperianceInfo(Integer id) {
+	public ResponseEntity<List<EmpExperiance>> getEmpExperianceInfo(Integer id) {
 		 try {
 	            return relationService.getEmpExperianceInfo(id);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
-	        return new ResponseEntity<List<EmpExperianceWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	        return new ResponseEntity<List<EmpExperiance>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 	
 	}
 
@@ -56,13 +56,13 @@ public class EmpExperianceRestImpl implements EmpExperianceRest {
 		    }
 
 	@Override
-	public ResponseEntity<List<EmpExperianceWrapper>> getUserEmpExperianceInfo(Integer id) {
+	public ResponseEntity<List<EmpExperiance>> getUserEmpExperianceInfo(Integer id) {
 		try {
             return relationService.getUserEmpExperianceInfo(id);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<List<EmpExperianceWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<List<EmpExperiance>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
   
 	}
 

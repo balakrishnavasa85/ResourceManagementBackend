@@ -121,6 +121,13 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<UserWorkingHours> userWorkingHours;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<EmpEducation> empEducations;
+
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<EmpExperiance> empExperiances;
 
 	public void setName(String name) {
 		this.name = name;
@@ -328,4 +335,21 @@ public class User implements Serializable {
     public void setIdentityDetails(IdentityDetails identityDetails) {
         this.identityDetails = identityDetails;
     }
+    
+    public List<EmpEducation> getEmpEducation() {
+        return empEducations;
+    }
+
+    public void setEmpEducation(List<EmpEducation> empEducation) {
+        this.empEducations = empEducation;
+    }
+    
+    public List<EmpExperiance> getEmpExperiance() {
+        return empExperiances;
+    }
+
+    public void setEmpExperiance(List<EmpExperiance> empExperiance) {
+        this.empExperiances = empExperiance;
+    }
+
 }

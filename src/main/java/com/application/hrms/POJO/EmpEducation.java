@@ -43,16 +43,16 @@ public class EmpEducation implements Serializable {
   @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="EMPEDUCATION_SEQ")
   @SequenceGenerator(name="EMPEDUCATION_SEQ",sequenceName="EMPEDUCATION_SEQ",allocationSize=1)
     @Column(name = "id")
-    private Integer id;
-    
-    @Column (name = "user")
-    private Integer user;
+    private Integer id; 
 
     @Column(name = "study")
     private String study;
 
     @Column(name = "duration")
     private String duration;
+    
+    @Column(name ="university")
+    private String university;
 
     @Column(name = "joiningdate")
     private String joiningdate;
@@ -60,18 +60,36 @@ public class EmpEducation implements Serializable {
     @Column(name = "releavedate")
     private String releavedate; 
     
+    @Column(name = "filepath")
+    private String filepath; 
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    
     public void setStudy(String name) { this.study = name; } 
  	public void setJoiningDate(String string) {this.joiningdate = string;			}
  	public void setReleaveDate(String string) {this.releavedate = string;			}
+ 	public void setUniversity(String uni) {this.university = uni;}
  	public void setId(Integer inte) {this.id = inte;	}
  	public void setDuration(String str) {this.duration= str;}
-    public void setUser(Integer user) {this.user = user;}
+    public void setFilepath(String filepath) {this.filepath= filepath;}
     
  	public String getStudy() { return study; } 
 	public String getJoiningDate() {return joiningdate;		}	
 	public String getReleaveDate() {return releavedate;		}	
+	public String getUniversity() {return university;}
 	public Integer getId() {		return id;			}	
 	public String getDuration() {return duration;}
-	public Integer getUser() { return user; }
+	public String getFilepath() { return filepath; }
+
+
+//	public User getUser() {
+//		return user;
+//	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }

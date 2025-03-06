@@ -5,15 +5,15 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
-import com.application.hrms.wrapper.EmpExperianceWrapper;
+import com.application.hrms.POJO.EmpExperiance;
 
 public interface EmpExperianceService {
 	
-	ResponseEntity<List<EmpExperianceWrapper>> getEmpExperianceInfo(Integer id); 
+	ResponseEntity<List<EmpExperiance>> getEmpExperianceInfo(Integer id); 
 
 	ResponseEntity<String> updateInfo(Integer id, Map<String, String> requestMap);
 	
 	ResponseEntity<String> create(Map<String,String> requestMap);
 
-	ResponseEntity<List<EmpExperianceWrapper>> getUserEmpExperianceInfo(Integer id);
+	ResponseEntity<List<EmpExperiance>> getUserEmpExperianceInfo(Integer id);
 }

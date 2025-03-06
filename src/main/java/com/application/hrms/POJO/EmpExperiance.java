@@ -43,10 +43,7 @@ public class EmpExperiance implements Serializable {
   @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="EMPEXP_SEQ")
   @SequenceGenerator(name="EMPEXP_SEQ",sequenceName="EMPEXP_SEQ",allocationSize=1)
     @Column(name = "id")
-    private Integer id;
-    
-    @Column (name = "user")
-    private Integer user;
+    private Integer id; 
 
     @Column(name = "companyname")
     private String companyname;
@@ -60,8 +57,12 @@ public class EmpExperiance implements Serializable {
     @Column(name = "releavedate")
     private String releavedate;
     
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    
+    @Column(name = "filepath")
+    private String filepath; 
    
     
     public void setCompanyName(String name) { this.companyname = name; } 
@@ -69,13 +70,21 @@ public class EmpExperiance implements Serializable {
  	public void setReleaveDate(String string) {this.releavedate = string;			}
  	public void setId(Integer inte) {this.id = inte;	}
  	public void setExperiance(String str) {this.experiance= str;}
-    public void setUser(Integer user) {this.user = user;}
+    public void setFilepath(String filepath) {this.filepath= filepath;}
     
  	public String getCompanyName() { return companyname; } 
 	public String getJoiningDate() {return joiningdate;		}	
 	public String getReleaveDate() {return releavedate;		}	
 	public Integer getId() {		return id;			}	
 	public String getExperiance() {return experiance;}
-	public Integer getUser() { return user; }
+	public String getFilepath() { return filepath; }
+
+
+	public User getUser() {
+		return user;
+	}
 	
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

@@ -9,12 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.EmpEducationRest;
 import com.application.hrms.service.EmpEducationService;
 import com.application.hrms.utils.HrmsUtils;
-import com.application.hrms.wrapper.EmpEducationWrapper;
+import com.application.hrms.POJO.EmpEducation;
 
 @RestController
 public class EmpEducationRestImpl implements EmpEducationRest {
@@ -23,13 +24,13 @@ public class EmpEducationRestImpl implements EmpEducationRest {
 	EmpEducationService relationService;
 
 	@Override
-	public ResponseEntity<List<EmpEducationWrapper>> getEmpEducationInfo(Integer id) {
+	public ResponseEntity<List<EmpEducation>> getEmpEducationInfo(Integer id) {
 		 try {
 	            return relationService.getEmpEducationInfo(id);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
-	        return new ResponseEntity<List<EmpEducationWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	        return new ResponseEntity<List<EmpEducation>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 	
 	}
 
@@ -44,10 +45,10 @@ public class EmpEducationRestImpl implements EmpEducationRest {
 	}
 
 	@Override
-	public ResponseEntity<String> create(Map<String, String> requestMap) {
+	public ResponseEntity<String> create(Integer id,List<String> educations, List<MultipartFile> files) {
 		 try {
 	            //System.out.println("inside userRestImpl");
-	            return relationService.create(requestMap);
+	            return relationService.create(id,educations,files);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
@@ -56,13 +57,13 @@ public class EmpEducationRestImpl implements EmpEducationRest {
 		    }
 
 	@Override
-	public ResponseEntity<List<EmpEducationWrapper>> getUserEmpEducationInfo(Integer id) {
+	public ResponseEntity<List<EmpEducation>> getUserEmpEducationInfo(Integer id) {
 		try {
             return relationService.getUserEmpEducationInfo(id);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<List<EmpEducationWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<List<EmpEducation>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
   
 	}
 

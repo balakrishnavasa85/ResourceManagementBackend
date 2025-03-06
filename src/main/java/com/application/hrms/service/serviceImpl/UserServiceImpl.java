@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	DeductionGroupDao dgd;
-	
+
 	@Autowired
 	EmpTImeSheetServiceImpl etssi;
 
@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
 		user.setMode(requestMap.get("mode"));
 		user.setProfilepic("");
 		String reporting = requestMap.get("reporting");
-		String reportername  = userDao.getReporterName(Integer.parseInt(reporting));
+		String reportername = userDao.getReporterName(Integer.parseInt(reporting));
 		user.setReportername(reportername);
 		DeductionGroup dgdi = dgd.getDeductionGroupInfoById(Integer.parseInt(requestMap.get("deductiongroup_id")));
 		user.setDeductionGroup(dgdi);
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
 				+ jsonObjectv.getDouble("leavetravelallowance") * 12 + jsonObjectv.getDouble("telephoneinternet") * 12
 				+ jsonObjectv.getDouble("childreneducationallowance") * 12;
 		System.out.println("Sum of selected keys: " + sum);
-		
+
 		Double basic = (Double.parseDouble(requestMap.get("salarypa").replace(",", "")) - sum);
 		System.out.println("Basic of selected keys: " + basic);
 		user.setBasicpa(basic.toString());
@@ -161,13 +161,13 @@ public class UserServiceImpl implements UserService {
 
 	public ResponseEntity<String> login(Map<String, String> requestMap) {
 		try {
-			System .out.println(HrmsConstants.INVALID_DATA + requestMap);
+			System.out.println(HrmsConstants.INVALID_DATA + requestMap);
 			Authentication auth = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password")));
 			if (auth.isAuthenticated()) {
-				 String status = customerUserDetailsService.getUserDatails().getStatus();
-                if (status.equalsIgnoreCase("y") || status.equalsIgnoreCase("true")) {
-                	etssi.emplogin(customerUserDetailsService.getUserDatails().getId());
+				String status = customerUserDetailsService.getUserDatails().getStatus();
+				if (status.equalsIgnoreCase("y") || status.equalsIgnoreCase("true")) {
+					etssi.emplogin(customerUserDetailsService.getUserDatails().getId());
 					return new ResponseEntity<String>(
 							"{\"token\":\""
 									+ jwtUtil.generateToken(customerUserDetailsService.getUserDatails().getEmail(),
@@ -304,7 +304,7 @@ public class UserServiceImpl implements UserService {
 					user.setManager(requestMap.get("manager"));
 					user.setReporting(requestMap.get("reporting"));
 					String reporting = requestMap.get("reporting");
-					String reportername  = userDao.getReporterName(Integer.parseInt(reporting));
+					String reportername = userDao.getReporterName(Integer.parseInt(reporting));
 					user.setReportername(reportername);
 					user.setLogin(requestMap.get("login"));
 					user.setMode(requestMap.get("mode"));
@@ -313,11 +313,12 @@ public class UserServiceImpl implements UserService {
 					DeductionGroup dgdi = dgd
 							.getDeductionGroupInfoById(Integer.parseInt(requestMap.get("deductiongroup_id")));
 					user.setDeductionGroup(dgdi);
-					
+
 					JSONObject jsonObjectv = new JSONObject(dgdi.getValue());
 					double sum = 0;
 					sum = sum + jsonObjectv.getDouble("PF") * 12 + jsonObjectv.getDouble("carmaintenance") * 12
-							+ jsonObjectv.getDouble("leavetravelallowance") * 12 + jsonObjectv.getDouble("telephoneinternet") * 12
+							+ jsonObjectv.getDouble("leavetravelallowance") * 12
+							+ jsonObjectv.getDouble("telephoneinternet") * 12
 							+ jsonObjectv.getDouble("childreneducationallowance") * 12;
 					System.out.println("Sum of selected keys: " + sum);
 					Double basic = (Double.parseDouble(requestMap.get("salarypa").replace(",", "")) - sum);
@@ -343,12 +344,12 @@ public class UserServiceImpl implements UserService {
 		List<User> list = new ArrayList<User>();
 		try {
 //			if (jwtFilter.isAdmin()) {
-				Optional<User> optional = userDao.findById(id);
-				if (optional.isPresent()) {
-					return new ResponseEntity<List<User>>(userDao.getUserById(id), HttpStatus.OK);
-				} else {
-					return new ResponseEntity<List<User>>(list, HttpStatus.UNAUTHORIZED);
-				}
+			Optional<User> optional = userDao.findById(id);
+			if (optional.isPresent()) {
+				return new ResponseEntity<List<User>>(userDao.getUserById(id), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<User>>(list, HttpStatus.UNAUTHORIZED);
+			}
 //			} else {
 //				return new ResponseEntity<List<User>>(list, HttpStatus.UNAUTHORIZED);
 //			}
@@ -374,30 +375,70 @@ public class UserServiceImpl implements UserService {
 		}
 		return new ResponseEntity<List<User>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
 
-	    @Override
-	    public ResponseEntity<String> uploadProfilePicture(Integer userId, MultipartFile file) {
-	        try {
-	            Optional<User> optionalUser = userDao.findById(userId);
-	            final String UPLOAD_DIR = "uploads/profile_pictures/"+userId+"/profile/";
-	            if (optionalUser.isPresent()) {
-	                User user = optionalUser.get();
-	                String fileName = userId + "_" + file.getOriginalFilename();
-	                Path filePath = Paths.get(UPLOAD_DIR + fileName);
-	                Files.createDirectories(filePath.getParent());
-	                Files.write(filePath, file.getBytes());
-String filepath = filePath.toString();
+	@Override
+	public ResponseEntity<String> uploadProfilePicture(Integer userId, MultipartFile file) {
+		try {
+			Optional<User> optionalUser = userDao.findById(userId);
+			final String UPLOAD_DIR = "uploads/profile_pictures/" + userId + "/";
+			if (optionalUser.isPresent()) {
+				User user = optionalUser.get();
+				String fileName = userId + "_" + file.getOriginalFilename();
+				Path filePath = Paths.get(UPLOAD_DIR + fileName);
+				Files.createDirectories(filePath.getParent());
+				Files.write(filePath, file.getBytes());
+				String filepath = filePath.toString();
 //	                user.setProfilepic(filePath.toString());
-	                userDao.saveProfilepic(userId,filepath);
+				userDao.saveProfilepic(userId, filepath);
 
-	                return HrmsUtils.getResponeEntity("Profile picture uploaded successfully", HttpStatus.OK);
-	            } else {
-	                return HrmsUtils.getResponeEntity("User not found", HttpStatus.NOT_FOUND);
-	            }
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	            return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-	        }
-	    }
+				return HrmsUtils.getResponeEntity("Profile picture uploaded successfully", HttpStatus.OK);
+			} else {
+				return HrmsUtils.getResponeEntity("User not found", HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Override
+	public ResponseEntity<String> uploadUsers(List<Map<String, Object>> users) {
+		List<User> userList = new ArrayList<>();
+
+		for (Map<String, Object> userMap : users) {
+			Map<String, String> userStringMap = new HashMap<>();
+
+			for (Map.Entry<String, Object> entry : userMap.entrySet()) {
+				userStringMap.put(entry.getKey(), entry.getValue().toString());
+			}
+
+			if (validaSignUpMap(userStringMap)) {
+				try {
+					User usercheck = userDao.findByEmailId(userStringMap.get("email"));
+					if (Objects.isNull(usercheck)) {
+						User user = getUserFromMap(userStringMap);
+						userList.add(user);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+					return HrmsUtils.getResponeEntity(HrmsConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
+				}
+			} else {
+				return HrmsUtils.getResponeEntity("Invalid user data", HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		if (!userList.isEmpty()) {
+			// Process userList (e.g., save to DB)
+			userDao.saveAll(userList);
+			for (User user : userList) {
+				User savedUser = userDao.findByEmailId(user.getEmail());
+				ls.createleaveBalance(savedUser.getId());
+			}
+			return HrmsUtils.getResponeEntity("Users Data uploaded successfully", HttpStatus.OK);
+		} else {
+			return HrmsUtils.getResponeEntity("No valid users found", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 }
