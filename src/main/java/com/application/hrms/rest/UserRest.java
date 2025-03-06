@@ -55,6 +55,12 @@ public interface UserRest {
     public ResponseEntity<List<User>> getManagers();
     
     @PostMapping("/uploadProfilePicture/{userId}")
-    public ResponseEntity<String> uploadProfilePicture(@PathVariable Integer userId, @RequestParam("file") MultipartFile file);
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable Integer userId, @RequestParam("file") MultipartFile file); 
+    
+    @GetMapping("/getRepoterDetails/{userId}")
+    public ResponseEntity<List<User>> getRepoterDetails(@PathVariable Integer userId);
+    
+    @GetMapping("/getRepotingDetails/{userId}")
+    public ResponseEntity<List<User>> getRepotingDetails(@PathVariable Integer userId);
 }
 

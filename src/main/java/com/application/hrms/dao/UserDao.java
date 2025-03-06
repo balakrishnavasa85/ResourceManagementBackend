@@ -71,6 +71,9 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("select u.name from User u where u.id =:reporting")
     String getReporterName(@Param("reporting") Integer reporting);
     
+    @Query("select u from User u where u.reporting =:reporting and u.id != :reporting")
+    List<User> findByReporting(String reporting);
+    
 //    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     List<User> findAll();
  

@@ -429,7 +429,6 @@ public class UserServiceImpl implements UserService {
 		}
 
 		if (!userList.isEmpty()) {
-			// Process userList (e.g., save to DB)
 			userDao.saveAll(userList);
 			for (User user : userList) {
 				User savedUser = userDao.findByEmailId(user.getEmail());
@@ -439,6 +438,59 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return HrmsUtils.getResponeEntity("No valid users found", HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@Override
+	public ResponseEntity<List<User>> getRepoterDetails(Integer reporting) {
+		List<User> reportingHierarchy = new ArrayList<>();
+
+		while (reporting != null) {
+			Optional<User> usercheck = userDao.findById(reporting);
+
+			if (usercheck.isPresent()) {
+				User user = usercheck.get();
+				reportingHierarchy.add(user);
+
+				Integer nextReporterId = user.getReporting() != null ? Integer.parseInt(user.getReporting()) : null;
+
+				if (nextReporterId == null || nextReporterId.equals(reporting)) {
+					break;
+				}
+
+				reporting = nextReporterId;
+			} else {
+				break;
+			}
+		}
+
+		Collections.reverse(reportingHierarchy);
+		if (reportingHierarchy.isEmpty()) {
+			return new ResponseEntity<List<User>>(reportingHierarchy, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<User>>(reportingHierarchy, HttpStatus.OK);
+		}
+	}
+
+	@Override
+	
+	public ResponseEntity<List<User>> getRepotingDetails(Integer userId) {
+	    List<User> reportingHierarchy = new ArrayList<>();
+	    fetchReportingHierarchy(userId, reportingHierarchy);
+	    return new ResponseEntity<>(reportingHierarchy, HttpStatus.OK);
+	}
+
+	private void fetchReportingHierarchy(Integer userId, List<User> reportingHierarchy) {
+	    Optional<User> userOptional = userDao.findById(userId);
+	    if (userOptional.isPresent()) {
+	        User user = userOptional.get();
+	        reportingHierarchy.add(user);
+	        List<User> subordinates = userDao.findByReporting(userId.toString());
+	        if (subordinates != null && !subordinates.isEmpty()) {
+	            for (User subordinate : subordinates) {
+	                fetchReportingHierarchy(subordinate.getId(), reportingHierarchy);
+	            }
+	        }
+	    }
 	}
 
 }
