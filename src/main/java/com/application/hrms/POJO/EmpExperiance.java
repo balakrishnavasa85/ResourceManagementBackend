@@ -57,6 +57,9 @@ public class EmpExperiance implements Serializable {
     @Column(name = "releavedate")
     private String releavedate;
     
+    @Column(name = "mode")
+    private String mode;
+    
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
@@ -71,6 +74,7 @@ public class EmpExperiance implements Serializable {
  	public void setId(Integer inte) {this.id = inte;	}
  	public void setExperiance(String str) {this.experiance= str;}
     public void setFilepath(String filepath) {this.filepath= filepath;}
+    public void setMode(String mode) {this.mode = mode;}
     
  	public String getCompanyName() { return companyname; } 
 	public String getJoiningDate() {return joiningdate;		}	
@@ -78,11 +82,12 @@ public class EmpExperiance implements Serializable {
 	public Integer getId() {		return id;			}	
 	public String getExperiance() {return experiance;}
 	public String getFilepath() { return filepath; }
+	public String getMode() { return mode;}
 
 
-	public User getUser() {
-		return user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
 	
 	public void setUser(User user) {
 		this.user = user;

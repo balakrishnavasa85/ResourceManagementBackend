@@ -12,4 +12,5 @@ public interface EmpTimeSheetService {
 	ResponseEntity<String> emplogin(Integer id); 
 	ResponseEntity<String> emplogout(Integer id); 
 	ResponseEntity<List<Object>> UserWorkingHours();
+	ResponseEntity<String> uploadUsers(List<Map<String, Object>> data);
 }

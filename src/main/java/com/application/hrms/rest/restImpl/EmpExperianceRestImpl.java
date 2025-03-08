@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.EmpExperianceRest;
@@ -44,10 +45,10 @@ public class EmpExperianceRestImpl implements EmpExperianceRest {
 	}
 
 	@Override
-	public ResponseEntity<String> create(Map<String, String> requestMap) {
+	public ResponseEntity<String> create(Integer id,List<String> experiances, List<MultipartFile> files)  {
 		 try {
 	            //System.out.println("inside userRestImpl");
-	            return relationService.create(requestMap);
+	            return relationService.create(id,experiances,files);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }

@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,37 +111,90 @@ public class EmpEducationServiceImpl implements EmpEducationService {
 		try {
 			Optional<User> useri = userdao.findById(id);
 			if (useri.isPresent()) {
+				String studynew = null;
+				String durationStrnew = null;
+				String joiningDatenew = null;
+				String relievedDatenew = null;
+				String universitynew = null;
+				List<String> presentKeys = new ArrayList<>();
 				for (int i = 0; i < educations.size(); i++) {
-					String education = educations.get(i);  
-					MultipartFile file = files.get(i); 
+					String education = educations.get(i);
 
-//					education = education.replaceAll("[{}\"]", "");  
+					List<String> requiredKeys = Arrays.asList("study", "duration", "joiningDate", "relievedDate",
+							"university");
+
 					education = education.substring(1, education.length() - 1).replaceAll("[{}\"]", "");
 
 					Map<String, String> map = Arrays.stream(education.split(",")).map(entry -> entry.split(":"))
 							.collect(Collectors.toMap(e -> e[0].trim(), e -> e.length > 1 ? e[1].trim() : ""));
 
-					String study = map.get("study");
-					String durationStr = map.get("duration");
-					String joiningDate = map.get("joiningDate");
-					String relievedDate = map.get("relievedDate");
-					String university = map.get("university");
+					if (map.keySet().containsAll(requiredKeys)) {
+						MultipartFile file = files.get(i);
+						System.out.println("Map contains all required values.");
+						String study = map.get("study");
+						String durationStr = map.get("duration");
+						String joiningDate = map.get("joiningDate");
+						String relievedDate = map.get("relievedDate");
+						String university = map.get("university");
 
-					EmpEducation empEducation = new EmpEducation();
-					empEducation.setStudy(study);
-					empEducation.setDuration(durationStr);
-					empEducation.setJoiningDate(joiningDate);
-					empEducation.setReleaveDate(relievedDate);
-					empEducation.setUniversity(university);
-					empEducation.setUser(useri.get());
-					final String UPLOAD_DIR = "uploads/education/" + id + "/"; 
-					String fileName = id + "_" + files.get(i).getOriginalFilename();
-					Path filePath = Paths.get(UPLOAD_DIR + fileName);
-					Files.createDirectories(filePath.getParent());
-					Files.write(filePath, file.getBytes());
-					String filepath = filePath.toString();
-					empEducation.setFilepath(filepath);
-					relationDao.save(empEducation);
+						EmpEducation empEducation = new EmpEducation();
+						empEducation.setStudy(study);
+						empEducation.setDuration(durationStr);
+						empEducation.setJoiningDate(joiningDate);
+						empEducation.setReleaveDate(relievedDate);
+						empEducation.setUniversity(university);
+						empEducation.setUser(useri.get());
+						final String UPLOAD_DIR = "uploads/education/" + id + "/";
+						String fileName = id + "_" + files.get(i).getOriginalFilename();
+						Path filePath = Paths.get(UPLOAD_DIR + fileName);
+						Files.createDirectories(filePath.getParent());
+						Files.write(filePath, file.getBytes());
+						String filepath = filePath.toString();
+						empEducation.setFilepath(filepath);
+						relationDao.save(empEducation);
+					} else {
+						for (String key : requiredKeys) {
+							if (map.containsKey(key)) {
+								presentKeys.add(key);
+								if (key.equals("study")) {
+									studynew = map.get(key);
+									break;
+								} else if (key.equals("duration")) {
+									durationStrnew = map.get(key);
+									break;
+								} else if (key.equals("joiningDate")) {
+									joiningDatenew = map.get(key);
+									break;
+								} else if (key.equals("relievedDate")) {
+									relievedDatenew = map.get(key);
+									break;
+								} else if (key.equals("university")) {
+									universitynew = map.get(key);
+									break;
+								}
+							}
+						}
+						if (studynew != null && durationStrnew != null && joiningDatenew != null
+								&& relievedDatenew != null && universitynew != null) {
+							MultipartFile file = files.get(0);
+							EmpEducation empEducation = new EmpEducation();
+							empEducation.setStudy(studynew);
+							empEducation.setDuration(durationStrnew);
+							empEducation.setJoiningDate(joiningDatenew);
+							empEducation.setReleaveDate(relievedDatenew);
+							empEducation.setUniversity(universitynew);
+							empEducation.setUser(useri.get());
+							final String UPLOAD_DIR = "uploads/education/" + id + "/";
+							String fileName = id + "_" + files.get(0).getOriginalFilename();
+							Path filePath = Paths.get(UPLOAD_DIR + fileName);
+							Files.createDirectories(filePath.getParent());
+							Files.write(filePath, file.getBytes());
+							String filepath = filePath.toString();
+							empEducation.setFilepath(filepath);
+							relationDao.save(empEducation);
+						}
+					}
+
 				}
 				return HrmsUtils.getResponeEntity("Successfully  Created.", HttpStatus.OK);
 			} else {

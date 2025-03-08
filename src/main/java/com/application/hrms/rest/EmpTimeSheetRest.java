@@ -26,23 +26,7 @@ public interface EmpTimeSheetRest {
   
   @GetMapping(path = "/UserWorkingHours")
   public ResponseEntity<List<Object>> UserWorkingHours();
-
-//	@GetMapping(path = "/get")
-//    public ResponseEntity<List<RelationWrapper>> getAllRelation();
-//    
-//    @GetMapping(path = "/getInfo/{id}")
-//    public ResponseEntity<List<RelationWrapper>> getRelationInfo(@PathVariable Integer id);
-//
-//    @PostMapping(path = "/update")
-//    public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
-//    
-//    @PutMapping(path = "/updateInfo/{id}")
-//    public ResponseEntity<String> updateRelation(@PathVariable Integer id, @RequestBody(required = true) Map<String, String> requestMap);
-//
-//    @PostMapping(path = "/create")
-//    public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
-//    
-//
-//    @GetMapping(path = "/getRelationInfo/{id}")
-//    public ResponseEntity<List<RelationWrapper>> getUserRelationInfo(@PathVariable Integer id);
+  
+  @PostMapping(path ="/UploadData")
+  public ResponseEntity<String> uploadUsers(@RequestBody List<Map<String, Object>> data ); 
 }

@@ -50,13 +50,21 @@ public class EmpTimeSheetRestImpl implements EmpTimeSheetRest {
 
 	@Override
 	public ResponseEntity<List<Object>> UserWorkingHours() {
-		try {
-            //System.out.println("inside userRestImpl");
+		try { 
             return etsService.UserWorkingHours();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return new ResponseEntity<List<Object>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
-        
+	}
+
+	@Override
+	public ResponseEntity<String> uploadUsers(List<Map<String, Object>> data) {
+		try { 
+            return etsService.uploadUsers(data);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<String>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

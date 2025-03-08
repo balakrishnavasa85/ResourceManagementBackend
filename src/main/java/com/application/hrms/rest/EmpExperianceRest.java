@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.application.hrms.POJO.EmpEducation;
 import com.application.hrms.POJO.EmpExperiance;
 
 import java.util.List;
@@ -22,11 +25,14 @@ public interface EmpExperianceRest {
 
 	@PutMapping(path = "/updateInfo/{id}")
 	public ResponseEntity<String> updateEmpExperiance(@PathVariable Integer id,
-			@RequestBody(required = true) Map<String, String> requestMap);
-
-	@PostMapping(path = "/create")
-	public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
+			@RequestBody(required = true) Map<String, String> requestMap); 
 
 	@GetMapping(path = "/getEmpExperianceInfo/{id}")
-	public ResponseEntity<List<EmpExperiance>> getUserEmpExperianceInfo(@PathVariable Integer id);
+	public ResponseEntity<List<EmpExperiance>> getUserEmpExperianceInfo(@PathVariable Integer id);	  
+
+	@PostMapping(path = "/create/{id}")
+	public ResponseEntity<String> create(@PathVariable Integer id,
+            @RequestParam("experiances") List<String> experiances, // Array of education data in String format (JSON string)
+            @RequestParam("files") List<MultipartFile> files);
+ 
 }
