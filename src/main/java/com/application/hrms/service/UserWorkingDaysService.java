@@ -13,5 +13,7 @@ public interface UserWorkingDaysService {
 	ResponseEntity<List<UserWorkingDays>> getPayslip(Integer id,Integer month,Integer year);
 	
 	ResponseEntity<List<UserWorkingDays>> getPayslipById(Integer id);
+	
+	ResponseEntity<List<UserWorkingDays>> getAllUserSalaryInfo(Integer month, Integer year);
 
 }

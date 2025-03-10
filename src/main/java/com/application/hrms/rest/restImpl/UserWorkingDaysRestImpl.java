@@ -50,5 +50,17 @@ public ResponseEntity<List<UserWorkingDays>> getPayslipById(Integer id) {
 	     }
 	     return new ResponseEntity<List<UserWorkingDays>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 }
+
+
+
+@Override
+public ResponseEntity<List<UserWorkingDays>> getAllUserSalaryInfo(Integer month, Integer year) {
+	try {
+	  	   return userWorkingDaysService.getAllUserSalaryInfo(month,year);
+	     } catch (Exception ex) {
+	         ex.printStackTrace();
+	     }
+	     return new ResponseEntity<List<UserWorkingDays>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+}
  
 }

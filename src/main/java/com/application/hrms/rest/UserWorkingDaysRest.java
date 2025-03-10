@@ -27,5 +27,9 @@ public interface UserWorkingDaysRest {
 
 	@GetMapping(path = "/getPayslipByid/{id}")
 	public ResponseEntity<List<UserWorkingDays>> getPayslipById(@PathVariable Integer id);
+	
+
+	@GetMapping(path = "/getAllUserSalaryInfo/{month}/{year}")
+	public ResponseEntity<List<UserWorkingDays>> getAllUserSalaryInfo(@PathVariable Integer month,@PathVariable Integer year);
 
 }

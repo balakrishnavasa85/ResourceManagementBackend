@@ -36,4 +36,8 @@ public interface UserWorkingDaysDao extends JpaRepository<UserWorkingDays, Integ
 	@Query("select u from UserWorkingDays u where u.user.id =:id")
     List<UserWorkingDays> getPayslipById(@Param("id") Integer id);
 
+	@Query("select u from UserWorkingDays u where u.year =:year and u.month=:monthname")
+    List<UserWorkingDays> getAllUserSalaryInfo(@Param("monthname") String monthname, @Param("year") Integer year);
+
+	
 }

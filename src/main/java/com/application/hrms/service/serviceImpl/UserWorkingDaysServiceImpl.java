@@ -56,4 +56,17 @@ public class UserWorkingDaysServiceImpl implements UserWorkingDaysService {
 		}
 		return new ResponseEntity<List<UserWorkingDays>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+	@Override
+	public ResponseEntity<List<UserWorkingDays>> getAllUserSalaryInfo(Integer month, Integer year) {
+		List<UserWorkingDays> list = new ArrayList<UserWorkingDays>();
+		try {
+			String monthname = Month.of(month).getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+			List<UserWorkingDays> lists = userWorkingDaysDao.getAllUserSalaryInfo(monthname, year);
+			return new ResponseEntity<List<UserWorkingDays>>(lists, HttpStatus.OK);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<UserWorkingDays>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }
