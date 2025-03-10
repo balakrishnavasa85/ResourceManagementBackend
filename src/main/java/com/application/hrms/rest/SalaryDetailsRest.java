@@ -21,9 +21,11 @@ public interface SalaryDetailsRest {
 
 	@PostMapping(path = "/create/{user}")
 	public ResponseEntity<String> create(@PathVariable Integer user,
-			@RequestBody(required = true) Map<String, String> requestMap);
-	
+			@RequestBody(required = true) Map<String, String> requestMap);	
 
 	@GetMapping(path = "/getDetails/{user}")
 	public ResponseEntity<SalaryDetails> getDetails(@PathVariable Integer user);
+	  
+	  @PostMapping(path ="/UploadData")
+	  public ResponseEntity<String> uploadUsers(@RequestBody List<Map<String, Object>> data ); 
 }

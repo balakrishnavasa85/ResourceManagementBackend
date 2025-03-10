@@ -12,5 +12,7 @@ public interface SalaryDetailsService {
 	
 	ResponseEntity<String> create(Integer id,Map<String,String> requestMap);
 	
-	ResponseEntity<SalaryDetails> getDetails(Integer user);
+	ResponseEntity<SalaryDetails> getDetails(Integer user); 
+	
+	ResponseEntity<String> uploadUsers(List<Map<String, Object>> data);
 }

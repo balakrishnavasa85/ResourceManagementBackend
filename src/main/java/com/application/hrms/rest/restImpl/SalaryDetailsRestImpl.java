@@ -43,8 +43,17 @@ public class SalaryDetailsRestImpl implements SalaryDetailsRest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-		return new ResponseEntity<SalaryDetails>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
-		
+		return new ResponseEntity<SalaryDetails>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);		
+	}
+
+	@Override
+	public ResponseEntity<String> uploadUsers(List<Map<String, Object>> data) {
+		try {
+            return salaryDetailsService.uploadUsers(data);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		return new ResponseEntity<String>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
