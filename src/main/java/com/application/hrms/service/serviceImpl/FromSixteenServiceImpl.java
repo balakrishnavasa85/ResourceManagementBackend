@@ -170,7 +170,14 @@ public class FromSixteenServiceImpl implements FormSixteenService {
 				continue;
 			}
 		}
-		return HrmsUtils.getResponeEntity(HrmsConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
+		if(timeList.isEmpty())
+		{
+			return HrmsUtils.getResponeEntity("No Users Data Available for Upload", HttpStatus.OK);
+		}
+		else
+		{			
+		return HrmsUtils.getResponeEntity(HrmsConstants.INVALID_DATA, HttpStatus.OK);
+		}
 	}
 
 	@Override
