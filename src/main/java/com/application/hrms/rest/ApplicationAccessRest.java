@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.application.hrms.POJO.Holidays;
+import com.application.hrms.POJO.ApplicationAccess;
 import com.application.hrms.POJO.Leaves;
 import com.application.hrms.wrapper.DepartmentWrapper;
 import com.application.hrms.wrapper.RelationWrapper;
@@ -22,6 +22,15 @@ import java.util.Map;
 @RequestMapping(path = "/applicationaccess")
 public interface ApplicationAccessRest {
 //
-	@GetMapping(path = "/checkaccess")
-	public ResponseEntity<Map> checkaccess(); 
+	@GetMapping(path = "/checkaccess/{name}")
+	public ResponseEntity<Map> checkaccess(@PathVariable String name); 
+
+	@GetMapping(path = "/allcheckaccess")
+	public ResponseEntity<List<ApplicationAccess>> allcheckaccess(); 	
+
+	@PostMapping(path = "/updateData")
+	public ResponseEntity<String> updateData(@RequestBody(required = true) Map<String, String> requestMap); 
+	
+	@GetMapping(path ="/getDetails/{name}")
+	public ResponseEntity<List<ApplicationAccess>> getDetails(@PathVariable String name);
 }

@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.application.hrms.POJO.ApplicationAccess;
-import com.application.hrms.POJO.DeductionGroup;
-import com.application.hrms.POJO.DeductionGroup;
-import com.application.hrms.wrapper.DeductionGroupWrapper;
+import com.application.hrms.POJO.EmpTimeSheet;
+import com.application.hrms.POJO.FormSixteen;
+import com.application.hrms.POJO.Relation;
+import com.application.hrms.POJO.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,11 +31,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ApplicationAccessDao extends JpaRepository<ApplicationAccess, Integer> {
-	 @Query("SELECT u FROM ApplicationAccess u WHERE  CURRENT_DATE BETWEEN u.fromaccess AND u.uptoaccess and u.name =:name")
-	    List<ApplicationAccess> findAccessValidToday(@Param("name") String name);
-	 
-	 
-	 @Query("SELECT u FROM ApplicationAccess u WHERE u.name != 'HRMS'")
-	    List<ApplicationAccess> findExceptMain();
+public interface FromSixteenDao extends JpaRepository<FormSixteen, Integer> {	
+	
+	
+	@Query("select u  from FormSixteen u  where u.user.id =:userid")
+	List<FormSixteen> findbyuserid(@Param("userid") Integer userid);
 }

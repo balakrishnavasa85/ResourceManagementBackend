@@ -44,7 +44,13 @@ public class ApplicationAccess implements Serializable {
 
 	@Column(name = "uptoaccess")
 	private String uptoaccess;
+	
+	@Column(name = "fromaccess")
+	private String fromaccess;
 
+	@Column(name = "value")
+	private String value;
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -53,6 +59,14 @@ public class ApplicationAccess implements Serializable {
 		this.uptoaccess = string;
 	}
 
+	public void setFromaccess(String string) {
+		this.fromaccess = string;
+	}
+
+	public void setValue(String string) {
+		this.value = string;
+	}
+	
 	public void setId(Integer inte) {
 		this.id = inte;
 	}
@@ -63,6 +77,14 @@ public class ApplicationAccess implements Serializable {
 
 	public String getUptoaccess() {
 		return uptoaccess;
+	}
+
+	public String getFromaccess() {
+		return fromaccess;
+	}
+
+	public String getValue() {
+		return value;
 	}
 
 	public Integer getId() {

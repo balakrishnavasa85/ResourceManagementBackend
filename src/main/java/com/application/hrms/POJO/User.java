@@ -124,7 +124,9 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<EmpEducation> empEducations;
-
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<FormSixteen> formSixteens;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<EmpExperiance> empExperiances;
