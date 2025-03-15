@@ -90,4 +90,15 @@ public class ApplicationAccess implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+	
+	 public ApplicationAccess() {}
+
+	    // Parameterized constructor
+	    public ApplicationAccess(Integer id, String name, String fromaccess,String uptoaccess,String value) {
+	        this.id = id;
+	        this.name = name;
+	        this.fromaccess = fromaccess;
+	        this.uptoaccess = uptoaccess;
+	        this.value = value; 
+	    }
 }

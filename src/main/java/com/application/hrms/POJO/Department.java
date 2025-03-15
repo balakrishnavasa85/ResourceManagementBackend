@@ -79,5 +79,14 @@ public class Department implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Department() {}
+
+    // Parameterized constructor
+    public Department(Integer id, String name,String status) {
+        this.id = id;
+        this.name = name;
+        this.status= status;
+    }
 
 }

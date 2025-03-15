@@ -77,4 +77,13 @@ public class Designation implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Designation() {}
+
+    // Parameterized constructor
+    public Designation(Integer id, String name,String status) {
+        this.id = id;
+        this.name = name;
+        this.status= status;
+    }
 }

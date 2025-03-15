@@ -370,4 +370,23 @@ public class User implements Serializable {
         this.uniqueid ="ABC"+ this.id ;
     }
 
+    public User() {}
+
+    // Parameterized constructor
+    public User(Integer id, String name, String email,String password,String role,String status,String login,String manager,Integer dept,Integer des) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+        this.login = login;
+        this.manager = manager; 
+        this.department = new Department();
+        this.department.setId(dept);
+
+        this.designation = new Designation();
+        this.designation.setId(des);
+        this.uniqueid = "ABC" + id;
+    }
 }

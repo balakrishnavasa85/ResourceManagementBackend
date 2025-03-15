@@ -83,4 +83,14 @@ public class DeductionGroup {
 	public String getStatus() {
 		return status;
 	}
+	
+	public DeductionGroup() {}
+
+    // Parameterized constructor
+    public DeductionGroup(Integer id, String name,String status,String value) {
+        this.id = id;
+        this.name = name;
+        this.status= status;
+        this.value = value;
+    }
 }
