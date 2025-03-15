@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Optional;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -83,12 +83,16 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 			List<Object> userWorkingdays = new ArrayList<>();
 
 			for (Object[] result : results) {
+				if((Integer) result[1] != 1 && (Integer) result[1] != 2 && (Integer) result[1] != 3)
+				{
+					Integer user =  (Integer) result[1];
+					String month = (String) result[2];
+					Optional<UserWorkingDays> ouwd = uwdd.findByMonthandUserId(user,month);
+					if(!ouwd.isPresent()) {
 				System.out.println(result[1]);
 				BigInteger dayscountBigInt = (BigInteger) result[0];
 				Integer dayscount = dayscountBigInt.intValue();
 //				Integer userStr = (Integer) result[1];
-				Integer user =  (Integer) result[1];
-				String month = (String) result[2];
 				String yearStr = (String) result[3];
 				Integer year = Integer.parseInt(yearStr);
 				BigInteger numberofdaysBigInt = (BigInteger) result[4];
@@ -181,6 +185,12 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				uwhd.updateStatus(user);
 
 				userWorkingdays.add(userWorkingDay);
+				}
+			}
+				else
+				{
+					break;
+				}
 			}
 			response.put("payslip", userWorkingdays);
 			return new ResponseEntity<Map>(response, HttpStatus.OK);

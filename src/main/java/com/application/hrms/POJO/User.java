@@ -373,7 +373,7 @@ public class User implements Serializable {
     public User() {}
 
     // Parameterized constructor
-    public User(Integer id, String name, String email,String password,String role,String status,String login,String manager,Integer dept,Integer des) {
+    public User(Integer id, String name, String email,String password,String role,String status,String login,String manager,Integer dept,Integer des,Integer dg) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -387,6 +387,11 @@ public class User implements Serializable {
 
         this.designation = new Designation();
         this.designation.setId(des);
+        
+        this.deductiongroup = new DeductionGroup();
+        this.deductiongroup.setId(dg);
+        
+        
         this.uniqueid = "ABC" + id;
     }
 }

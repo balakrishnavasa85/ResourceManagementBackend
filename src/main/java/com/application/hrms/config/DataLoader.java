@@ -57,10 +57,10 @@ public class DataLoader implements CommandLineRunner {
 		}
 		if (userRepository.count() == 0) {
 			userRepository.save(
-					new User(1, "superadmin", "superadmin@demo.com", "Super@1234", "superadmin", "y", "0", "y", 3, 1));
-			userRepository.save(new User(2, "devadmin", "devadmin@demo.com", "dev@1234", "admin", "y", "0", "y", 1, 1));
+					new User(1, "superadmin", "superadmin@demo.com", "Super@1234", "superadmin", "y", "0", "y", 3, 1,1));
+			userRepository.save(new User(2, "devadmin", "devadmin@demo.com", "dev@1234", "admin", "y", "0", "y", 1, 1,1));
 			userRepository
-					.save(new User(3, "testadmin", "testadmin@demo.com", "test@1234", "admin", "y", "0", "y", 2, 1));
+					.save(new User(3, "testadmin", "testadmin@demo.com", "test@1234", "admin", "y", "0", "y", 2, 1,1));
 		}
 	}
 }

@@ -213,6 +213,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 		empts.setLogouttime(timeStringMap.get("logouttime"));
 		empts.setStatus("0");
 		empts.setUser(useri);
+		empts.setTransfered("0");
 		empts.setWorkinghours(String.valueOf(duration.toMillis()));
 
 		return empts;
