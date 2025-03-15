@@ -42,6 +42,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -288,6 +291,7 @@ public class UserServiceImpl implements UserService {
 					user.setPassword(optional.get().getPassword());
 					user.setStatus(requestMap.get("status"));
 					user.setRole(requestMap.get("role"));
+					user.setUniqueId(optional.get().getUniqueId());
 					Department dInfo = departmentDao
 							.getDepartmentInfoById(Integer.parseInt(requestMap.get("department_id")));
 					user.setDepartment(dInfo);
@@ -472,25 +476,25 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	
+
 	public ResponseEntity<List<User>> getRepotingDetails(Integer userId) {
-	    List<User> reportingHierarchy = new ArrayList<>();
-	    fetchReportingHierarchy(userId, reportingHierarchy);
-	    return new ResponseEntity<>(reportingHierarchy, HttpStatus.OK);
+		List<User> reportingHierarchy = new ArrayList<>();
+		fetchReportingHierarchy(userId, reportingHierarchy);
+		return new ResponseEntity<>(reportingHierarchy, HttpStatus.OK);
 	}
 
 	private void fetchReportingHierarchy(Integer userId, List<User> reportingHierarchy) {
-	    Optional<User> userOptional = userDao.findById(userId);
-	    if (userOptional.isPresent()) {
-	        User user = userOptional.get();
-	        reportingHierarchy.add(user);
-	        List<User> subordinates = userDao.findByReporting(userId.toString());
-	        if (subordinates != null && !subordinates.isEmpty()) {
-	            for (User subordinate : subordinates) {
-	                fetchReportingHierarchy(subordinate.getId(), reportingHierarchy);
-	            }
-	        }
-	    }
+		Optional<User> userOptional = userDao.findById(userId);
+		if (userOptional.isPresent()) {
+			User user = userOptional.get();
+			reportingHierarchy.add(user);
+			List<User> subordinates = userDao.findByReporting(userId.toString());
+			if (subordinates != null && !subordinates.isEmpty()) {
+				for (User subordinate : subordinates) {
+					fetchReportingHierarchy(subordinate.getId(), reportingHierarchy);
+				}
+			}
+		}
 	}
 
 }

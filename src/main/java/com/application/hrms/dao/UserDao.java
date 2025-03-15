@@ -22,10 +22,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface UserDao extends JpaRepository<User, Integer> {
-	
-//	@Query("select new com.application.hrms.wrapper.UserWrapper(u.id , u.name , u.email , u.contactNumber , u.status, u.role) from User u")
-//	List<UserWrapper> getAllUser();
+public interface UserDao extends JpaRepository<User, Integer> { 
 
     @Transactional
     @Modifying
@@ -45,11 +42,9 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query(value="select * from User u where u.email=:email", nativeQuery=true)
     User findByEmailId(String email);
 
-//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     @Query("select u  from User u  where u.id =:id")
 	List<User> getUserById(@Param("id") Integer id);
     
-//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     @Query("select u  from User u  where u.manager = 'y'")
 	List<User> findAllAdmins();
     
@@ -74,18 +69,10 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.reporting =:reporting and u.id != :reporting")
     List<User> findByReporting(String reporting);
     
-//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductiongroup"})
     List<User> findAll();
  
-
-//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductionGroup"})
-//    List<User> getUserById(Integer id);
-
-//    @EntityGraph(attributePaths = {"identityDetails", "department", "designation", "deductionGroup"})
-//    List<User> findAllAdmins();
-
-//    @Query("SELECT u.reportername FROM User u WHERE u.id = :id")
-//    String getReporterName(@Param("id") Integer id);
+    @Query(value = "SELECT USER_SEQ.NEXTVAL FROM DUAL", nativeQuery = true)
+    Long getNextSequenceValue();
 
     
 }

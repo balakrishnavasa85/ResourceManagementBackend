@@ -32,6 +32,9 @@ public class User implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "uniqueid")
+	private String uniqueid;
+
 	@Column(name = "contactNumber")
 	private String contactNumber;
 
@@ -352,6 +355,19 @@ public class User implements Serializable {
 
     public void setEmpExperiance(List<EmpExperiance> empExperiance) {
         this.empExperiances = empExperiance;
+    }
+    
+    public void setUniqueId(String uid) {
+    	this.uniqueid = uid;
+    }
+    
+    public String getUniqueId() {
+    	return uniqueid;
+    }
+    
+    @PostPersist
+    private void generateUniqueId() {
+        this.uniqueid ="ABC"+ this.id ;
     }
 
 }
