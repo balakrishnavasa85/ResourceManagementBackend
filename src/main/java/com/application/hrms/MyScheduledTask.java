@@ -1,24 +1,33 @@
 package com.application.hrms;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.application.hrms.service.EmpTimeSheetService;
+import com.application.hrms.service.UserWorkingHoursService;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 @Component
 public class MyScheduledTask {
 
-    // Run this method at a specific time, for example, every day at 10:00 AM
-    @Scheduled(cron = "0 46 9 * * ?")
-    public void runTaskAtSpecificTime() {
-    	
-        System.out.println("Scheduled task executed at 9:46 AM every day");
-        LocalDate currentDate = LocalDate.now();
-        System.out.println("Current Date: " + currentDate);
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedYesterday = yesterday.format(formatter);
-       
-        System.out.println("Yesterday's Date: " + formattedYesterday);
-    }
+	@Autowired
+	EmpTimeSheetService etss;
+
+	@Autowired
+	UserWorkingHoursService uwhs;
+
+	@Scheduled(cron = "0 5 0 * * ?")
+	public void daySheet() {
+
+		etss.UserWorkingHours();
+	}
+
+	@Scheduled(cron = "0 0 1 26 * ?")
+	public void monthSheet() {
+		uwhs.generatePayslip();
+	}
 }
