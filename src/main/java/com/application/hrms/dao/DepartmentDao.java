@@ -33,6 +33,9 @@ public interface DepartmentDao extends JpaRepository<Department,Integer>{
 	@Query("select new com.application.hrms.wrapper.DepartmentWrapper(u.id , u.name , u.status) from Department u")
 	List<DepartmentWrapper> getAllDepartments();
 	
+	@Query("select new com.application.hrms.wrapper.DepartmentWrapper(u.id , u.name , u.status) from Department u where u.status = 'y'")
+	List<DepartmentWrapper> getAllActiveDepartments();
+	
 	@Transactional
     @Modifying
     @Query(value="update Department u set u.status=:status where u.id =:id", nativeQuery=true)

@@ -36,6 +36,9 @@ public interface DesignationDao extends JpaRepository<Designation,Integer>{
 	@Query("select new com.application.hrms.wrapper.DesignationWrapper(u.id , u.name , u.status) from Designation u")
 	List<DesignationWrapper> getAll();
 	
+	@Query("select new com.application.hrms.wrapper.DesignationWrapper(u.id , u.name , u.status) from Designation u where u.status = 'y'")
+	List<DesignationWrapper> getAllActive();
+	
 	@Transactional
     @Modifying
     @Query(value="update Designation u set u.status=:status where u.id =:id", nativeQuery=true)

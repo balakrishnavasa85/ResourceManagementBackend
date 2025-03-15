@@ -55,6 +55,23 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
         return new ResponseEntity<List<DepartmentWrapper>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@Override
+	public ResponseEntity<List<DepartmentWrapper>> getAllActiveDepartment() {
+
+    	List<DepartmentWrapper> list = new ArrayList<DepartmentWrapper>();
+        try {
+            if (jwtFilter.isAdmin()) {
+                return new ResponseEntity<List<DepartmentWrapper>>(departmentDao.getAllActiveDepartments(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<List<DepartmentWrapper>>(list, HttpStatus.UNAUTHORIZED);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<DepartmentWrapper>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 	@Override
 	public ResponseEntity<String> update(Map<String, String> requestMap) {

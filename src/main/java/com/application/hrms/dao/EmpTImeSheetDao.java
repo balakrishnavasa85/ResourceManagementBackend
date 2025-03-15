@@ -56,8 +56,14 @@ public interface EmpTImeSheetDao extends JpaRepository<EmpTimeSheet, Integer> {
             "ELSE 'halfday' " +
             "END AS mode " +
             "FROM emptimesheet " +
-            "WHERE logouttime != 'checkout' " +
+            "WHERE logouttime != 'checkout' and transfered = '0' " +
             "GROUP BY user_id, STR_TO_DATE(logintime, '%d-%m-%Y') " +
             "ORDER BY user_id	, workingdate", nativeQuery = true)
     List<Object[]> findUserWorkingHours();
+    
+    
+    @Transactional
+    @Modifying
+    @Query("update EmpTimeSheet u set u.transfered= '1' where u.user.id =:user")
+    Integer updateStatus(@Param("user") Integer user);
 }

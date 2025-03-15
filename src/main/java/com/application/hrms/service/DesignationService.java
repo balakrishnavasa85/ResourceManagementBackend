@@ -9,6 +9,8 @@ import com.application.hrms.wrapper.DesignationWrapper;
 
 public interface DesignationService {
 	ResponseEntity<List<DesignationWrapper>> getAll();
+	
+	ResponseEntity<List<DesignationWrapper>> getActive();
 
     ResponseEntity<String> update(Map<String, String> requestMap);
 

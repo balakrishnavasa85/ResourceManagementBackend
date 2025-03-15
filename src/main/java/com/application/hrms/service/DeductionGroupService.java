@@ -9,6 +9,8 @@ import com.application.hrms.wrapper.DeductionGroupWrapper;
 
 public interface DeductionGroupService {
 	ResponseEntity<List<DeductionGroupWrapper>> getAll();
+	
+	ResponseEntity<List<DeductionGroupWrapper>> getAllActive();
 
     ResponseEntity<String> update(Map<String, String> requestMap);
 

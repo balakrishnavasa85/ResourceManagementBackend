@@ -66,6 +66,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 					ets.setUser(useri.get());
 					ets.setLogouttime("checkout");
 					ets.setWorkinghours("0");
+					ets.setTransfered("0");
 
 					LocalDateTime myObj = LocalDateTime.now();
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -100,6 +101,7 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 					ets.setUser(useri.get());
 					ets.setId(etso.getId());
 					ets.setLogintime(etso.getLogintime());
+					ets.setTransfered("0");
 
 					LocalDateTime myObj = LocalDateTime.now();
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -149,9 +151,11 @@ public class EmpTImeSheetServiceImpl implements EmpTimeSheetService {
 				userWorkingHour.setWorkinghours(workingHours);
 				userWorkingHour.setTotalworkinghours(totalworkinghours);
 				userWorkingHour.setMode(mode);
+				userWorkingHour.setStatus("0");
 
 				// Save the UserWorkingHours object to the database
 				uwhd.save(userWorkingHour);
+				etsd.updateStatus(user);
 
 				// Add the UserWorkingHours object to the list
 				userWorkingHours.add(userWorkingHour);

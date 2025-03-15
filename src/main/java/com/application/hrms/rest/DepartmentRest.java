@@ -19,6 +19,9 @@ public interface DepartmentRest {
 
 	@GetMapping(path = "/get")
     public ResponseEntity<List<DepartmentWrapper>> getAllDepartment();
+	
+	@GetMapping(path = "/getActive")
+    public ResponseEntity<List<DepartmentWrapper>> getAllActiveDepartment();
     
     @GetMapping(path = "/getInfo/{id}")
     public ResponseEntity<List<DepartmentWrapper>> getDepartmentInfo(@PathVariable Integer id);

@@ -35,4 +35,11 @@ public interface UserWorkingHoursDao extends JpaRepository<UserWorkingHours, Int
                    "AND DATE_FORMAT(CURDATE(), '%Y-%m-24') " +
                    "GROUP BY u.user_id, us.name, sd.id", nativeQuery = true)
     List<Object[]> generatePayslip();
+    
+    
+
+    @Transactional
+    @Modifying
+    @Query("update UserWorkingHours u set u.status= '1' where u.user.id =:user")
+    Integer updateStatus(@Param("user") Integer user);
 }

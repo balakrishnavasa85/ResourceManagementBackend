@@ -19,6 +19,9 @@ public interface DeductionGroupRest {
 
 	@GetMapping(path = "/get")
     public ResponseEntity<List<DeductionGroupWrapper>> getAll();
+
+	@GetMapping(path = "/getActive")
+    public ResponseEntity<List<DeductionGroupWrapper>> getAllActive();
     
     @GetMapping(path = "/getInfo/{id}")
     public ResponseEntity<List<DeductionGroupWrapper>> getInfo(@PathVariable Integer id);

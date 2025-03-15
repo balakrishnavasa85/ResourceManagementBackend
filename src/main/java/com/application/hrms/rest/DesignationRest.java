@@ -19,6 +19,9 @@ public interface DesignationRest {
 
 	@GetMapping(path = "/get")
     public ResponseEntity<List<DesignationWrapper>> getAll();
+	
+	@GetMapping(path = "/getActive")
+    public ResponseEntity<List<DesignationWrapper>> getActive();
     
     @GetMapping(path = "/getInfo/{id}")
     public ResponseEntity<List<DesignationWrapper>> getInfo(@PathVariable Integer id);

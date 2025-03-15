@@ -57,6 +57,9 @@ public class EmpTimeSheet implements Serializable {
     @Column (name = "status")
     private String status;
     
+    @Column (name = "transfered")
+    private String transfered;
+    
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;   
@@ -67,12 +70,14 @@ public class EmpTimeSheet implements Serializable {
  	public void setWorkinghours(String str) {this.workinghours = str;}
     public void setUser(User user) {this.user = user;}
     public void setStatus(String user) {this.status = user;}
+    public void setTransfered(String tr) {this.transfered = tr;}
     
  	public String getLogintime() { return logintime; } 
 	public String getLogouttime() {return logouttime;		}	
 	public Integer getId() {		return id;			}	
 	public String getWorkinghours() {return workinghours;}
 	public User getUser() { return user; }
-	public String getStatus() {return status;		}	
+	public String getStatus() {return status;		}
+	public String getTransfered() {return transfered;}
 	
 }

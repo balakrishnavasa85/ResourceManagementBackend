@@ -76,4 +76,15 @@ public class DeductionGroupRestImpl implements DeductionGroupRest {
 	        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<DeductionGroupWrapper>> getAllActive() {
+		try {
+            return deductionGroupService.getAllActive();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<DeductionGroupWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+  
+	}
+
 }

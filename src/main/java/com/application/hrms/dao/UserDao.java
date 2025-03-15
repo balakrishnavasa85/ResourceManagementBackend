@@ -45,7 +45,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("select u  from User u  where u.id =:id")
 	List<User> getUserById(@Param("id") Integer id);
     
-    @Query("select u  from User u  where u.manager = 'y'")
+    @Query("select u  from User u  where u.manager = 'y' and u.status = 'y'")
 	List<User> findAllAdmins();
     
     @Query("select u  from User u  where u.name =:user")

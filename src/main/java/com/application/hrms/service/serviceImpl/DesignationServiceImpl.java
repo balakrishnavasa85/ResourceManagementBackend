@@ -58,6 +58,23 @@ public class DesignationServiceImpl implements DesignationService{
         }
         return new ResponseEntity<List<DesignationWrapper>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+
+@Override
+public ResponseEntity<List<DesignationWrapper>> getActive() {
+	List<DesignationWrapper> list = new ArrayList<DesignationWrapper>();
+    try {
+        if (jwtFilter.isAdmin()) {
+            return new ResponseEntity<List<DesignationWrapper>>(designationDao.getAllActive(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<DesignationWrapper>>(list, HttpStatus.UNAUTHORIZED);
+        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return new ResponseEntity<List<DesignationWrapper>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+}
 
 	@Override
 	public ResponseEntity<String> update(Map<String, String> requestMap) {
@@ -152,5 +169,6 @@ private Designation getDepartmentFromMap(Map<String, String> requestMap) {
 	department.setStatus("y");
     return department;
 }
+
 
 }

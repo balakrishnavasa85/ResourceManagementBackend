@@ -60,6 +60,9 @@ public class UserWorkingHours implements Serializable {
 	@Column(name = "mode")
 	private String mode;
 
+	@Column(name = "status")
+	private String status;
+	
 	public void setId(Integer inte) {
 		this.id = inte;
 	}
@@ -82,6 +85,10 @@ public class UserWorkingHours implements Serializable {
 
 	public void setMode(String twh) {
 		this.mode = twh;
+	}
+	
+	public void setStatus(String st) {
+		this.status = st;
 	}
 
 	public Integer getId() {
@@ -106,6 +113,11 @@ public class UserWorkingHours implements Serializable {
 
 	public String getMode() {
 		return mode;
+	}
+	
+	public String getStatus()
+	{
+		return status;
 	}
 
 }

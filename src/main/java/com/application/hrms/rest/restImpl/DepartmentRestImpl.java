@@ -76,4 +76,15 @@ public class DepartmentRestImpl implements DepartmentRest {
 	        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<DepartmentWrapper>> getAllActiveDepartment() {
+		try {
+            return departmentService.getAllActiveDepartment();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<DepartmentWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+  
+	}
+
 }

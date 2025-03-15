@@ -33,10 +33,13 @@ import java.util.Optional;
 public interface DeductionGroupDao extends JpaRepository<DeductionGroup, Integer> {
 	@Query("select new com.application.hrms.wrapper.DeductionGroupWrapper(u.id , u.name ,u.value, u.status) from DeductionGroup u")
 	List<DeductionGroupWrapper> getAll();
+	
+	@Query("select new com.application.hrms.wrapper.DeductionGroupWrapper(u.id , u.name ,u.value, u.status) from DeductionGroup u where u.status = 'y'")
+	List<DeductionGroupWrapper> getAllActive();
 
 	@Transactional
 	@Modifying
-	@Query(value = "update DeductionGroup u set u.status=:status where u.id =:id", nativeQuery = true)
+	@Query("update DeductionGroup u set u.status=:status where u.id =:id")
 	Integer updateStatus(@Param("status") String status, @Param("id") Integer id);
 
 	@Query("select new com.application.hrms.wrapper.DeductionGroupWrapper(u.id , u.name ,u.value, u.status) from DeductionGroup u  where u.id =:id")

@@ -9,6 +9,8 @@ import com.application.hrms.wrapper.DepartmentWrapper;
 
 public interface DepartmentService {
 	ResponseEntity<List<DepartmentWrapper>> getAllDepartment();
+	
+	ResponseEntity<List<DepartmentWrapper>> getAllActiveDepartment();
 
     ResponseEntity<String> update(Map<String, String> requestMap);
 

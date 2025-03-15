@@ -177,6 +177,8 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				userWorkingDay.setUan(uan);
 				userWorkingDay.setBankname(bankname);
 				uwdd.save(userWorkingDay);
+				
+				uwhd.updateStatus(user);
 
 				userWorkingdays.add(userWorkingDay);
 			}

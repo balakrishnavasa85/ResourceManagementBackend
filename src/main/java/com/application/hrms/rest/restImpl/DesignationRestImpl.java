@@ -78,4 +78,15 @@ public class DesignationRestImpl implements DesignationRest {
 	        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<DesignationWrapper>> getActive() {
+		try {
+            return designationService.getActive();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<DesignationWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+  
+	}
+
 }
