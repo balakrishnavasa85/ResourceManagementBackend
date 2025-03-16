@@ -34,12 +34,7 @@ public interface LeavesDao extends JpaRepository<Leaves, Integer> {
 	@Transactional
 	@Modifying
 	@Query(value = "update leaves u set u.balance=:balance where u.id =:id", nativeQuery = true)
-	Integer updateLeaves(@Param("balance") Integer balace,@Param("id") Integer id);
-	
-//	@Override
-//	@Modifying
-//	@Query("FLUSH")
-//	void flush();
+	Integer updateLeaves(@Param("balance") Integer balace,@Param("id") Integer id); 
 	  
 	@Query("select u  from Leaves u  where u.user.id =:id")
 	Leaves getLeavesByUserId(@Param("id") Integer id);

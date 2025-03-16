@@ -25,12 +25,12 @@ public interface UserWorkingHoursDao extends JpaRepository<UserWorkingHours, Int
     @Query(value = "SELECT count(*) as dayscount, u.user_id, DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%M') as month, " +
                    "DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y') AS year, " +
                    "DAY(LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))) AS lastmonthnumberofdays, " +
-                   "(SELECT count(*) FROM demonew.holidays WHERE date BETWEEN DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m-25') " +
+                   "(SELECT count(*) FROM hrmsnew.holidays WHERE date BETWEEN DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m-25') " +
                    "AND DATE_FORMAT(CURDATE(), '%Y-%m-24') AND DAYOFWEEK(date) NOT IN (1, 7)) AS numberofholidays , us.name as username " +
                    ",sd.accountnumber, sd.ifsccode, sd.pf, sd.uan, sd.bankname " +
-                   "FROM demonew.userworkinghours u " +
-                   "JOIN demonew.user us ON u.user_id = us.id " +
-                   "JOIN demonew.salarydetails sd ON u.user_id = sd.user_id " +
+                   "FROM hrmsnew.userworkinghours u " +
+                   "JOIN hrmsnew.user us ON u.user_id = us.id " +
+                   "JOIN hrmsnew.salarydetails sd ON u.user_id = sd.user_id " +
                    "WHERE u.workingdate BETWEEN DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m-25') " +
                    "AND DATE_FORMAT(CURDATE(), '%Y-%m-24') " +
                    "GROUP BY u.user_id, us.name, sd.id", nativeQuery = true)
