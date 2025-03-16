@@ -59,7 +59,7 @@ public interface LeaveRequestDao extends JpaRepository<LeaveRequest, Integer> {
 	@Query(value = "WITH RECURSIVE DateSeries AS ( "
 			+ "SELECT STR_TO_DATE(l.requestfromdate, '%d-%m-%Y') AS date_value, "
 			+ "STR_TO_DATE(l.requesttodate, '%d-%m-%Y') AS requesttodate "
-			+ "FROM hrmsnew.leaverequest l "
+			+ "FROM leaverequest l "
 			+ "WHERE l.status !='rejected' and l.user_id = :userId "
 			+ "UNION ALL "
 			+ "SELECT DATE_ADD(date_value, INTERVAL 1 DAY), requesttodate "
