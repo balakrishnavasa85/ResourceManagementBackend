@@ -11,9 +11,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.hrms.constents.HrmsConstants;
+import com.application.hrms.rest.DepartmentRest;
 import com.application.hrms.rest.DesignationRest;
 import com.application.hrms.service.DesignationService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.DepartmentWrapper;
 import com.application.hrms.wrapper.DesignationWrapper;
 
 @RestController

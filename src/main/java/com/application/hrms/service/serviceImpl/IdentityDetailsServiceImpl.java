@@ -1,19 +1,34 @@
 package com.application.hrms.service.serviceImpl;
 
+import com.application.hrms.JWT.JwtFilter;
+import com.application.hrms.JWT.jwtUtil;
+import com.application.hrms.POJO.Department;
+import com.application.hrms.POJO.IdentityDetails;
+import com.application.hrms.POJO.SalaryDetails;
+import com.application.hrms.POJO.User;
+import com.application.hrms.constents.HrmsConstants;
+import com.application.hrms.dao.DepartmentDao;
+import com.application.hrms.dao.IdentityDetailsDao;
+import com.application.hrms.dao.SalaryDetailsDao;
+import com.application.hrms.dao.UserDao;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 
-import com.application.hrms.POJO.IdentityDetails;
-import com.application.hrms.POJO.User;
-import com.application.hrms.dao.IdentityDetailsDao;
-import com.application.hrms.dao.UserDao;
+import com.application.hrms.service.DepartmentService;
 import com.application.hrms.service.IdentityDetailsService;
+import com.application.hrms.service.SalaryDetailsService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.DepartmentWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,14 +51,17 @@ public class IdentityDetailsServiceImpl implements IdentityDetailsService {
 				sdData.setId(sd.get().getId());
 				sdData.setPan(requestMap.containsKey("pan") ? requestMap.get("pan") : sd.get().getPan());
 				sdData.setAadhar(requestMap.containsKey("aadhar") ? requestMap.get("aadhar") : sd.get().getAadhar());
-				sdData.setPassport(
-						requestMap.containsKey("passport") ? requestMap.get("passport") : sd.get().getPassport());
-				sdData.setExpiry(requestMap.containsKey("expiry") ? requestMap.get("expiry") : sd.get().getExpiry());
+				sdData.setPassport(requestMap.containsKey("passport") ? requestMap.get("passport")
+						:  sd.get().getPassport());
+				sdData.setExpiry(
+						requestMap.containsKey("expiry") ? requestMap.get("expiry") : sd.get().getExpiry());
 			} else {
 				sdData.setPan(requestMap.containsKey("pan") ? requestMap.get("pan") : "");
 				sdData.setAadhar(requestMap.containsKey("aadhar") ? requestMap.get("aadhar") : "");
-				sdData.setPassport(requestMap.containsKey("passport") ? requestMap.get("passport") : "");
-				sdData.setExpiry(requestMap.containsKey("expiry") ? requestMap.get("ifsccode") : "");
+				sdData.setPassport(requestMap.containsKey("passport") ? requestMap.get("passport")
+						:  "");
+				sdData.setExpiry(
+						requestMap.containsKey("expiry") ? requestMap.get("ifsccode") : "");
 			}
 			sdData.setUser(optional.get());
 			idd.save(sdData);
@@ -56,12 +74,14 @@ public class IdentityDetailsServiceImpl implements IdentityDetailsService {
 
 	@Override
 	public ResponseEntity<IdentityDetails> getDetailsIdentity(Integer user) {
-
-		Optional<IdentityDetails> sd = idd.findByUser(user);
-		if (sd.isPresent()) {
-			return new ResponseEntity<IdentityDetails>(sd.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<IdentityDetails>(HttpStatus.NO_CONTENT);
-		}
+		 
+			Optional<IdentityDetails> sd = idd.findByUser(user);
+			if(sd.isPresent())
+			{
+				return new ResponseEntity<IdentityDetails>(sd.get(), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<IdentityDetails>( HttpStatus.NO_CONTENT);
+			}
 	}
 }

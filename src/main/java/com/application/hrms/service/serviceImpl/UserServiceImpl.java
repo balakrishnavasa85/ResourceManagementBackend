@@ -1,31 +1,11 @@
 package com.application.hrms.service.serviceImpl;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
+import com.google.common.base.Strings;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.application.hrms.JWT.CustomerUserDetailsService;
 import com.application.hrms.JWT.JwtFilter;
+import com.application.hrms.JWT.jwtUtil;
 import com.application.hrms.POJO.DeductionGroup;
 import com.application.hrms.POJO.Department;
 import com.application.hrms.POJO.Designation;
@@ -37,11 +17,38 @@ import com.application.hrms.dao.DesignationDao;
 import com.application.hrms.dao.UserDao;
 import com.application.hrms.service.LeavesService;
 import com.application.hrms.service.UserService;
-import com.application.hrms.utils.EmailUtil;
 import com.application.hrms.utils.HrmsUtils;
-import com.google.common.base.Strings;
+import com.application.hrms.utils.EmailUtil;
+import com.application.hrms.wrapper.UserWrapper;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+import com.application.hrms.service.serviceImpl.EmpTImeSheetServiceImpl;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Slf4j
 @Service

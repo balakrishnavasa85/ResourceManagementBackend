@@ -6,12 +6,13 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 
 import com.application.hrms.POJO.SalaryDetails;
+import com.application.hrms.wrapper.DepartmentWrapper;
 
 public interface SalaryDetailsService {
-
-	ResponseEntity<String> create(Integer id, Map<String, String> requestMap);
-
-	ResponseEntity<SalaryDetails> getDetails(Integer user);
-
+	
+	ResponseEntity<String> create(Integer id,Map<String,String> requestMap);
+	
+	ResponseEntity<SalaryDetails> getDetails(Integer user); 
+	
 	ResponseEntity<String> uploadUsers(List<Map<String, Object>> data);
 }

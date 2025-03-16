@@ -1,21 +1,40 @@
 package com.application.hrms.service.serviceImpl;
 
+import com.application.hrms.JWT.JwtFilter;
+import com.application.hrms.JWT.jwtUtil;
+import com.application.hrms.POJO.Department;
+import com.application.hrms.POJO.EmpTimeSheet;
+import com.application.hrms.POJO.SalaryDetails;
+import com.application.hrms.POJO.TaxSubmission;
+import com.application.hrms.POJO.User;
+import com.application.hrms.constents.HrmsConstants;
+import com.application.hrms.dao.DepartmentDao;
+import com.application.hrms.dao.SalaryDetailsDao;
+import com.application.hrms.dao.TaxSubmissionDao;
+import com.application.hrms.dao.UserDao;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 
-import com.application.hrms.POJO.TaxSubmission;
-import com.application.hrms.POJO.User;
-import com.application.hrms.dao.TaxSubmissionDao;
-import com.application.hrms.dao.UserDao;
+import com.application.hrms.service.DepartmentService;
+import com.application.hrms.service.SalaryDetailsService;
 import com.application.hrms.service.TaxSubmissionService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.DepartmentWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +52,7 @@ public class TaxSubmissionServiceImpl implements TaxSubmissionService {
 		Optional<User> optional = userDao.findById(user);
 		if (optional.isPresent()) {
 			Optional<TaxSubmission> sd = tdd.findByUser(user);
-			TaxSubmission tsdData = new TaxSubmission();
+			TaxSubmission tsdData = new TaxSubmission(); 
 			tsdData = TaxSubmissionMap(requestMap, optional.get());
 			tdd.save(tsdData);
 			return HrmsUtils.getResponeEntity("Tax Details uploaded successfully", HttpStatus.OK);
@@ -45,9 +64,8 @@ public class TaxSubmissionServiceImpl implements TaxSubmissionService {
 
 	private TaxSubmission TaxSubmissionMap(Map<String, String> taxSubmissionData, User useri) throws JSONException {
 		TaxSubmission sd = new TaxSubmission();
-		if (taxSubmissionData.get("id") != null) {
-			sd.setId(Integer.parseInt(taxSubmissionData.get("id")));
-		}
+		if(taxSubmissionData.get("id") != null) {
+			sd.setId(Integer.parseInt(taxSubmissionData.get("id")));}
 		sd.setdonationMode(taxSubmissionData.get("donationMode"));
 		sd.seteducationLoanProvider(taxSubmissionData.get("educationLoanProvider"));
 		sd.setlandlordPAN(taxSubmissionData.get("landlordPAN"));

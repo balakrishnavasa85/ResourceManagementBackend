@@ -8,12 +8,33 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.application.hrms.POJO.LeaveRequest;
+import com.application.hrms.POJO.User;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LeaveRequestDao extends JpaRepository<LeaveRequest, Integer> {
+
+//	@Transactional
+//	@Modifying
+//	@Query(value = "update LeaveRequest u set u.approvedby=:approverid where u.id =:leaverequestid", nativeQuery = true)
+//	Integer updateApprove(@Param("leaverequestid") Integer leaverequestid, @Param("approverid") Integer approverid);
 
 	@Transactional
 	@Modifying

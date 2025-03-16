@@ -1,24 +1,37 @@
 package com.application.hrms.service.serviceImpl;
 
+import com.application.hrms.JWT.JwtFilter;
+import com.application.hrms.JWT.jwtUtil;
+import com.application.hrms.POJO.Department;
+import com.application.hrms.POJO.EmpTimeSheet;
+import com.application.hrms.POJO.SalaryDetails;
+import com.application.hrms.POJO.User;
+import com.application.hrms.constents.HrmsConstants;
+import com.application.hrms.dao.DepartmentDao;
+import com.application.hrms.dao.SalaryDetailsDao;
+import com.application.hrms.dao.UserDao;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 
-import com.application.hrms.POJO.SalaryDetails;
-import com.application.hrms.POJO.User;
-import com.application.hrms.constents.HrmsConstants;
-import com.application.hrms.dao.SalaryDetailsDao;
-import com.application.hrms.dao.UserDao;
+import com.application.hrms.service.DepartmentService;
 import com.application.hrms.service.SalaryDetailsService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.DepartmentWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,7 +128,7 @@ public class SalaryDetailsServiceImpl implements SalaryDetailsService {
 		sd.setIfsccode(timeStringMap.get("ifsccode"));
 		sd.setPf(timeStringMap.get("pf"));
 		sd.setUan(timeStringMap.get("uan"));
-		sd.setUser(useri);
+		sd.setUser(useri); 
 		return sd;
 
 	}

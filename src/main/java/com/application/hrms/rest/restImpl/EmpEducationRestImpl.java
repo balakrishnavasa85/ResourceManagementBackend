@@ -11,11 +11,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.application.hrms.POJO.EmpEducation;
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.EmpEducationRest;
 import com.application.hrms.service.EmpEducationService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.POJO.EmpEducation;
 
 @RestController
 public class EmpEducationRestImpl implements EmpEducationRest {

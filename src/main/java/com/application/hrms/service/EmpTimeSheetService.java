@@ -5,13 +5,12 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
-public interface EmpTimeSheetService {
+import com.application.hrms.wrapper.RelationWrapper;
 
-	ResponseEntity<String> emplogin(Integer id);
-
-	ResponseEntity<String> emplogout(Integer id);
-
+public interface EmpTimeSheetService { 
+	
+	ResponseEntity<String> emplogin(Integer id); 
+	ResponseEntity<String> emplogout(Integer id); 
 	ResponseEntity<List<Object>> UserWorkingHours();
-
 	ResponseEntity<String> uploadUsers(List<Map<String, Object>> data);
 }
