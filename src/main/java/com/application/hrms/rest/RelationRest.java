@@ -18,20 +18,8 @@ import java.util.Map;
 @RequestMapping(path = "/relation")
 public interface RelationRest {
 
-	@GetMapping(path = "/get")
-    public ResponseEntity<List<RelationWrapper>> getAllRelation();
-    
-    @GetMapping(path = "/getInfo/{id}")
-    public ResponseEntity<List<RelationWrapper>> getRelationInfo(@PathVariable Integer id);
-
-    @PostMapping(path = "/update")
-    public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
-    
-    @PutMapping(path = "/updateInfo/{id}")
-    public ResponseEntity<String> updateRelation(@PathVariable Integer id, @RequestBody(required = true) Map<String, String> requestMap);
-
-    @PostMapping(path = "/create")
-    public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
+	@PostMapping(path = "/create/{id}")
+    public ResponseEntity<String> create(@PathVariable Integer id,@RequestBody(required = true) List<Map<String, String>> requestMap);
     
 
     @GetMapping(path = "/getRelationInfo/{id}")

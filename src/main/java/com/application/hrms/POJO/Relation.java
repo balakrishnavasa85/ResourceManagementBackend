@@ -35,42 +35,88 @@ import lombok.Setter;
 @DynamicInsert
 @Table(name = "relation")
 public class Relation implements Serializable {
-       
-    private static final long serialVersionUID = 1L;
 
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
 //  @GeneratedValue(strategy = GenerationType.AUTO)
-  @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="REL_SEQ")
-  @SequenceGenerator(name="REL_SEQ",sequenceName="REL_SEQ",allocationSize=1)
-    @Column(name = "id")
-    private Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REL_SEQ")
+	@SequenceGenerator(name = "REL_SEQ", sequenceName = "REL_SEQ", allocationSize = 1)
+	@Column(name = "id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "relation")
-    private String relation;
+	@Column(name = "relation")
+	private String relation;
 
-    @Column(name = "status")
-    private String status;
-    
-    @Column (name = "user")
-    private Integer user;
-    
+	@Column(name = "age")
+	private Integer age;
+
+	@Column(name = "dob")
+	private String dob;
+
+	@Column(name = "status")
+	private String status;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+
 //    @ManyToOne
 //    private User user;
-   
-    
-    public void setName(String name) { this.name = name; } 
- 	public void setStatus(String string) {this.status = string;			}	
- 	public void setId(Integer inte) {this.id = inte;	}
- 	public void setRelation(String str) {this.relation= str;}
-    public void setUser(Integer user) {this.user = user;}
-    
- 	public String getName() { return name; } 
-	public String getStatus() {return status;		}	
-	public Integer getId() {		return id;			}	
-	public String getRelation() {return relation;}
-	public Integer getUser() { return user; }
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStatus(String string) {
+		this.status = string;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public void setDob(String string) {
+		this.dob = string;
+	}
+
+	public void setId(Integer inte) {
+		this.id = inte;
+	}
+
+	public void setRelation(String str) {
+		this.relation = str;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getRelation() {
+		return relation;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
 }

@@ -133,6 +133,9 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<EmpExperiance> empExperiances;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Relation> relations;
 
 	public void setName(String name) {
 		this.name = name;
@@ -355,6 +358,14 @@ public class User implements Serializable {
 
     public void setEmpExperiance(List<EmpExperiance> empExperiance) {
         this.empExperiances = empExperiance;
+    }
+    
+    public List<Relation> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Relation> rel) {
+        this.relations = rel;
     }
     
     public void setUniqueId(String uid) {

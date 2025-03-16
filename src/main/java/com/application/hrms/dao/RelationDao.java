@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface RelationDao extends JpaRepository<Relation,Integer>{
-	@Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation,u.user) from Relation u")
+	@Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation) from Relation u")
 	List<RelationWrapper> getAllRelations();
 	
 	@Transactional
@@ -40,7 +40,7 @@ public interface RelationDao extends JpaRepository<Relation,Integer>{
     Integer updateStatus(@Param("status") String status, @Param("id") Integer id);
 	
 
-    @Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation,u.user) from Relation u  where u.id =:id")
+    @Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation) from Relation u  where u.id =:id")
 	List<RelationWrapper> getRelationById(@Param("id") Integer id);
     
     
@@ -50,6 +50,6 @@ public interface RelationDao extends JpaRepository<Relation,Integer>{
     @Query(value="select * from Relation u  where u.id =:id", nativeQuery=true)
     Relation getRelationInfoById(@Param("id") Integer id);
     
-    @Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation,u.user) from Relation u  where u.user =:id")
+    @Query("select new com.application.hrms.wrapper.RelationWrapper(u.id , u.name , u.status,u.relation) from Relation u  where u.user =:id")
    	List<RelationWrapper> getRelationByUserId(@Param("id") Integer id);
 }

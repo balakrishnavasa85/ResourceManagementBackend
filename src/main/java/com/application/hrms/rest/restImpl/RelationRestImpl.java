@@ -21,54 +21,13 @@ public class RelationRestImpl implements RelationRest {
 
 	@Autowired
 	RelationService relationService;
-	@Override
-	public ResponseEntity<List<RelationWrapper>> getAllRelation() {
-		try {
-            return relationService.getAllRelation();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return new ResponseEntity<List<RelationWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
-  
-	}
-
-	@Override
-	public ResponseEntity<List<RelationWrapper>> getRelationInfo(Integer id) {
-		 try {
-	            return relationService.getRelationInfo(id);
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	        }
-	        return new ResponseEntity<List<RelationWrapper>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 	
-	}
 
 	@Override
-	public ResponseEntity<String> update(Map<String, String> requestMap) {
-		   try {
-	            return relationService.update(requestMap);
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	        }
-	        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-	    
-	}
-
-	@Override
-	public ResponseEntity<String> updateRelation(Integer id, Map<String, String> requestMap) {
-		 try {
-	            return relationService.updateInfo(id,requestMap);
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	        }
-	        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	@Override
-	public ResponseEntity<String> create(Map<String, String> requestMap) {
+	public ResponseEntity<String> create(Integer id,List<Map<String, String>> requestMap) {
 		 try {
 	            //System.out.println("inside userRestImpl");
-	            return relationService.create(requestMap);
+	            return relationService.create(id, requestMap);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
