@@ -1,24 +1,13 @@
 package com.application.hrms.service.serviceImpl;
 
-import com.application.hrms.JWT.JwtFilter;
-import com.application.hrms.JWT.jwtUtil;
-import com.application.hrms.POJO.EmpEducation;
-import com.application.hrms.POJO.User;
-import com.application.hrms.constents.HrmsConstants;
-import com.application.hrms.dao.EmpEducationDao;
-import com.application.hrms.dao.UserDao;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +17,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.application.hrms.JWT.JwtFilter;
+import com.application.hrms.POJO.EmpEducation;
+import com.application.hrms.POJO.User;
+import com.application.hrms.constents.HrmsConstants;
+import com.application.hrms.dao.EmpEducationDao;
+import com.application.hrms.dao.UserDao;
 import com.application.hrms.service.EmpEducationService;
 import com.application.hrms.utils.HrmsUtils;
 

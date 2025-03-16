@@ -3,16 +3,17 @@ package com.application.hrms.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.application.hrms.POJO.User;
-import com.application.hrms.dao.UserDao;
+
 import com.application.hrms.POJO.ApplicationAccess;
 import com.application.hrms.POJO.DeductionGroup;
 import com.application.hrms.POJO.Department;
 import com.application.hrms.POJO.Designation;
+import com.application.hrms.POJO.User;
 import com.application.hrms.dao.ApplicationAccessDao;
 import com.application.hrms.dao.DeductionGroupDao;
 import com.application.hrms.dao.DepartmentDao;
 import com.application.hrms.dao.DesignationDao;
+import com.application.hrms.dao.UserDao;
 
 @Component
 public class DataLoader implements CommandLineRunner {

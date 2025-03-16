@@ -1,9 +1,9 @@
 package com.application.hrms.JWT;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.application.hrms.dao.UserDao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service

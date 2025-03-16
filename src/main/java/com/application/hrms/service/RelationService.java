@@ -5,18 +5,11 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
-import com.application.hrms.wrapper.RelationWrapper;
+import com.application.hrms.POJO.Relation;
 
 public interface RelationService {
-	ResponseEntity<List<RelationWrapper>> getAllRelation();
-		
-    ResponseEntity<String> update(Map<String, String> requestMap);
 
-	ResponseEntity<String> updateInfo(Integer id, Map<String, String> requestMap);
+	ResponseEntity<String> create(Map<String, String> requestMap);
 
-	ResponseEntity<List<RelationWrapper>> getRelationInfo(Integer id); 
-	
-	ResponseEntity<String> create(Map<String,String> requestMap);
-
-	ResponseEntity<List<RelationWrapper>> getUserRelationInfo(Integer id);
+	ResponseEntity<List<Relation>> getUserRelationInfo(Integer id);
 }

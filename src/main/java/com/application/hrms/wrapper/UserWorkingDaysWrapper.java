@@ -2,250 +2,249 @@ package com.application.hrms.wrapper;
 
 import javax.persistence.Column;
 
-import com.application.hrms.POJO.Department;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 public class UserWorkingDaysWrapper {
 	private Integer id;
 
-    @Column(name = "user")
-    private Integer user;
-    
-    @Column(name = "name")
-    private String name;
+	@Column(name = "user")
+	private Integer user;
 
-    @Column(name = "dayscount")
-    private Integer dayscount;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "month")
-    private String month;
+	@Column(name = "dayscount")
+	private Integer dayscount;
 
-    @Column(name = "year")
-    private Integer year;
+	@Column(name = "month")
+	private String month;
 
-    @Column(name = "lastmonthnumberofdays")
-    private Integer lastmonthnumberofdays;
+	@Column(name = "year")
+	private Integer year;
 
-    @Column(name = "deductiongroup")
-    private String deductiongroup;
+	@Column(name = "lastmonthnumberofdays")
+	private Integer lastmonthnumberofdays;
 
-    @Column(name = "basicamount")
-    private Double basicamount;
+	@Column(name = "deductiongroup")
+	private String deductiongroup;
 
-    @Column(name = "hraamount")
-    private Double hraamount;
+	@Column(name = "basicamount")
+	private Double basicamount;
 
-    @Column(name = "specialallowanceamount")
-    private Double specialallowanceamount;
+	@Column(name = "hraamount")
+	private Double hraamount;
 
-    @Column(name = "childreneducationallowanceamount")
-    private Integer childreneducationallowanceamount;
+	@Column(name = "specialallowanceamount")
+	private Double specialallowanceamount;
 
-    @Column(name = "carmaintenanceamount")
-    private Integer carmaintenanceamount;
+	@Column(name = "childreneducationallowanceamount")
+	private Integer childreneducationallowanceamount;
 
-    @Column(name = "leavetravelallowanceamount")
-    private Integer leavetravelallowanceamount;
+	@Column(name = "carmaintenanceamount")
+	private Integer carmaintenanceamount;
 
-    @Column(name = "telephoneinternetamount")
-    private Integer telephoneinternetamount;
+	@Column(name = "leavetravelallowanceamount")
+	private Integer leavetravelallowanceamount;
 
-    @Column(name = "pfamount")
-    private Integer pfamount;
+	@Column(name = "telephoneinternetamount")
+	private Integer telephoneinternetamount;
 
-    @Column(name = "professionaltax")
-    private Integer professionaltax;
+	@Column(name = "pfamount")
+	private Integer pfamount;
 
-    @Column(name = "tds")
-    private Double tds;
+	@Column(name = "professionaltax")
+	private Integer professionaltax;
 
-    @Column(name = "salarycredited")
-    private Double salarycredited;
-    
-    @Column(name = "uan")
+	@Column(name = "tds")
+	private Double tds;
+
+	@Column(name = "salarycredited")
+	private Double salarycredited;
+
+	@Column(name = "uan")
 	private String uan;
 
 	@Column(name = "pf")
 	private String pf;
-	
+
 	@Column(name = "accountnumber")
 	private String accountnumber;
 
 	@Column(name = "ifsccode")
-	private String ifsccode;	
+	private String ifsccode;
 
-    // Getters and Setters
-    public Integer getId() {
-        return id;
-    }
+	// Getters and Setters
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getUser() {
-        return user;
-    }
-    
-    public void setUser(Integer user) {
-        this.user = user;
-    }
+	public Integer getUser() {
+		return user;
+	}
 
-    public String getName() {
-    	return name;
-    }
+	public void setUser(Integer user) {
+		this.user = user;
+	}
 
-    public void setName(String user) {
-        this.name = user;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getDayscount() {
-        return dayscount;
-    }
+	public void setName(String user) {
+		this.name = user;
+	}
 
-    public void setDayscount(Integer dayscount) {
-        this.dayscount = dayscount;
-    }
+	public Integer getDayscount() {
+		return dayscount;
+	}
 
-    public String getMonth() {
-        return month;
-    }
+	public void setDayscount(Integer dayscount) {
+		this.dayscount = dayscount;
+	}
 
-    public void setMonth(String month) {
-        this.month = month;
-    }
+	public String getMonth() {
+		return month;
+	}
 
-    public Integer getYear() {
-        return year;
-    }
+	public void setMonth(String month) {
+		this.month = month;
+	}
 
-    public void setYear(Integer year) {
-        this.year = year;
-    }
+	public Integer getYear() {
+		return year;
+	}
 
-    public Integer getLastmonthnumberofdays() {
-        return lastmonthnumberofdays;
-    }
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 
-    public void setLastmonthnumberofdays(Integer lastmonthnumberofdays) {
-        this.lastmonthnumberofdays = lastmonthnumberofdays;
-    }
+	public Integer getLastmonthnumberofdays() {
+		return lastmonthnumberofdays;
+	}
 
-    public String getDeductiongroup() {
-        return deductiongroup;
-    }
+	public void setLastmonthnumberofdays(Integer lastmonthnumberofdays) {
+		this.lastmonthnumberofdays = lastmonthnumberofdays;
+	}
 
-    public void setDeductiongroup(String deductiongroup) {
-        this.deductiongroup = deductiongroup;
-    }
+	public String getDeductiongroup() {
+		return deductiongroup;
+	}
 
-    public Double getBasicamount() {
-        return basicamount;
-    }
+	public void setDeductiongroup(String deductiongroup) {
+		this.deductiongroup = deductiongroup;
+	}
 
-    public void setBasicamount(Double basicamount) {
-        this.basicamount = basicamount;
-    }
+	public Double getBasicamount() {
+		return basicamount;
+	}
 
-    public Double getHraamount() {
-        return hraamount;
-    }
+	public void setBasicamount(Double basicamount) {
+		this.basicamount = basicamount;
+	}
 
-    public void setHraamount(Double hramount) {
-        this.hraamount = hramount;
-    }
+	public Double getHraamount() {
+		return hraamount;
+	}
 
-    public Double getSpecialallowanceamount() {
-        return specialallowanceamount;
-    }
+	public void setHraamount(Double hramount) {
+		this.hraamount = hramount;
+	}
 
-    public void setSpecialallowanceamount(Double specialallowanceamount) {
-        this.specialallowanceamount = specialallowanceamount;
-    }
+	public Double getSpecialallowanceamount() {
+		return specialallowanceamount;
+	}
 
-    public Integer getChildreneducationallowanceamount() {
-        return childreneducationallowanceamount;
-    }
+	public void setSpecialallowanceamount(Double specialallowanceamount) {
+		this.specialallowanceamount = specialallowanceamount;
+	}
 
-    public void setChildreneducationallowanceamount(Integer childreneducationallowanceamount) {
-        this.childreneducationallowanceamount = childreneducationallowanceamount;
-    }
+	public Integer getChildreneducationallowanceamount() {
+		return childreneducationallowanceamount;
+	}
 
-    public Integer getCarmaintenanceamount() {
-        return carmaintenanceamount;
-    }
+	public void setChildreneducationallowanceamount(Integer childreneducationallowanceamount) {
+		this.childreneducationallowanceamount = childreneducationallowanceamount;
+	}
 
-    public void setCarmaintenanceamount(Integer carmaintenanceamount) {
-        this.carmaintenanceamount = carmaintenanceamount;
-    }
+	public Integer getCarmaintenanceamount() {
+		return carmaintenanceamount;
+	}
 
-    public Integer getLeavetravelallowanceamount() {
-        return leavetravelallowanceamount;
-    }
+	public void setCarmaintenanceamount(Integer carmaintenanceamount) {
+		this.carmaintenanceamount = carmaintenanceamount;
+	}
 
-    public void setLeavetravelallowanceamount(Integer leavetravelallowanceamount) {
-        this.leavetravelallowanceamount = leavetravelallowanceamount;
-    }
+	public Integer getLeavetravelallowanceamount() {
+		return leavetravelallowanceamount;
+	}
 
-    public Integer getTelephoneinternetamount() {
-        return telephoneinternetamount;
-    }
+	public void setLeavetravelallowanceamount(Integer leavetravelallowanceamount) {
+		this.leavetravelallowanceamount = leavetravelallowanceamount;
+	}
 
-    public void setTelephoneinternetamount(Integer telephoneinternetamount) {
-        this.telephoneinternetamount = telephoneinternetamount;
-    }
+	public Integer getTelephoneinternetamount() {
+		return telephoneinternetamount;
+	}
 
-    public Integer getPfamount() {
-        return pfamount;
-    }
+	public void setTelephoneinternetamount(Integer telephoneinternetamount) {
+		this.telephoneinternetamount = telephoneinternetamount;
+	}
 
-    public void setPfamount(Integer pfamount) {
-        this.pfamount = pfamount;
-    }
+	public Integer getPfamount() {
+		return pfamount;
+	}
 
-    public Integer getProfessionaltax() {
-        return professionaltax;
-    }
+	public void setPfamount(Integer pfamount) {
+		this.pfamount = pfamount;
+	}
 
-    public void setProfessionaltax(Integer professionaltax) {
-        this.professionaltax = professionaltax;
-    }
+	public Integer getProfessionaltax() {
+		return professionaltax;
+	}
 
-    public Double getTds() {
-        return tds;
-    }
+	public void setProfessionaltax(Integer professionaltax) {
+		this.professionaltax = professionaltax;
+	}
 
-    public void setTds(Double tds) {
-        this.tds = tds;
-    }
+	public Double getTds() {
+		return tds;
+	}
 
-    public Double getSalarycredited() {
-        return salarycredited;
-    }
+	public void setTds(Double tds) {
+		this.tds = tds;
+	}
 
-    public void setSalarycredited(Double salarycreadited) {
-        this.salarycredited = salarycreadited;
-    }
-    
-    public void setUan(String name) {
-		this.uan= name;
+	public Double getSalarycredited() {
+		return salarycredited;
+	}
+
+	public void setSalarycredited(Double salarycreadited) {
+		this.salarycredited = salarycreadited;
+	}
+
+	public void setUan(String name) {
+		this.uan = name;
 	}
 
 	public void setPf(String string) {
 		this.pf = string;
 	}
-	
+
 	public void setAccountnumber(String name) {
-		this.accountnumber= name;
+		this.accountnumber = name;
 	}
 
 	public void setIfsccode(String string) {
 		this.ifsccode = string;
 	}
-	
+
 	public String getUan() {
 		return uan;
 	}
@@ -261,4 +260,4 @@ public class UserWorkingDaysWrapper {
 	public String getIfsccode() {
 		return ifsccode;
 	}
-	}
+}

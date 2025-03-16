@@ -8,10 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.application.hrms.POJO.UserWorkingHours;
-
-import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserWorkingHoursDao extends JpaRepository<UserWorkingHours, Integer> {
@@ -32,7 +31,7 @@ public interface UserWorkingHoursDao extends JpaRepository<UserWorkingHours, Int
                    "JOIN user us ON u.user_id = us.id " +
                    "JOIN salarydetails sd ON u.user_id = sd.user_id " +
                    "WHERE u.workingdate BETWEEN DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m-25') " +
-                   "AND DATE_FORMAT(CURDATE(), '%Y-%m-24') " +
+                   "AND DATE_FORMAT(CURDATE(), '%Y-%m-24') AND us.status = 'y' " +
                    "GROUP BY u.user_id, us.name, sd.id", nativeQuery = true)
     List<Object[]> generatePayslip();
     

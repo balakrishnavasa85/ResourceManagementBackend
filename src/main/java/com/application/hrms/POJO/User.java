@@ -1,14 +1,31 @@
 package com.application.hrms.POJO;
 
-import javax.persistence.*;
-import lombok.*;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PostPersist;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import java.io.Serializable;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -133,6 +150,9 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<EmpExperiance> empExperiances;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Relation> relation;
 
 	public void setName(String name) {
 		this.name = name;
@@ -355,6 +375,14 @@ public class User implements Serializable {
 
     public void setEmpExperiance(List<EmpExperiance> empExperiance) {
         this.empExperiances = empExperiance;
+    }
+    
+    public List<Relation> getRelation() {
+        return relation;
+    }
+
+    public void setRelation(List<Relation> rel) {
+        this.relation = rel;
     }
     
     public void setUniqueId(String uid) {
