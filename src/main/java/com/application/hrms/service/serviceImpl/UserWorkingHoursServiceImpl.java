@@ -2,10 +2,12 @@ package com.application.hrms.service.serviceImpl;
 
 import com.application.hrms.dao.DeductionGroupDao;
 import com.application.hrms.dao.LeaveRequestDao;
+import com.application.hrms.dao.TdsDao;
 import com.application.hrms.dao.UserDao;
 import com.application.hrms.dao.UserWorkingDaysDao;
 import com.application.hrms.dao.UserWorkingHoursDao;
 import com.application.hrms.POJO.DeductionGroup;
+import com.application.hrms.POJO.Tds;
 import com.application.hrms.POJO.User;
 import com.application.hrms.POJO.UserWorkingDays;
 import com.application.hrms.POJO.UserWorkingHours;
@@ -50,6 +52,9 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 
 	@Autowired
 	LeaveRequestDao lrd;
+	
+	@Autowired
+	TdsDao tdsDao;
 
 	@Override
 	public ResponseEntity<List<UserWorkingHours>> getByUserId(Integer id) {
@@ -135,9 +140,16 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				BigDecimal hraAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.20)).setScale(2,
 						RoundingMode.HALF_UP); // 20%
 				BigDecimal specialallowanceAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.30))
-						.setScale(2, RoundingMode.HALF_UP); // 30%
-				BigDecimal tds = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.10)).setScale(2,
-						RoundingMode.HALF_UP);
+						.setScale(2, RoundingMode.HALF_UP); // 30% 
+				Integer amount = Integer.parseInt( userDetails.getBasicpa().split("\\.")[0]); 
+				Optional<Tds> tdsdata  = tdsDao.findTaxSlabByAmount(amount);
+				
+//				BigDecimal tds = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.10)).setScale(2,
+//						RoundingMode.HALF_UP);
+				
+				 BigDecimal tdsPercentage = BigDecimal.valueOf(tdsdata.get().getPercentage()).divide(BigDecimal.valueOf(100));
+				    BigDecimal tds = BigDecimal.valueOf(basicpa / 12).multiply(tdsPercentage).setScale(2, RoundingMode.HALF_UP);
+
 
 				JSONObject jsonObjectv = new JSONObject(dg.getValue());
 
@@ -146,6 +158,7 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				Integer leavetravelallowanceAmount = jsonObjectv.getInt("leavetravelallowance");
 				Integer telephoneinternetAmount = jsonObjectv.getInt("telephoneinternet");
 				Integer PFAmount = jsonObjectv.getInt("PF");
+				Integer insuranceAmount = jsonObjectv.getInt("insurance");
 				Integer professional = 200;
 
 				BigDecimal salaryCredited = basicSalaryAmount.add(hraAmount).add(specialallowanceAmount)
@@ -154,6 +167,7 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 						.add(BigDecimal.valueOf(leavetravelallowanceAmount))
 						.add(BigDecimal.valueOf(telephoneinternetAmount)).subtract(tds)
 						.subtract(BigDecimal.valueOf(professional)).subtract(BigDecimal.valueOf(PFAmount))
+						.subtract(BigDecimal.valueOf(insuranceAmount))
 						.setScale(2, RoundingMode.HALF_UP);
 
 				UserWorkingDays userWorkingDay = new UserWorkingDays();
@@ -173,6 +187,7 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				userWorkingDay.setTelephoneinternetamount(telephoneinternetAmount);
 				userWorkingDay.setPfamount(PFAmount);
 				userWorkingDay.setProfessionaltax(200);
+				userWorkingDay.setInsurance(insuranceAmount);
 				userWorkingDay.setTds(tds.doubleValue());
 				userWorkingDay.setSalarycredited(salaryCredited.doubleValue());
 				userWorkingDay.setAccountnumber(accountnumber);
@@ -187,10 +202,10 @@ public class UserWorkingHoursServiceImpl implements UserWorkingHoursService {
 				userWorkingdays.add(userWorkingDay);
 				}
 			}
-				else
-				{
-					break;
-				}
+//				else
+//				{
+//					break;
+//				}
 			}
 			response.put("payslip", userWorkingdays);
 			return new ResponseEntity<Map>(response, HttpStatus.OK);

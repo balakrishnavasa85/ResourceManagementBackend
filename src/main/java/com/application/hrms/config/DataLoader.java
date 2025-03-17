@@ -53,7 +53,7 @@ public class DataLoader implements CommandLineRunner {
 		}
 		if (dgd.count() == 0) {
 			dgd.save(new DeductionGroup(1, "Basic", "y",
-					"{'basicsalary':'50%','hra':'20%','specialallowance':'30%','childreneducationallowance':'200','carmaintenance':'1500','leavetravelallowance':'2000','telephoneinternet':'2500','PF':'1800'}"));
+					"{'basicsalary':'50%','hra':'20%','specialallowance':'30%','childreneducationallowance':'200','carmaintenance':'1500','leavetravelallowance':'2000','telephoneinternet':'2500','PF':'1800','insurance':'2000'}"));
 		}
 		if (userRepository.count() == 0) {
 			userRepository.save(

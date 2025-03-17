@@ -65,6 +65,9 @@ public class UserWorkingDays implements Serializable {
 
     @Column(name = "pfamount")
     private Integer pfamount;
+    
+    @Column(name = "insurance")
+    private Integer insurance;
 
     @Column(name = "professionaltax")
     private Integer professionaltax;
@@ -217,6 +220,14 @@ public class UserWorkingDays implements Serializable {
 
     public void setPfamount(Integer pfamount) {
         this.pfamount = pfamount;
+    }
+    
+    public Integer getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Integer pfamount) {
+        this.insurance = pfamount;
     }
 
     public Integer getProfessionaltax() {
