@@ -126,10 +126,10 @@ public class UserRestImpl implements UserRest {
 	}
 
 	@Override
-	public ResponseEntity<List<User>> getManagers() {
+	public ResponseEntity<List<User>> getManagers(Integer department_id) {
 		 try {
 	            //System.out.println("inside userRestImpl");
-	            return userService.getManagers();
+	            return userService.getManagers(department_id);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
@@ -179,6 +179,19 @@ public class UserRestImpl implements UserRest {
             ex.printStackTrace();
         }
        return new ResponseEntity<List<User>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<List<User>> getusersDepartment(Integer id) {
+		try {
+            //System.out.println("inside userRestImpl");
+            return userService.getusersDepartment(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //System.out.println("Before return");
+       return new ResponseEntity<List<User>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+
 	}
 
 	 

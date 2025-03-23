@@ -14,7 +14,7 @@ public interface UserService {
     ResponseEntity<String> login(Map<String, String> requestMap);
 
     ResponseEntity<List<User>> getAllUser();
-    ResponseEntity<List<User>> getManagers();
+    ResponseEntity<List<User>> getManagers(Integer department_id);
 
     ResponseEntity<String> update(Map<String, String> requestMap);
 
@@ -35,5 +35,7 @@ public interface UserService {
 	ResponseEntity<List<User>> getRepoterDetails(Integer userId);
 	
 	ResponseEntity<List<User>> getRepotingDetails(Integer userId);
+	
+	ResponseEntity<List<User>> getusersDepartment(Integer id);
 	
 }

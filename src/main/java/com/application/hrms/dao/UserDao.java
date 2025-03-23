@@ -45,12 +45,14 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("select u  from User u  where u.id =:id")
 	List<User> getUserById(@Param("id") Integer id);
     
-    @Query("select u  from User u  where u.manager = 'y' and u.status = 'y'")
-	List<User> findAllAdmins();
+    @Query("select u  from User u  where u.manager = 'y' and u.status = 'y' and u.department.id =:department_id")
+	List<User> findAllAdmins(@Param("department_id") Integer department_id);
     
     @Query("select u  from User u  where u.name =:user")
     User findByUsername(@Param("user") String user);
     
+    @Query("select u  from User u  where u.name ='superadmin'")
+	List<User> findSuperadmin();
 
     @Query("select u  from User u  where u.id =:id")
 	User getUserDetailById(@Param("id") Integer id);
@@ -73,6 +75,9 @@ public interface UserDao extends JpaRepository<User, Integer> {
  
     @Query(value = "SELECT USER_SEQ.NEXTVAL FROM DUAL", nativeQuery = true)
     Long getNextSequenceValue();
+    
+    @Query("select u from User u  where u.department.id =:department_id")
+    List<User> findAllUsersByDepartmentId(@Param("department_id") Integer department_id);
 
     
 }

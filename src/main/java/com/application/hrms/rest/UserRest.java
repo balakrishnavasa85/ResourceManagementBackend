@@ -51,8 +51,11 @@ public interface UserRest {
     @PostMapping(path = "/forgotPassword")
     public ResponseEntity<String> forgetPassword(@RequestBody Map<String, String> requestMap);
 
-    @GetMapping(path = "/getManagers")
-    public ResponseEntity<List<User>> getManagers();
+    @GetMapping(path = "/getManagers/{department_id}")
+    public ResponseEntity<List<User>> getManagers(@PathVariable Integer department_id);    
+
+    @GetMapping(path = "/getusersDepartment/{id}")
+    public ResponseEntity<List<User>> getusersDepartment(@PathVariable Integer id);
     
     @PostMapping("/uploadProfilePicture/{userId}")
     public ResponseEntity<String> uploadProfilePicture(@PathVariable Integer userId, @RequestParam("file") MultipartFile file); 

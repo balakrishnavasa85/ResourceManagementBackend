@@ -365,13 +365,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<List<User>> getManagers() {
+	public ResponseEntity<List<User>> getManagers(Integer department_id) {
 		List<User> list = new ArrayList<User>();
 		try {
-			if (jwtFilter.isAdmin()) {
-				return new ResponseEntity<List<User>>(userDao.findAllAdmins(), HttpStatus.OK);
+//			if (jwtFilter.isAdmin()) {
+			list = userDao.findAllAdmins(department_id);
+			if (list.size() > 0) {
+				return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<List<User>>(list, HttpStatus.UNAUTHORIZED);
+				list = userDao.findSuperadmin();
+				return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 			}
 
 		} catch (Exception ex) {
@@ -495,6 +498,30 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public ResponseEntity<List<User>> getusersDepartment(Integer id) {
+		List<User> list = new ArrayList<User>();
+		try {
+			Optional<User> useri = userDao.findById(id);
+			if (useri.isPresent()) {
+				Integer department_id = useri.get().getDepartment().getId();
+				list = userDao.findAllUsersByDepartmentId(department_id);
+				if (list.size() > 0) {
+					return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+				} else {
+					list = userDao.findSuperadmin();
+					return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+				}
+			} else {
+				return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<User>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

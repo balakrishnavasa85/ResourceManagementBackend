@@ -44,6 +44,7 @@ public class DataLoader implements CommandLineRunner {
 			depd.save(new Department(1, "Development", "y"));
 			depd.save(new Department(2, "Testing", "y"));
 			depd.save(new Department(3, "Administration", "y"));
+			depd.save(new Department(3, "Hr Recrutment ", "y"));
 		}
 		if (desd.count() == 0) {
 			desd.save(new Designation(1, "Lead", "y"));
@@ -61,6 +62,9 @@ public class DataLoader implements CommandLineRunner {
 			userRepository.save(new User(2, "devadmin", "devadmin@demo.com", "dev@1234", "admin", "y", "0", "y", 1, 1,1));
 			userRepository
 					.save(new User(3, "testadmin", "testadmin@demo.com", "test@1234", "admin", "y", "0", "y", 2, 1,1));
+
+			userRepository
+					.save(new User(4, "Hr Admin", "hradmin@demo.com", "hr@1234", "admin", "y", "0", "y", 4, 1,1));
 		}
 	}
 }
