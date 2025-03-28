@@ -3,7 +3,9 @@ package com.application.hrms.POJO;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
@@ -50,19 +53,18 @@ public class Recrutment implements Serializable {
 
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "budget")
-	private String budget;	
+	private String budget;
 
 	@Column(name = "reqid")
 	private String reqid;
-	
+
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "noofpositions")
 	private Integer noofpositions;
-	
 
 	@Column(name = "noofpositionsclosed")
 	private Integer noofpositionsclosed;
@@ -70,8 +72,7 @@ public class Recrutment implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER) // EAGER fetch so department is loaded with user
 	@JoinColumn(name = "department_id")
 	private Department department;
-	
-	
+
 	public void setTitle(String name) {
 		this.title = name;
 	}
@@ -79,7 +80,7 @@ public class Recrutment implements Serializable {
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setDescription(String name) {
 		this.description = name;
 	}
@@ -109,15 +110,15 @@ public class Recrutment implements Serializable {
 	}
 
 	public void setNoofpositions(Integer name) {
-		this.noofpositions= name;
+		this.noofpositions = name;
 	}
 
 	public Integer getNoofpositions() {
 		return noofpositions;
 	}
-	
+
 	public void setNoofpositionsclosed(Integer name) {
-		this.noofpositionsclosed= name;
+		this.noofpositionsclosed = name;
 	}
 
 	public Integer getNoofpositionsclosed() {
@@ -127,7 +128,7 @@ public class Recrutment implements Serializable {
 	public String getReqid() {
 		return reqid;
 	}
-	
+
 	public void setId(Integer inte) {
 		this.id = inte;
 	}
@@ -135,21 +136,44 @@ public class Recrutment implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setDepartment(Department dept) {
 		this.department = dept;
 	}
-	
+
 	public Department getDepartment() {
 		return department;
 	}
-	
+
 	@PrePersist
 	private void generateReqId() {
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-	    String timestamp = LocalDateTime.now().format(formatter);
-	    this.reqid = "REQ" + timestamp;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		String timestamp = LocalDateTime.now().format(formatter);
+		this.reqid = "REQ" + timestamp;
 	}
 
+	@OneToMany(mappedBy = "recrutment", cascade = CascadeType.ALL)
+	private List<RecrutmentAssigners> assigners;
+
+	public List<RecrutmentAssigners> getAssigners() {
+		return assigners;
+	}
+
+	public void setAssigners(List<RecrutmentAssigners> empEducation) {
+		this.assigners = empEducation;
+	}
 	
+	@OneToMany(mappedBy = "recrutment", cascade = CascadeType.ALL)
+	private List<UserProcess> usersProcess;
+
+	public List<UserProcess> getUsersProcess() {
+		return usersProcess;
+	}
+
+	public void setUsersProcess(List<UserProcess> empEducation) {
+		this.usersProcess = empEducation;
+	}
+	
+	 
+
 }

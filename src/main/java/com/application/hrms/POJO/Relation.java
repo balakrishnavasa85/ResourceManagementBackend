@@ -64,9 +64,6 @@ public class Relation implements Serializable {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-//    @ManyToOne
-//    private User user;
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -118,5 +115,8 @@ public class Relation implements Serializable {
 	public String getDob() {
 		return dob;
 	}
+	
+
+	
 
 }

@@ -31,10 +31,10 @@ import java.util.Optional;
 @Repository
 public interface EmpTImeSheetDao extends JpaRepository<EmpTimeSheet, Integer> {
 
-    @Query(value = "select * from EmpTimeSheet u where u.user =:id and u.status =:status order by asc", nativeQuery = true)
+    @Query("select u from EmpTimeSheet u where u.user.id =:id and u.status =:status")
     List<EmpTimeSheet> findByEmpIdStatus(@Param("id") Integer id, @Param("status") Integer status);
 
-    @Query(value = "select * from emptimesheet u where u.user_id =:id and u.logouttime =:checkout", nativeQuery = true)
+    @Query("select u from EmpTimeSheet u where u.user.id =:id and u.logouttime =:checkout")
     EmpTimeSheet findByLogedItem(@Param("id") Integer id, @Param("checkout") String checkout);
 
     @Query(value = "SELECT " +
@@ -44,6 +44,7 @@ public interface EmpTImeSheetDao extends JpaRepository<EmpTimeSheet, Integer> {
             "LEAST(FLOOR(SUM(workinghours) / 3600000), 9), 'h ', " +
             "CASE " +
             "WHEN SUM(workinghours) / 3600000 >= 9 THEN 0 " +
+            
             "ELSE FLOOR((SUM(workinghours) % 3600000) / 60000) " +
             "END, 'm' " +
             ") AS working_hours, " +

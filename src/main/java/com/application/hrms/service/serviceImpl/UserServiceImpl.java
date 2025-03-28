@@ -524,4 +524,17 @@ public class UserServiceImpl implements UserService {
 		return new ResponseEntity<List<User>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<User>> getDepartmentUsers(Integer id) {
+		List<User> list = new ArrayList<User>();
+		try {
+			list = userDao.findActiveUsersByDepartmentId(id);
+			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<User>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

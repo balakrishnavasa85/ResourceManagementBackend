@@ -65,5 +65,11 @@ public interface UserRest {
     
     @GetMapping("/getRepotingDetails/{userId}")
     public ResponseEntity<List<User>> getRepotingDetails(@PathVariable Integer userId);
+    
+
+    @GetMapping(path = "/departmentUsers/{id}")
+    public ResponseEntity<List<User>> getDepartmentUsers(@PathVariable Integer id);
+    
+    
 }
 

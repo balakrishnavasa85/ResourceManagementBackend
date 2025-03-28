@@ -194,5 +194,17 @@ public class UserRestImpl implements UserRest {
 
 	}
 
+	@Override
+	public ResponseEntity<List<User>> getDepartmentUsers(Integer id) {
+		try {
+            //System.out.println("inside userRestImpl");
+            return userService.getDepartmentUsers(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //System.out.println("Before return");
+       return new ResponseEntity<List<User>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 	 
 }

@@ -19,4 +19,11 @@ public interface RecrutmentDao extends JpaRepository<Recrutment,Integer>{
 	@Query("Select u from Recrutment u where u.status ='y'")
 	List<Recrutment> getAllActive();
 	
+	@Query("Select u from Recrutment u where u.id =:reqid")
+	Recrutment findByReqId(@Param("reqid") Integer reqid);
+	
+	@Query("SELECT r FROM Recrutment r WHERE r.id IN (SELECT ra.recrutment.id FROM RecrutmentAssigners ra WHERE ra.user.id = :userid)")
+		List<Recrutment> findRecruitmentsByUserId(@Param("userid") Integer userid);
+
+	
 }

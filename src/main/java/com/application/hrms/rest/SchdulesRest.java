@@ -1,5 +1,6 @@
 package com.application.hrms.rest;
 
+import org.json.JSONArray;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,30 +10,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.application.hrms.POJO.Leaves;
+import com.application.hrms.POJO.Schdules;
 import com.application.hrms.wrapper.DepartmentWrapper;
+import com.application.hrms.wrapper.RelationWrapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-@RequestMapping(path = "/department")
-public interface DepartmentRest {
-
-	@GetMapping(path = "/get")
-    public ResponseEntity<List<DepartmentWrapper>> getAllDepartment();
-	
-	@GetMapping(path = "/getActive")
-    public ResponseEntity<List<DepartmentWrapper>> getAllActiveDepartment();
-    
-    @GetMapping(path = "/getInfo/{id}")
-    public ResponseEntity<List<DepartmentWrapper>> getDepartmentInfo(@PathVariable Integer id);
-
-    @PostMapping(path = "/update")
-    public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
-    
-    @PostMapping(path = "/updateInfo/{id}")
-    public ResponseEntity<String> updateDepartment(@PathVariable Integer id, @RequestBody(required = true) Map<String, String> requestMap);
+@RequestMapping(path = "/schdules")
+public interface SchdulesRest {
 
     @PostMapping(path = "/create")
     public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
     
+    @GetMapping(path= "/checkUserInterviews/{id}")
+    public ResponseEntity<Boolean> checkUserInterviews(@PathVariable Integer id);
+
+    @GetMapping(path= "/checkInterviewDetailsById/{id}", produces = "application/json")
+    public ResponseEntity<List<Schdules>> checkInterviewDetailsById(@PathVariable Integer id);
 }
