@@ -47,21 +47,24 @@ public class Schdules implements Serializable {
 	@Column(name = "interviewerid")
 	private Integer interviewerid;
 
-	@Column(name = "recrutmentid")
-	private Integer recrutmentid;
-	
-	@ManyToOne
+	@Column(name = "assigner")
+	private Integer assigner;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userprocess_id", referencedColumnName = "id")
 	private UserProcess userprocess;
 
 	@Column(name = "interviewername")
 	private String interviewername;
 
-	@Column(name = "recuterid")
-	private Integer recuterid;
-
 	@Column(name = "status")
 	private String status;
+
+	@Column(name = "takentime")
+	private String takentime;
+
+	@Column(name = "comment")
+	private String comment;
 
 	public void setId(Integer inte) {
 		this.id = inte;
@@ -87,28 +90,20 @@ public class Schdules implements Serializable {
 		return interviewerid;
 	}
 
-	public void setRecrutmentid(Integer week) {
-		this.recrutmentid = week;
+	public void setAssigner(Integer week) {
+		this.assigner = week;
 	}
 
-	public Integer getRecrutmentid() {
-		return recrutmentid;
+	public Integer getAssigner() {
+		return assigner;
 	}
-	
+
 //	public UserProcess getUserProcess() {
 //		return userprocess;
 //	}
 
 	public void setUserprocess(UserProcess upi) {
 		this.userprocess = upi;
-	}
-
-	public void setRecurterid(Integer rpi) {
-		this.recuterid = rpi;
-	}
-
-	public Integer getRecruterid() {
-		return recuterid;
 	}
 
 	public void setStatus(String status) {
@@ -127,4 +122,19 @@ public class Schdules implements Serializable {
 		return interviewername;
 	}
 
+	public void setTakentime(String time) {
+		this.takentime = time;
+	}
+
+	public String getTakentime() {
+		return takentime;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getComment() {
+		return comment;
+	}
 }

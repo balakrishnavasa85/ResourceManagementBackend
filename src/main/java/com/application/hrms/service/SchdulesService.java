@@ -8,11 +8,16 @@ import org.json.JSONArray;
 import org.springframework.http.ResponseEntity;
 
 import com.application.hrms.POJO.Schdules;
+import com.application.hrms.wrapper.RecruitmentDetailsDTO;
 
 public interface SchdulesService {
 	ResponseEntity<String> create(Map<String, String> requestMap);
 	
 	ResponseEntity<Boolean> checkUserInterviews(Integer id);
 	
-	ResponseEntity<List<Schdules>> checkInterviewDetailsById(Integer id);
+	ResponseEntity<List<RecruitmentDetailsDTO>> checkInterviewDetailsById(Integer id);
+	
+	ResponseEntity<String> updateFeedback(Map<String, String> requestMap);
+	
+	ResponseEntity<List<Schdules>> checkPreviousHistory(Integer id);
 }

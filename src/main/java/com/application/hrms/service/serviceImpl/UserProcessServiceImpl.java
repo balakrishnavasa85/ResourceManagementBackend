@@ -41,13 +41,13 @@ public class UserProcessServiceImpl implements UserProcessService {
 	@Override
 	public ResponseEntity<List<UserProcessWrapper>> getList() {
 		List<UserProcessWrapper> up = new ArrayList<UserProcessWrapper>();
-		try {
-			return new ResponseEntity<List<UserProcessWrapper>>(userProcessDao.getRecruitmentUserProcess(),
-					HttpStatus.OK);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+//		try {
+//			return new ResponseEntity<List<UserProcessWrapper>>(userProcessDao.getRecruitmentUserProcess(),
+//					HttpStatus.OK);
+//
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
 
 		return new ResponseEntity<List<UserProcessWrapper>>(up, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

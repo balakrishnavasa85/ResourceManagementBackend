@@ -72,6 +72,10 @@ public class Recrutment implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER) // EAGER fetch so department is loaded with user
 	@JoinColumn(name = "department_id")
 	private Department department;
+	
+	@ManyToOne(fetch = FetchType.EAGER) // EAGER fetch so department is loaded with user
+	@JoinColumn(name = "designation_id")
+	private Designation designation;
 
 	public void setTitle(String name) {
 		this.title = name;
@@ -144,6 +148,14 @@ public class Recrutment implements Serializable {
 	public Department getDepartment() {
 		return department;
 	}
+	
+	public void setDesignation(Designation dept) {
+		this.designation = dept;
+	}
+
+	public Designation getDesignation() {
+		return designation;
+	}
 
 	@PrePersist
 	private void generateReqId() {
@@ -162,17 +174,17 @@ public class Recrutment implements Serializable {
 	public void setAssigners(List<RecrutmentAssigners> empEducation) {
 		this.assigners = empEducation;
 	}
-	
-	@OneToMany(mappedBy = "recrutment", cascade = CascadeType.ALL)
-	private List<UserProcess> usersProcess;
-
-	public List<UserProcess> getUsersProcess() {
-		return usersProcess;
-	}
-
-	public void setUsersProcess(List<UserProcess> empEducation) {
-		this.usersProcess = empEducation;
-	}
+//	
+//	@OneToMany(mappedBy = "recrutment", cascade = CascadeType.ALL)
+//	private List<UserProcess> usersProcess;
+//
+//	public List<UserProcess> getUsersProcess() {
+//		return usersProcess;
+//	}
+//
+//	public void setUsersProcess(List<UserProcess> empEducation) {
+//		this.usersProcess = empEducation;
+//	}
 	
 	 
 

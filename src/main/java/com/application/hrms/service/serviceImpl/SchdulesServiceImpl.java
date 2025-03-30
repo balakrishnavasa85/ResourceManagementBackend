@@ -1,5 +1,6 @@
 package com.application.hrms.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.application.hrms.dao.UserDao;
 import com.application.hrms.dao.UserProcessDao;
 import com.application.hrms.service.SchdulesService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.RecruitmentDetailsDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,10 +55,11 @@ public class SchdulesServiceImpl implements SchdulesService {
 				sch.setInterviewerid(Integer.parseInt(requestMap.get("interviewerid")));
 				sch.setInterviewername(name);
 				sch.setInterviewtime(requestMap.get("interviewtime"));
-				sch.setRecrutmentid(Integer.parseInt(requestMap.get("reqid")));
-				sch.setRecurterid(Integer.parseInt(requestMap.get("recuterid")));
 				sch.setStatus(requestMap.get("status"));
 				sch.setUserprocess(useri.get());
+				sch.setAssigner(Integer.parseInt(requestMap.get("assignerid")));
+				sch.setTakentime(null);
+				sch.setComment(null);
 				sDao.save(sch);
 
 				return HrmsUtils.getResponeEntity("Successfully Schduled.", HttpStatus.OK);
@@ -68,7 +71,6 @@ public class SchdulesServiceImpl implements SchdulesService {
 			ex.printStackTrace();
 		}
 		return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
 
 	@Override
@@ -88,26 +90,49 @@ public class SchdulesServiceImpl implements SchdulesService {
 	}
 
 	@Override
-	public ResponseEntity<List<Schdules>> checkInterviewDetailsById(Integer id) {
+	public ResponseEntity<List<RecruitmentDetailsDTO>> checkInterviewDetailsById(Integer id) {
+		List<RecruitmentDetailsDTO> list = new ArrayList<RecruitmentDetailsDTO>();
 		try {
-
-			List<Schdules> data = sDao.checkUserInterviews(id);
-//			JSONArray datarray = new JSONArray();
-//			for (Schdules schdule : data) {
-//				JSONObject jsonObject = new JSONObject();
-//				Optional<User> interviewer = userDao.findById(schdule.getInterviewerId());
-//				Optional<User> recruter = userDao.findById(schdule.getRecruterid());
-//				Optional<Recrutment> recrutment = recrutmentDao.findById(schdule.getRecrutmentid());
-//				jsonObject.put("interviewerId", interviewer);
-//				jsonObject.put("recruiterId", recrutment);
-//				jsonObject.put("recruitmentId", recruter);
-//				datarray.put(jsonObject);
+			List<RecruitmentDetailsDTO> data = sDao.findSchedulesByInterviewerId(id);
+			return new ResponseEntity<List<RecruitmentDetailsDTO>>(data, HttpStatus.OK);
 //
 //			}
-			return new ResponseEntity<List<Schdules>>(data, HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		return new ResponseEntity<List<RecruitmentDetailsDTO>>(list,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> updateFeedback(Map<String, String> requestMap) {
+		try {
+			Optional<Schdules> sci = sDao.findById(Integer.parseInt(requestMap.get("schduleid")));
+			if (sci.isPresent()) {
+				String comment = requestMap.get("comment");
+				String takentime = requestMap.get("takentime");
+				String status = requestMap.get("status");
+				Integer schduleid = Integer.parseInt(requestMap.get("schduleid"));
+				sDao.updateFeedback(comment, schduleid, takentime , status);
+				return HrmsUtils.getResponeEntity("Successfully Updated.", HttpStatus.OK);
+			} else {
+				return HrmsUtils.getResponeEntity("Request Not Submited", HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<List<Schdules>> checkPreviousHistory(Integer id) {
+		try {
+			return new ResponseEntity<List<Schdules>>(sDao.checkPreviousHistory(id), HttpStatus.OK);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 		return new ResponseEntity<List<Schdules>>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

@@ -3,7 +3,9 @@ package com.application.hrms.POJO;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
@@ -51,7 +54,10 @@ public class RecrutmentAssigners implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user;
+	private User user; 
+	
+	@OneToMany(mappedBy = "recrutmentassigners", cascade = CascadeType.ALL)
+	private List<UserProcess> userprocess;
 
 	public void setRecrutment(Recrutment dept) {
 		this.recrutment = dept;
@@ -73,4 +79,12 @@ public class RecrutmentAssigners implements Serializable {
 		return id;
 	}
 
+	public void setUserProcesses(List<UserProcess> list)
+	{
+		this.userprocess = list;
+	}
+	public List<UserProcess> getUserProcess()
+	{
+		return userprocess;
+	}
 }

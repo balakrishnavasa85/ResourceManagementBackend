@@ -22,6 +22,7 @@ import com.application.hrms.rest.SchdulesRest;
 import com.application.hrms.service.SchdulesService;
 import com.application.hrms.service.HolidaysService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.RecruitmentDetailsDTO;
 
 @RestController
 public class SchdulesRestImpl implements SchdulesRest {
@@ -50,14 +51,35 @@ public class SchdulesRestImpl implements SchdulesRest {
 	}
 
 	@Override
-	public ResponseEntity<List<Schdules>> checkInterviewDetailsById(Integer id) {
+	public ResponseEntity<List<RecruitmentDetailsDTO>> checkInterviewDetailsById(Integer id) {
 
 		try {
             return schdulesService.checkInterviewDetailsById(id);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<List<Schdules>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<List<RecruitmentDetailsDTO>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> updateFeedback(Map<String, String> requestMap) {
+		try {
+            return schdulesService.updateFeedback(requestMap);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<String>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);  
+	}
+
+	@Override
+	public ResponseEntity<List<Schdules>> checkPreviousHistory(Integer id) {
+
+		try {
+            return schdulesService.checkPreviousHistory(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<Schdules>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);  
 	}
 
  

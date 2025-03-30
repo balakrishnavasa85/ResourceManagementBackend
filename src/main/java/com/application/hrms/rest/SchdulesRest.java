@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.application.hrms.POJO.Leaves;
 import com.application.hrms.POJO.Schdules;
 import com.application.hrms.wrapper.DepartmentWrapper;
+import com.application.hrms.wrapper.RecruitmentDetailsDTO;
 import com.application.hrms.wrapper.RelationWrapper;
 
 import java.util.List;
@@ -29,5 +30,12 @@ public interface SchdulesRest {
     public ResponseEntity<Boolean> checkUserInterviews(@PathVariable Integer id);
 
     @GetMapping(path= "/checkInterviewDetailsById/{id}", produces = "application/json")
-    public ResponseEntity<List<Schdules>> checkInterviewDetailsById(@PathVariable Integer id);
+    public ResponseEntity<List<RecruitmentDetailsDTO>> checkInterviewDetailsById(@PathVariable Integer id);
+    
+    @PostMapping(path="/updateFeedback")
+    public ResponseEntity<String> updateFeedback(@RequestBody(required = true) Map<String, String> requestMap);
+    
+    @GetMapping(path= "/checkPreviousHistory/{id}")
+    public ResponseEntity<List<Schdules>> checkPreviousHistory(@PathVariable Integer id);
+    
 }

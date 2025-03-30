@@ -20,12 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.application.hrms.JWT.JwtFilter;
 import com.application.hrms.JWT.jwtUtil;
 import com.application.hrms.POJO.Department;
+import com.application.hrms.POJO.Designation;
 import com.application.hrms.POJO.Recrutment;
+import com.application.hrms.POJO.RecrutmentAssigners;
 import com.application.hrms.POJO.Tds;
 import com.application.hrms.POJO.User;
 import com.application.hrms.POJO.UserProcess;
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.dao.DepartmentDao;
+import com.application.hrms.dao.DesignationDao;
+import com.application.hrms.dao.RecrutmentAssignersDao;
 import com.application.hrms.dao.RecrutmentDao;
 import com.application.hrms.dao.TdsDao;
 import com.application.hrms.dao.UserDao;
@@ -48,6 +52,9 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 	DepartmentDao departmentDao;
 	
 	@Autowired
+	DesignationDao designationDao;
+	
+	@Autowired
 	JwtFilter jwtFilter;
 	
 	@Autowired
@@ -55,6 +62,9 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 	
 	@Autowired
 	UserProcessDao userprocessDao;
+	
+	@Autowired
+	RecrutmentAssignersDao recrutmentAssignerDao;
 
 	@Override
 	public ResponseEntity<String> createrecrtment(Map<String, String> requestMap) {
@@ -71,7 +81,9 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 				rdata.setStatus("y");
 				Department dInfo = departmentDao
 						.getDepartmentInfoById(Integer.parseInt(requestMap.get("department_id")));
+				Designation degInfo = designationDao.getDesignationInfoById(Integer.parseInt(requestMap.get("position_id")));
 				rdata.setDepartment(dInfo);
+				rdata.setDesignation(degInfo);
 				recrutmentDao.save(rdata);
 				return HrmsUtils.getResponeEntity("Recrutment Datails Created.", HttpStatus.OK);
 			} else {
@@ -117,10 +129,10 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 	@Override
 	public ResponseEntity<String> creatUserProcess(String data, MultipartFile file) throws JSONException, IOException{
 		JSONObject jsonObject = new JSONObject(data);
-
-		Optional<User> useri = userdao.findById((Integer) jsonObject.get("userid"));
-		Optional<Recrutment> rinfo = recrutmentDao.findById((Integer) jsonObject.get("reqid"));
-		if(useri.isPresent() && rinfo.isPresent())
+		Optional<RecrutmentAssigners> assigner = recrutmentAssignerDao.findById((Integer) jsonObject.get("assignerid"));
+//		Optional<User> useri = userdao.findById((Integer) jsonObject.get("userid"));
+//		Optional<Recrutment> rinfo = recrutmentDao.findById((Integer) jsonObject.get("reqid"));
+		if(assigner.isPresent())
 		{
 			String originalFileName = file.getOriginalFilename();
 			String fileNameWithoutExtension = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
@@ -145,8 +157,7 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 				userprocessinfo.setJoiningon(jsonObject.get("joiningon").toString());
 				userprocessinfo.setName(jsonObject.get("name").toString());
 				userprocessinfo.setPan(jsonObject.get("pan").toString());
-				userprocessinfo.setRecrutment(rinfo.get());
-				userprocessinfo.setRecruter(jsonObject.get("userid").toString());
+				userprocessinfo.setRecrutmentassigners(assigner.get());
 				userprocessDao.save(userprocessinfo);
 				return HrmsUtils.getResponeEntity("User Entry Created.", HttpStatus.OK);
 //			} else {
