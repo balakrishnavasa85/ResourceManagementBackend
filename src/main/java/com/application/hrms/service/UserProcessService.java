@@ -11,7 +11,9 @@ import com.application.hrms.wrapper.UserProcessWrapper;
 
 public interface UserProcessService {
 
-	ResponseEntity<List<UserProcess>> check(Map<String,String> request);
+	ResponseEntity<List<UserProcess>> check(Map<String,String> request); 
 	
-	ResponseEntity<List<UserProcessWrapper>> getList();
+	ResponseEntity<String> updateUserConformation(Map<String, String> requestMap);
+	
+	ResponseEntity<String> offerInitiate(Map<String, String> requestMap);
 }

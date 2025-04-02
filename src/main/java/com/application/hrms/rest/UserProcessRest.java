@@ -18,9 +18,11 @@ import com.application.hrms.wrapper.UserProcessWrapper;
 public interface UserProcessRest { 
 	
 	@GetMapping(path = "/check/{value}")
-    public ResponseEntity<List<UserProcess>> check(@RequestBody(required = true) Map<String, String> requestMap); 
+    public ResponseEntity<List<UserProcess>> check(@RequestBody(required = true) Map<String, String> requestMap);  
 	
-	@GetMapping(path ="/getList")
-	public ResponseEntity<List<UserProcessWrapper>> getList(); 
+	@PostMapping(path = "/updateUserConformation")
+	public ResponseEntity<String> updateUserConformation(@RequestBody(required = true) Map<String, String> requestMap); 
 	
+	@PostMapping(path ="/offerInitiate")
+	public ResponseEntity<String> offerInitiate(@RequestBody(required = true) Map<String, String> requestMap);
 }

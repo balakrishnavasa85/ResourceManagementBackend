@@ -20,4 +20,6 @@ public interface SchdulesService {
 	ResponseEntity<String> updateFeedback(Map<String, String> requestMap);
 	
 	ResponseEntity<List<Schdules>> checkPreviousHistory(Integer id);
+	
+	ResponseEntity<List<RecruitmentDetailsDTO>> selectedUser();
 }

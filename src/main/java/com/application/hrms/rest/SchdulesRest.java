@@ -38,4 +38,7 @@ public interface SchdulesRest {
     @GetMapping(path= "/checkPreviousHistory/{id}")
     public ResponseEntity<List<Schdules>> checkPreviousHistory(@PathVariable Integer id);
     
+    @GetMapping(path= "/selectedUser")
+    public ResponseEntity<List<RecruitmentDetailsDTO>> selectedUser();
+    
 }

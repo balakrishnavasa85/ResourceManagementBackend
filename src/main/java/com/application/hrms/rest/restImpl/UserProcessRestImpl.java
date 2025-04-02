@@ -32,16 +32,26 @@ public class UserProcessRestImpl implements UserProcessRest {
 			ex.printStackTrace();
 		}
         return new ResponseEntity((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+	} 
 
 	@Override
-	public ResponseEntity<List<UserProcessWrapper>> getList() {
+	public ResponseEntity<String> updateUserConformation(Map<String, String> requestMap) {
 		try {
-			return ups.getList();
+			return ups.updateUserConformation(requestMap);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-        return new ResponseEntity((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> offerInitiate(Map<String, String> requestMap) {
+		try {
+			return ups.offerInitiate(requestMap);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

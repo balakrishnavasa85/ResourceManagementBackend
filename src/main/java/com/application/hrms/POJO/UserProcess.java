@@ -178,5 +178,100 @@ public class UserProcess implements Serializable {
 	public void setSchdules(List<Schdules> rel) {
 		this.schdules = rel;
 	}
+	
+	@Column(name="opuserid")
+	private Integer opuserid;
+	public Integer getOpuserid() {
+		return opuserid;
+	}
+	public void setOpuserid(Integer op) {
+		this.opuserid = op;
+	}
+	
+	@Column(name="opusername")
+	private String opusername;
+	public String getOpuserName() {
+		return opusername;
+	}
+	public void setOpuserName(String op) {
+		this.opusername = op;
+	}
+	
+	@Column(name="opusercomment")
+	private String opusercomment;
+	public String getOpuserComment() {
+		return opusercomment;
+	}
+	public void setOpuserComment(String op) {
+		this.opusername = op;
+	}
+	
+	@Column(name="preferedjoingdate")
+	private String preferedjoingdate;
+	public String getpreferedjoingdate() {
+		return preferedjoingdate;
+	}
+	public void setpreferedjoingdate(String op) {
+		this.preferedjoingdate = op;
+	}
+	
+	@Column(name="userconformation")
+	private String userconformation;
+	public String getuserconformation() {
+		return userconformation;
+	}
+	public void setuserconformation(String op) {
+		this.userconformation = op;
+	}
+	
+	@Column(name="operationdate")
+	private String operationdate;
+	public String getoperationdate() {
+		return operationdate;
+	}
+	public void setoperationdate(String op) {
+		this.operationdate = op;
+	}
+
+	@Column(name="userlink")
+	private String userlink;
+	public String getUserlink() {
+		return userlink;
+	}
+	public void setUserlink(String op) {
+		this.userlink = op;
+	}
+	@Column(name="offergenerateddate")
+	private String offergenerateddate;
+	public String getOffergenerateddate() {
+		return offergenerateddate;
+	}
+	public void setOffergenerateddate(String op) {
+		this.offergenerateddate= op;
+	}
+	@Column(name="address")
+	private String address;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String op) {
+		this.address= op;
+	}
+	@Column(name="password")
+	private String password;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String op) {
+		this.password= op;
+	}
+	@Column(name="role")
+	private String role= "processuser";
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String op) {
+		this.role= op;
+	}
 
 }

@@ -53,4 +53,14 @@ public class TdsRestImpl implements TdsRest {
 		return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<Map> getByAmount(Integer amount,Integer groupid) {
+		try {
+			return tdss.getByAmount(amount,groupid);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<Map>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

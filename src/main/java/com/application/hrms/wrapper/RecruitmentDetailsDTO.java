@@ -33,9 +33,17 @@ public class RecruitmentDetailsDTO {
 	    private String designationName;
 	    private Integer recruitmentAssignerId;
 	    private Integer recruterAssigneruserId;
-//	    private Integer assignerUserId;
-//	    private String assignerName;
-//	    private String assignerEmail;
+	    private Integer opuserid;
+		private String opusername;
+		private String opusercomment;
+		private String operationdate;
+		private String preferedjoingdate;
+		private String userconformation;
+		private String userlink;
+		private String offergenerateddate;
+		private String address;
+		
+		
 
 	    // Constructor
 	    public RecruitmentDetailsDTO(Integer scheduleId, Integer interviewerId, String interviewTime, 
@@ -46,8 +54,9 @@ public class RecruitmentDetailsDTO {
 	                                String recruitmentReqId, String jobTitle, String jobDescription, 
 	                                String recruitmentStatus, Integer noOfPositions, Integer noOfPositionsClosed, 
 	                                String budget, Integer departmentId, String departmentName, Integer designationId, String designationName, 
-	                                Integer recruitmentAssignerId,Integer recruterAssigneruserId
-//	                                , Integer assignerUserId, String assignerName, String assignerEmail
+	                                Integer recruitmentAssignerId,Integer recruterAssigneruserId,  Integer opuserid, String opusername, String opusercomment, 
+	                                String preferedjoingdate, String userconformation, String operationdate, String userlink,String offergenerateddate,
+	                                String address
 	                                ) {
 	        this.scheduleId = scheduleId;
 	        this.interviewerId = interviewerId;
@@ -81,9 +90,15 @@ public class RecruitmentDetailsDTO {
 	        this.designationName = designationName;
 	        this.recruitmentAssignerId = recruitmentAssignerId;
 	        this.recruterAssigneruserId = recruterAssigneruserId;
-//	        this.assignerUserId = assignerUserId;
-//	        this.assignerName = assignerName;
-//	        this.assignerEmail = assignerEmail;
+	        this.opuserid = opuserid;
+	        this.opusername = opusername;
+	        this.opusercomment = opusercomment;
+	        this.preferedjoingdate = preferedjoingdate;
+	        this.userconformation = userconformation;
+	        this.operationdate = operationdate;
+	        this.userlink = userlink;
+	        this.offergenerateddate = offergenerateddate;
+	        this.address = address;
 	    }
 
 	    // Getters and Setters
@@ -345,32 +360,64 @@ public class RecruitmentDetailsDTO {
 	    {
 	    	this.interviewerComment = time;
 	    }
+	    
+	    public Integer getOpuserid() {
+			return opuserid;
+		}
+		public void setOpuserid(Integer op) {
+			this.opuserid = op;
+		}
+		
+		public String getOpuserName() {
+			return opusername;
+		}
+		public void setOpuserName(String op) {
+			this.opusername = op;
+		}
+		
+		public String getOpuserComment() {
+			return opusercomment;
+		}
+		public void setOpuserComment(String op) {
+			this.opusername = op;
+		}
+		
+		public String getpreferedjoingdate() {
+			return preferedjoingdate;
+		}
+		public void setpreferedjoingdate(String op) {
+			this.preferedjoingdate = op;
+		}
+		
+		public String getuserconformation() {
+			return userconformation;
+		}
+		public void setuserconformation(String op) {
+			this.userconformation = op;
+		}
 
-//	    public Integer getAssignerUserId() {
-//	        return assignerUserId;
-//	    }
-//
-//	    public void setAssignerUserId(Integer assignerUserId) {
-//	        this.assignerUserId = assignerUserId;
-//	    }
-//
-//	    public String getAssignerName() {
-//	        return assignerName;
-//	    }
-//
-//	    public void setAssignerName(String assignerName) {
-//	        this.assignerName = assignerName;
-//	    }
-//
-//	    public String getAssignerEmail() {
-//	        return assignerEmail;
-//	    }
-//
-//	    public void setAssignerEmail(String assignerEmail) {
-//	        this.assignerEmail = assignerEmail;
-//	    }
-
-  
-    
-    // Getters & Setters (or use Lombok @Data for brevity)
+		public String getoperationdate() {
+			return operationdate;
+		}
+		public void setoperationdate(String op) {
+			this.operationdate = op;
+		}
+		public String getUserlink() {
+			return userlink;
+		}
+		public void setUserlink(String op) {
+			this.userlink = op;
+		}
+		public String getOffergenerateddate() {
+			return offergenerateddate;
+		}
+		public void setOffergenerateddate(String op) {
+			this.offergenerateddate= op;
+		}
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String op) {
+			this.address= op;
+		}
 }

@@ -61,11 +61,11 @@ public class DeductionGroupServiceImpl implements DeductionGroupService {
 	public ResponseEntity<List<DeductionGroupWrapper>> getAllActive() {
 		List<DeductionGroupWrapper> list = new ArrayList<DeductionGroupWrapper>();
 		try {
-			if (jwtFilter.isAdmin()) {
+//			if (jwtFilter.isAdmin()) {
 				return new ResponseEntity<List<DeductionGroupWrapper>>(deductionGroupDao.getAllActive(), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<List<DeductionGroupWrapper>>(list, HttpStatus.UNAUTHORIZED);
-			}
+//			} else {
+//				return new ResponseEntity<List<DeductionGroupWrapper>>(list, HttpStatus.UNAUTHORIZED);
+//			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

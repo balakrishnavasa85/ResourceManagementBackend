@@ -158,6 +158,7 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 				userprocessinfo.setName(jsonObject.get("name").toString());
 				userprocessinfo.setPan(jsonObject.get("pan").toString());
 				userprocessinfo.setRecrutmentassigners(assigner.get());
+				userprocessinfo.setAddress(jsonObject.get("address").toString());
 				userprocessDao.save(userprocessinfo);
 				return HrmsUtils.getResponeEntity("User Entry Created.", HttpStatus.OK);
 //			} else {

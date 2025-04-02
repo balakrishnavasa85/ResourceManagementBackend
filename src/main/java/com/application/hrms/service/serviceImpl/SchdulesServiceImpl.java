@@ -136,4 +136,16 @@ public class SchdulesServiceImpl implements SchdulesService {
 		return new ResponseEntity<List<Schdules>>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<RecruitmentDetailsDTO>> selectedUser() {
+		List<RecruitmentDetailsDTO> list = new ArrayList<RecruitmentDetailsDTO>();
+		try {
+			List<RecruitmentDetailsDTO> data = sDao.slectedUser();
+			return new ResponseEntity<List<RecruitmentDetailsDTO>>(data, HttpStatus.OK); 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<RecruitmentDetailsDTO>>(list,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

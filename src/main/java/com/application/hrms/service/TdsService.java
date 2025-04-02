@@ -14,4 +14,6 @@ public interface TdsService {
 	ResponseEntity<List<Tds>> getAll();
 	
 	ResponseEntity<String> delete();
+	
+	ResponseEntity<Map> getByAmount(Integer amount,Integer groupid);
 }
