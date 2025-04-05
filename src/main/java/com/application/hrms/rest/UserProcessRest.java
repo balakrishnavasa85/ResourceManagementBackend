@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.application.hrms.POJO.Tds;
 import com.application.hrms.POJO.UserProcess;
+import com.application.hrms.wrapper.UserProcessDetailsDTO;
 import com.application.hrms.wrapper.UserProcessWrapper;
 
 @RequestMapping(path = "/usersprocess")
@@ -25,4 +26,16 @@ public interface UserProcessRest {
 	
 	@PostMapping(path ="/offerInitiate")
 	public ResponseEntity<String> offerInitiate(@RequestBody(required = true) Map<String, String> requestMap);
+	
+	@GetMapping(path ="/getByUser/{id}")
+	public ResponseEntity<UserProcess> getyUser(@PathVariable Integer id);	
+
+	@PostMapping(path = "/updateUserInformation")
+	public ResponseEntity<String> updateUserInformation(@RequestBody(required = true) Map<String, String> requestMap); 
+	
+	@GetMapping(path = "/getAcceptedUsersList")
+	public ResponseEntity<List<UserProcessDetailsDTO>> getAcceptedUsersList();
+	
+	@PostMapping(path = "/onboard/{userProcessId}/{recrutmentId}")
+	public ResponseEntity<String> onboard(@PathVariable Integer userProcessId,@PathVariable Integer recrutmentId,@RequestBody(required = true) Map<String, String> requestMap);
 }

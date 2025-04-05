@@ -3,7 +3,10 @@ package com.application.hrms.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -24,6 +27,9 @@ public interface RecrutmentDao extends JpaRepository<Recrutment,Integer>{
 	
 	@Query("SELECT r FROM Recrutment r WHERE r.id IN (SELECT ra.recrutment.id FROM RecrutmentAssigners ra WHERE ra.user.id = :userid)")
 		List<Recrutment> findRecruitmentsByUserId(@Param("userid") Integer userid);
-
 	
+	@Transactional
+	@Modifying
+	@Query("update Recrutment u set u.noofpositionsclosed =:noofopositionsCount where u.id =:recrutmentId")
+	Integer updatePositions(@Param("noofopositionsCount") Integer noofopositionsCount,@Param("recrutmentId") Integer recrutmentId);	
 }

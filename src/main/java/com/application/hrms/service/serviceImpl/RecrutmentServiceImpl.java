@@ -78,6 +78,7 @@ public class RecrutmentServiceImpl implements RecrutmentService {
 				rdata.setBudget(requestMap.get("budget"));
 				rdata.setDescription(requestMap.get("description"));
 				rdata.setNoofpositions(Integer.parseInt(requestMap.get("noofpositions")));
+				rdata.setNoofpositionsclosed(0);
 				rdata.setStatus("y");
 				Department dInfo = departmentDao
 						.getDepartmentInfoById(Integer.parseInt(requestMap.get("department_id")));

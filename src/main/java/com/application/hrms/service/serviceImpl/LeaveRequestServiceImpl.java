@@ -77,6 +77,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 						ets.setNoofdays(Integer.parseInt(requestMap.get("noofdays")));
 						lrd.save(ets);
 
+			            ls.leaveBalanceChange(id, Integer.parseInt(requestMap.get("noofdays")), "minus");
 				return HrmsUtils.getResponeEntity("Successfully Leave Request Submited.", HttpStatus.OK);
 			} else {
 				return HrmsUtils.getResponeEntity("Leave Request Not Submited", HttpStatus.BAD_REQUEST);
@@ -110,13 +111,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 					ets.setReason(requestMap.get("reason"));
 					ets.setUsername(requestMap.get("username"));
 					lrd.save(ets);
-					if ("approved".equalsIgnoreCase(requestMap.get("status"))) {
+//					if ("approved".equalsIgnoreCase(requestMap.get("status"))) {
 	                JSONObject jsonObject = new JSONObject();
 	                jsonObject.put("user", ets.getUser().getId());
 	                jsonObject.put("noofdays", lr.get().getNoofdays());
 	                jsonObject.put("status", requestMap.get("status"));
 	                jsonArray.put(jsonObject);
-                    }
+//                    }
                 }
             }
 
@@ -145,7 +146,14 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
             JSONObject jsonObject = uniqueJsonArray.getJSONObject(i);
             int user = jsonObject.getInt("user");
             int noofdays = jsonObject.getInt("noofdays");
+            if(jsonObject.getString("status").equals("approved"))
+            {            	
             ls.leaveBalanceChange(user, noofdays, "minus");
+            }
+            else
+            {
+            	ls.leaveBalanceChange(user, noofdays, "add");
+            }
         }
 		return HrmsUtils.getResponeEntity("Successfully Leaves Request Updated.", HttpStatus.OK);
 		} catch (Exception ex) {

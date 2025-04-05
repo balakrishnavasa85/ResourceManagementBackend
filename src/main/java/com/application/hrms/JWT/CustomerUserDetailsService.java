@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.application.hrms.dao.UserDao;
+import com.application.hrms.dao.UserProcessDao;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,10 +23,17 @@ public class CustomerUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserDao userDao;
+    
+    @Autowired
+    UserProcessDao userProcessDao;
 
     @Getter
     private com.application.hrms.POJO.User userDatails;
 
+
+    @Getter
+    private com.application.hrms.POJO.UserProcess userProcessDatails;
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        log.info("Inside loadUserByUsername {}", username);
@@ -33,7 +41,14 @@ public class CustomerUserDetailsService implements UserDetailsService {
         if (!Objects.isNull(userDatails)) {
             return new User(userDatails.getEmail(), userDatails.getPassword(), new ArrayList<>());
         } else {
-            throw new UsernameNotFoundException("User not found");
+        	userProcessDatails = userProcessDao.findByEmailId(username);
+        	if (!Objects.isNull(userProcessDatails)) {
+                return new User(userProcessDatails.getEmail(), userProcessDatails.getPassword(), new ArrayList<>());
+            }
+        	else
+        	{
+        		throw new UsernameNotFoundException("User not found");        		
+        	}
         }
     }
     public com.application.hrms.POJO.User getUserDatails() {

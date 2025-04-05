@@ -10,11 +10,13 @@ import com.application.hrms.POJO.DeductionGroup;
 import com.application.hrms.POJO.Department;
 import com.application.hrms.POJO.Designation;
 import com.application.hrms.POJO.User;
+import com.application.hrms.POJO.UserProcess;
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.dao.DeductionGroupDao;
 import com.application.hrms.dao.DepartmentDao;
 import com.application.hrms.dao.DesignationDao;
 import com.application.hrms.dao.UserDao;
+import com.application.hrms.dao.UserProcessDao;
 import com.application.hrms.service.LeavesService;
 import com.application.hrms.service.UserService;
 import com.application.hrms.utils.HrmsUtils;
@@ -161,6 +163,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	EmailUtil emailUtil;
+	
+	@Autowired
+	UserProcessDao userProcessDao;
 
 	public ResponseEntity<String> login(Map<String, String> requestMap) {
 		try {
@@ -180,12 +185,27 @@ public class UserServiceImpl implements UserService {
 									+ "\"}",
 							HttpStatus.OK);
 				} else {
+					
 					return new ResponseEntity<String>("{\"message\":\"" + "Wait for Admin Approvel." + "\"}",
 							HttpStatus.BAD_REQUEST);
 				}
 			}
 		} catch (Exception ex) {
-			return new ResponseEntity<String>("{\"message\":\"" + "User not Valid." + "\"}", HttpStatus.BAD_REQUEST);
+			 Optional<UserProcess> userOptional = userProcessDao.findByEmail(requestMap.get("email"));
+		        
+		        if (userOptional.isPresent()) {
+		        	UserProcess user = userOptional.get();
+		        	if (requestMap.get("password").equals(user.getPassword())) {  
+		                return new ResponseEntity<String>(
+		                        "{\"token\":\""
+		                                + jwtUtil.generateToken(user.getEmail(), user.getRole(), user.getName(), user.getId())
+		                                + "\"}",
+		                        HttpStatus.OK);
+		            }
+		        }
+		        
+		        // If credentials are invalid, return an error
+		        return new ResponseEntity<>("{\"message\":\"" + "User not Valid." + "\"}", HttpStatus.BAD_REQUEST); 
 		}
 		return new ResponseEntity<String>("{\"message\":\"" + "Bad Credentials." + "\"}", HttpStatus.BAD_REQUEST);
 	}

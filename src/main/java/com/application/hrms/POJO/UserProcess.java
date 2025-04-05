@@ -273,5 +273,42 @@ public class UserProcess implements Serializable {
 	public void setRole(String op) {
 		this.role= op;
 	}
+	
+	@Column(name="gender")
+	private String gender;
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String op) {
+		this.gender= op;
+	}
+	
+	@Column(name="maritalstatus")
+	private String maritalstatus;
+	public String getMaritalstatus() {
+		return maritalstatus;
+	}
+	public void setMaritalstatus(String op) {
+		this.maritalstatus= op;
+	}
+	
+	@Column(name="onboard")
+	private String onboard;
+	public String getOnboard() {
+		return onboard;
+	}
+	public void setOnboard(String op) {
+		this.onboard= op;
+	}
 
+	 public UserProcess() {}
+
+	    // Parameterized constructor
+	    public UserProcess(Integer id, String name, String email,String password, String role) {
+	        this.id = id;
+	        this.name = name;
+	        this.email = email;
+	        this.password = password;
+	        this.role = role; 
+	    }
 }

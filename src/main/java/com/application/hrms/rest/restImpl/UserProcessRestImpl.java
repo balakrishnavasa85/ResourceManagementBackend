@@ -16,6 +16,8 @@ import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.UserProcessRest;
 import com.application.hrms.service.UserProcessService;
 import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.RecruitmentDetailsDTO;
+import com.application.hrms.wrapper.UserProcessDetailsDTO;
 import com.application.hrms.wrapper.UserProcessWrapper;
 
 @RestController
@@ -48,6 +50,47 @@ public class UserProcessRestImpl implements UserProcessRest {
 	public ResponseEntity<String> offerInitiate(Map<String, String> requestMap) {
 		try {
 			return ups.offerInitiate(requestMap);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<UserProcess> getyUser(Integer id) {
+		try {
+			return ups.getyUser(id);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+        return new ResponseEntity((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> updateUserInformation(Map<String, String> requestMap) {
+		try {
+			return ups.updateUserInformation(requestMap);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+        return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<List<UserProcessDetailsDTO>> getAcceptedUsersList() {
+		try {
+			return ups.getAcceptedUsersList();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<UserProcessDetailsDTO>>((MultiValueMap<String, String>) new ArrayList<Object>(),
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> onboard(Integer userProcessId, Integer recrutmentId, Map<String, String> requestMap) {
+		try {
+			return ups.onboard(userProcessId,recrutmentId,requestMap);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

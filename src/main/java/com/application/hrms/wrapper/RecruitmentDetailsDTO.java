@@ -1,5 +1,7 @@
 package com.application.hrms.wrapper;
 
+import javax.persistence.Column;
+
 public class RecruitmentDetailsDTO {
 	 private Integer scheduleId;
 	    private Integer interviewerId;
@@ -42,7 +44,9 @@ public class RecruitmentDetailsDTO {
 		private String userlink;
 		private String offergenerateddate;
 		private String address;
-		
+		private String gender;
+		private String maritalstatus;
+		private String onboard;
 		
 
 	    // Constructor
@@ -56,7 +60,7 @@ public class RecruitmentDetailsDTO {
 	                                String budget, Integer departmentId, String departmentName, Integer designationId, String designationName, 
 	                                Integer recruitmentAssignerId,Integer recruterAssigneruserId,  Integer opuserid, String opusername, String opusercomment, 
 	                                String preferedjoingdate, String userconformation, String operationdate, String userlink,String offergenerateddate,
-	                                String address
+	                                String address,String gender, String maritalstatus, String onboard
 	                                ) {
 	        this.scheduleId = scheduleId;
 	        this.interviewerId = interviewerId;
@@ -99,6 +103,9 @@ public class RecruitmentDetailsDTO {
 	        this.userlink = userlink;
 	        this.offergenerateddate = offergenerateddate;
 	        this.address = address;
+	        this.gender = gender;
+	        this.maritalstatus = maritalstatus;
+	        this.onboard = onboard;
 	    }
 
 	    // Getters and Setters
@@ -419,5 +426,24 @@ public class RecruitmentDetailsDTO {
 		}
 		public void setAddress(String op) {
 			this.address= op;
+		}
+
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String op) {
+			this.gender= op;
+		}
+		public String getMaritalstatus() {
+			return maritalstatus;
+		}
+		public void setMaritalstatus(String op) {
+			this.maritalstatus= op;
+		}
+		public String getOnboard() {
+			return onboard;
+		}
+		public void setOnboard(String op) {
+			this.onboard= op;
 		}
 }
