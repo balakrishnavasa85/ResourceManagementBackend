@@ -300,7 +300,14 @@ public class UserProcess implements Serializable {
 	public void setOnboard(String op) {
 		this.onboard= op;
 	}
-
+	@Column(name="onboardid")
+	private String onboardid;
+	public String getOnboardId() {
+		return onboardid;
+	}
+	public void setOnboardId(String op) {
+		this.onboardid= op;
+	}
 	 public UserProcess() {}
 
 	    // Parameterized constructor

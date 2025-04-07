@@ -47,6 +47,8 @@ public class RecruitmentDetailsDTO {
 		private String gender;
 		private String maritalstatus;
 		private String onboard;
+		private String onboardid;
+		
 		
 
 	    // Constructor
@@ -60,7 +62,7 @@ public class RecruitmentDetailsDTO {
 	                                String budget, Integer departmentId, String departmentName, Integer designationId, String designationName, 
 	                                Integer recruitmentAssignerId,Integer recruterAssigneruserId,  Integer opuserid, String opusername, String opusercomment, 
 	                                String preferedjoingdate, String userconformation, String operationdate, String userlink,String offergenerateddate,
-	                                String address,String gender, String maritalstatus, String onboard
+	                                String address,String gender, String maritalstatus, String onboard, String onboardid
 	                                ) {
 	        this.scheduleId = scheduleId;
 	        this.interviewerId = interviewerId;
@@ -106,6 +108,7 @@ public class RecruitmentDetailsDTO {
 	        this.gender = gender;
 	        this.maritalstatus = maritalstatus;
 	        this.onboard = onboard;
+	        this.onboardid = onboardid;
 	    }
 
 	    // Getters and Setters
@@ -445,5 +448,11 @@ public class RecruitmentDetailsDTO {
 		}
 		public void setOnboard(String op) {
 			this.onboard= op;
+		}
+		public String getOnboardId() {
+			return onboardid;
+		}
+		public void setOnboardId(String op) {
+			this.onboardid= op;
 		}
 }

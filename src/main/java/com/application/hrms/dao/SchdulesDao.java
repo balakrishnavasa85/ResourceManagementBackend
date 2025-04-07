@@ -35,7 +35,7 @@ public interface SchdulesDao extends JpaRepository<Schdules, Integer> {
             "r.id, r.reqid, r.title, r.description, r.status, r.noofpositions, " +
             "r.noofpositionsclosed, r.budget, d.id, d.name,de.id, de.name, ra.id,ra.user.id " +
             ",up.opuserid  ,up.opusername  ,up.opusercomment  ,up.preferedjoingdate  ,up.userconformation  "+
-            ",up.operationdate, up.userlink,up.offergenerateddate,up.address,up.gender,up.maritalstatus,up.onboard  " +
+            ",up.operationdate, up.userlink,up.offergenerateddate,up.address,up.gender,up.maritalstatus,up.onboard,up.onboardid  " +
              ") " +
             "FROM Schdules s " +
             "JOIN s.userprocess up " +
@@ -55,7 +55,7 @@ public interface SchdulesDao extends JpaRepository<Schdules, Integer> {
             "r.id, r.reqid, r.title, r.description, r.status, r.noofpositions, " +
             "r.noofpositionsclosed, r.budget, d.id, d.name,de.id, de.name, ra.id,ra.user.id " +
             ",up.opuserid  ,up.opusername  ,up.opusercomment  ,up.preferedjoingdate  ,up.userconformation  "
-            + ",up.operationdate, up.userlink,up.offergenerateddate,up.address,up.gender,up.maritalstatus,up.onboard  " +
+            + ",up.operationdate, up.userlink,up.offergenerateddate,up.address,up.gender,up.maritalstatus,up.onboard,up.onboardid  " +
              ") " +
             "FROM Schdules s " +
             "JOIN s.userprocess up " +

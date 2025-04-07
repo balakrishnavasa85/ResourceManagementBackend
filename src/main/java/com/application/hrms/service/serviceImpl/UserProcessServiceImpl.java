@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.application.hrms.POJO.Recrutment;
+import com.application.hrms.POJO.User;
 import com.application.hrms.POJO.UserProcess;
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.dao.RecrutmentDao;
@@ -177,7 +178,8 @@ public class UserProcessServiceImpl implements UserProcessService {
 					HttpStatus status = response.getStatusCode();
 					if(status.equals(HttpStatus.OK))
 					{
-						userProcessDao.updateOnboard(userProcessId);
+						User newuser = userDao.findByEmailId(requestMap.get("email"));
+						userProcessDao.updateOnboard(userProcessId,newuser.getUniqueId());
 						Integer noofopositionsCount = rval.get().getNoofpositionsclosed() + 1;						
 						recrutmentDao.updatePositions(noofopositionsCount,recrutmentId);						
 						return HrmsUtils.getResponeEntity("Successfully  Onboareded.", HttpStatus.OK);

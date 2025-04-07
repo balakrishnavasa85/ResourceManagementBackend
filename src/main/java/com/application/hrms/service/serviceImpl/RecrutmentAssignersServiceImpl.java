@@ -81,15 +81,15 @@ public class RecrutmentAssignersServiceImpl implements RecrutmentAssignersServic
 		return HrmsUtils.getResponeEntity(HrmsConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-//	@Override
-//	public ResponseEntity<List<Recrutment>> getActive() {
-//		List<Recrutment> list = new ArrayList<Recrutment>();
-//		try {
-//			return new ResponseEntity<List<Recrutment>>(recrutmentDao.getAllActive(), HttpStatus.OK);
-//
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
-//		return new ResponseEntity<List<Recrutment>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
+	@Override
+	public ResponseEntity<List<Recrutment>> getById(Integer id) {
+		List<Recrutment> list = new ArrayList<Recrutment>();
+		try {
+			return new ResponseEntity<List<Recrutment>>(recrutmentDao.getByIdAssigner(id), HttpStatus.OK);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<Recrutment>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

@@ -11,6 +11,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.hrms.POJO.Recrutment;
+import com.application.hrms.POJO.RecrutmentAssigners;
 import com.application.hrms.POJO.User;
 import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.DepartmentRest;
@@ -38,22 +39,29 @@ public class RecrutmentAssignersRestImpl implements RecrutmentAssignersRest {
             ex.printStackTrace();
         }
         return new ResponseEntity<String>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
 
 
 
 //	@Override
-//	public ResponseEntity<List<Recrutment>> getActive() {
-//		try {
-//     	   
-////        	JSONObject data = jwtUtil.extractUserIdNew(authorizationHeader);
-//            
-//            return recrutmentService.getActive();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        return new ResponseEntity<List<Recrutment>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+//	public ResponseEntity<RecrutmentAssigners> getById(Integer id) {
+//		// TODO Auto-generated method stub
+//		return null;
 //	}
+
+
+
+	@Override
+	public ResponseEntity<List<Recrutment>> getById(Integer id) {
+		try {
+     	   
+//        	JSONObject data = jwtUtil.extractUserIdNew(authorizationHeader);
+            
+            return recrutmentService.getById(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<Recrutment>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 }

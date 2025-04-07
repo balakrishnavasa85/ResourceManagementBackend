@@ -12,5 +12,5 @@ public interface RecrutmentAssignersService {
 	
 	ResponseEntity<String> createrecrtmentassign(Map<String, String> requestMap);
 	
-//	ResponseEntity<List<Recrutment>> getActive();
+	ResponseEntity<List<Recrutment>> getById(Integer id);
 }

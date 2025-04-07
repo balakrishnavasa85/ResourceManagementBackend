@@ -97,23 +97,24 @@ public class TdsServiceImpl implements TdsService {
 					+ jsonObjectv.getDouble("leavetravelallowance") * 12
 					+ jsonObjectv.getDouble("telephoneinternet") * 12
 					+ jsonObjectv.getDouble("childreneducationallowance") * 12 + jsonObjectv.getDouble("insurance") * 12
+
 					+ jsonObjectv.getDouble("professionaltax") * 12;
 
-String basicStr = jsonObjectv.getString("basicsalary");
-Double basicValue = Double.parseDouble(basicStr.replace("%", ""))/100;
-String hraStr = jsonObjectv.getString("hra");
-Double hraValue = Double.parseDouble(hraStr.replace("%", ""))/100;
-String specialStr = jsonObjectv.getString("specialallowance");
-Double specialValue = Double.parseDouble(specialStr.replace("%", ""))/100;
+			String basicStr = jsonObjectv.getString("basicsalary");
+			Double basicValue = Double.parseDouble(basicStr.replace("%", "")) / 100;
+			String hraStr = jsonObjectv.getString("hra");
+			Double hraValue = Double.parseDouble(hraStr.replace("%", "")) / 100;
+			String specialStr = jsonObjectv.getString("specialallowance");
+			Double specialValue = Double.parseDouble(specialStr.replace("%", "")) / 100;
 
 			Double basicpa = netsalary - sum;
 			Double basic = (basicpa) / 12;
-			BigDecimal basicAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(basicValue)).setScale(2,
-					RoundingMode.HALF_UP); // 20%
+			BigDecimal basicAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(basicValue))
+					.setScale(2, RoundingMode.HALF_UP); // 20%
 			BigDecimal hraAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(hraValue)).setScale(2,
 					RoundingMode.HALF_UP); // 20%
-			BigDecimal specialallowanceAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(specialValue))
-					.setScale(2, RoundingMode.HALF_UP);
+			BigDecimal specialallowanceAmount = BigDecimal.valueOf(basicpa / 12)
+					.multiply(BigDecimal.valueOf(specialValue)).setScale(2, RoundingMode.HALF_UP);
 			Integer childreneducationallowanceAmount = jsonObjectv.getInt("childreneducationallowance");
 			Integer carmaintenanceAmount = jsonObjectv.getInt("carmaintenance");
 			Integer leavetravelallowanceAmount = jsonObjectv.getInt("leavetravelallowance");
