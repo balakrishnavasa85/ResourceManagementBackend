@@ -56,7 +56,7 @@ public interface UserProcessDao extends JpaRepository<UserProcess, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query("update UserProcess u set u.onboard = 'y', u.onboardid =:uniqueid where u.id =:userProcessId")
+	@Query("update UserProcess u set u.onboard = 'y', u.onboardid =:uniqueid,u.password = NULL where u.id =:userProcessId")
 	Integer updateOnboard(@Param("userProcessId") Integer userProcessId,@Param("uniqueid") String uniqueid);
 
 }
