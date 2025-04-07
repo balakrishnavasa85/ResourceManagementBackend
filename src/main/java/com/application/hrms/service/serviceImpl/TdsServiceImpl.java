@@ -84,49 +84,54 @@ public class TdsServiceImpl implements TdsService {
 	}
 
 	@Override
-	public ResponseEntity<Map> getByAmount(Integer amount,Integer groupid) {
+	public ResponseEntity<Map> getByAmount(Integer amount, Integer groupid) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			Optional<Tds> tdsdata = tdsDao.findTaxSlabByAmount(amount);
-			Double basicpa = Double.valueOf(amount);
-
-			BigDecimal basicsaAmountPerMonth = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.50))
-					.setScale(2, RoundingMode.HALF_UP); // 50
-			BigDecimal hraAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.20)).setScale(2,
-					RoundingMode.HALF_UP); // 20%
-			BigDecimal specialallowanceAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(0.30))
-					.setScale(2, RoundingMode.HALF_UP); // 30%
-
-			BigDecimal tdsPercentage = BigDecimal.valueOf(tdsdata.get().getPercentage())
-					.divide(BigDecimal.valueOf(100));
-			BigDecimal tds = BigDecimal.valueOf(basicpa / 12).multiply(tdsPercentage).setScale(2, RoundingMode.HALF_UP);
-
 			DeductionGroup dg = dgd.getDeductionGroupInfoById(groupid);
 			JSONObject jsonObjectv = new JSONObject(dg.getValue());
 
+			Double netsalary = Double.valueOf(amount);
+
+			double sum = 0;
+			sum = sum + jsonObjectv.getDouble("PF") * 12 + jsonObjectv.getDouble("carmaintenance") * 12
+					+ jsonObjectv.getDouble("leavetravelallowance") * 12
+					+ jsonObjectv.getDouble("telephoneinternet") * 12
+					+ jsonObjectv.getDouble("childreneducationallowance") * 12 + jsonObjectv.getDouble("insurance") * 12
+					+ jsonObjectv.getDouble("professionaltax") * 12;
+
+String basicStr = jsonObjectv.getString("basicsalary");
+Double basicValue = Double.parseDouble(basicStr.replace("%", ""))/100;
+String hraStr = jsonObjectv.getString("hra");
+Double hraValue = Double.parseDouble(hraStr.replace("%", ""))/100;
+String specialStr = jsonObjectv.getString("specialallowance");
+Double specialValue = Double.parseDouble(specialStr.replace("%", ""))/100;
+
+			Double basicpa = netsalary - sum;
+			Double basic = (basicpa) / 12;
+			BigDecimal basicAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(basicValue)).setScale(2,
+					RoundingMode.HALF_UP); // 20%
+			BigDecimal hraAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(hraValue)).setScale(2,
+					RoundingMode.HALF_UP); // 20%
+			BigDecimal specialallowanceAmount = BigDecimal.valueOf(basicpa / 12).multiply(BigDecimal.valueOf(specialValue))
+					.setScale(2, RoundingMode.HALF_UP);
 			Integer childreneducationallowanceAmount = jsonObjectv.getInt("childreneducationallowance");
 			Integer carmaintenanceAmount = jsonObjectv.getInt("carmaintenance");
 			Integer leavetravelallowanceAmount = jsonObjectv.getInt("leavetravelallowance");
 			Integer telephoneinternetAmount = jsonObjectv.getInt("telephoneinternet");
 			Integer PFAmount = jsonObjectv.getInt("PF");
 			Integer insuranceAmount = jsonObjectv.getInt("insurance");
-			Integer professional = 200;
-			BigDecimal basicsaAmountPerDay = basicsaAmountPerMonth.divide(BigDecimal.valueOf(30), 2,
-					RoundingMode.HALF_UP);
-			BigDecimal basicSalaryAmount = basicsaAmountPerDay.multiply(BigDecimal.valueOf(30)).setScale(2,
-					RoundingMode.HALF_UP);
-			BigDecimal salaryCredited = basicSalaryAmount.add(hraAmount).add(specialallowanceAmount)
+			Integer professional = jsonObjectv.getInt("professionaltax");
+			BigDecimal salaryCredited = basicAmount.add(hraAmount).add(specialallowanceAmount)
 					.add(BigDecimal.valueOf(childreneducationallowanceAmount))
 					.add(BigDecimal.valueOf(carmaintenanceAmount)).add(BigDecimal.valueOf(leavetravelallowanceAmount))
-					.add(BigDecimal.valueOf(telephoneinternetAmount)).subtract(tds)
-					.subtract(BigDecimal.valueOf(professional)).subtract(BigDecimal.valueOf(PFAmount))
-					.subtract(BigDecimal.valueOf(insuranceAmount)).setScale(2, RoundingMode.HALF_UP);
+					.add(BigDecimal.valueOf(telephoneinternetAmount)).add(BigDecimal.valueOf(professional))
+					.add(BigDecimal.valueOf(PFAmount)).add(BigDecimal.valueOf(insuranceAmount))
+					.setScale(2, RoundingMode.HALF_UP);
+			response.put("netsalary", netsalary);
 			response.put("peranam", basicpa);
-			response.put("permonth", basicsaAmountPerMonth);
+			response.put("permonth", basicAmount);
 			response.put("hraAmount", hraAmount);
 			response.put("specialallowanceAmount", specialallowanceAmount);
-			response.put("tdsPercentage", tdsPercentage);
-			response.put("tds", tds);
 			response.put("dg", dg);
 			response.put("childreneducationallowanceAmount", childreneducationallowanceAmount);
 			response.put("carmaintenanceAmount", carmaintenanceAmount);
@@ -135,7 +140,7 @@ public class TdsServiceImpl implements TdsService {
 			response.put("PFAmount", PFAmount);
 			response.put("insuranceAmount", insuranceAmount);
 			response.put("professional", professional);
-			response.put("basicSalaryAmount", basicSalaryAmount);
+//			response.put("basicSalaryAmount", basicSalaryAmount);
 			response.put("salaryCredited", salaryCredited);
 			return new ResponseEntity<Map>(response, HttpStatus.OK);
 

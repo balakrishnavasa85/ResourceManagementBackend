@@ -35,6 +35,9 @@ public class User implements Serializable {
 	@Column(name = "uniqueid")
 	private String uniqueid;
 
+	@Column(name = "officelmail")
+	private String officelmail;	
+	
 	@Column(name = "contactNumber")
 	private String contactNumber;
 
@@ -376,10 +379,24 @@ public class User implements Serializable {
     	return uniqueid;
     }
     
+    public void setOfficelMail(String uid) {
+    	this.officelmail = uid;
+    }
+    
+    public String getOfficelMail() {
+    	return officelmail;
+    }
+    
     @PostPersist
     private void generateUniqueId() {
         this.uniqueid ="ABC"+ this.id ;
+        this.officelmail ="ABC"+ this.id+"@demo.com" ;
     }
+    
+//    @PostPersist
+//    private void generateOfficelMail() {
+//        this.officelmail ="ABC"+ this.id+"@demo.com" ;
+//    }
 
     public User() {}
 
@@ -404,5 +421,6 @@ public class User implements Serializable {
         
         
         this.uniqueid = "ABC" + id;
+        this.officelmail = "ABC"+id+"@demo.com";
     }
 }

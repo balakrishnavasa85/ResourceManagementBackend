@@ -37,9 +37,10 @@ public class CustomerUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        log.info("Inside loadUserByUsername {}", username);
-        userDatails = userDao.findByEmailId(username);
+//        userDatails = userDao.findByEmailId(username);
+    	userDatails = userDao.findByOfficelEmail(username);
         if (!Objects.isNull(userDatails)) {
-            return new User(userDatails.getEmail(), userDatails.getPassword(), new ArrayList<>());
+            return new User(userDatails.getOfficelMail(), userDatails.getPassword(), new ArrayList<>());
         } else {
         	userProcessDatails = userProcessDao.findByEmailId(username);
         	if (!Objects.isNull(userProcessDatails)) {

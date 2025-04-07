@@ -139,9 +139,13 @@ public class UserServiceImpl implements UserService {
 		user.setDeductionGroup(dgdi);
 		JSONObject jsonObjectv = new JSONObject(dgdi.getValue());
 		double sum = 0;
-		sum = sum + jsonObjectv.getDouble("PF") * 12 + jsonObjectv.getDouble("carmaintenance") * 12
-				+ jsonObjectv.getDouble("leavetravelallowance") * 12 + jsonObjectv.getDouble("telephoneinternet") * 12
-				+ jsonObjectv.getDouble("childreneducationallowance") * 12;
+		sum = sum + jsonObjectv.getDouble("PF") * 12 
+				+ jsonObjectv.getDouble("carmaintenance") * 12
+				+ jsonObjectv.getDouble("leavetravelallowance") * 12 
+				+ jsonObjectv.getDouble("telephoneinternet") * 12
+				+ jsonObjectv.getDouble("childreneducationallowance") * 12 
+				+ jsonObjectv.getDouble("insurance") * 12 
+				+jsonObjectv.getDouble("professionaltax") * 12;
 		System.out.println("Sum of selected keys: " + sum);
 
 		Double basic = (Double.parseDouble(requestMap.get("salarypa").replace(",", "")) - sum);
@@ -178,7 +182,7 @@ public class UserServiceImpl implements UserService {
 					etssi.emplogin(customerUserDetailsService.getUserDatails().getId());
 					return new ResponseEntity<String>(
 							"{\"token\":\""
-									+ jwtUtil.generateToken(customerUserDetailsService.getUserDatails().getEmail(),
+									+ jwtUtil.generateToken(customerUserDetailsService.getUserDatails().getOfficelMail(),
 											customerUserDetailsService.getUserDatails().getRole(),
 											customerUserDetailsService.getUserDatails().getName(),
 											customerUserDetailsService.getUserDatails().getId())
