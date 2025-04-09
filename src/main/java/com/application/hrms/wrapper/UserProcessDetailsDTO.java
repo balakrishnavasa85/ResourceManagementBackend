@@ -5,6 +5,7 @@ import com.application.hrms.POJO.UserProcess;
 public class UserProcessDetailsDTO {
     private UserProcess userProcess;
     private Integer recrutmentId;
+    private String reqid;
     private Integer noofpositions;
     private Integer noofpositionsclosed;
     private Integer departmentId;
@@ -12,11 +13,12 @@ public class UserProcessDetailsDTO {
     private Integer designationId;
     private String designationName;
 
-    public UserProcessDetailsDTO(UserProcess userProcess, Integer id,Integer noofpositions,Integer noofpositionsclosed, Integer depId, String departmentName, Integer desId, String designationName) {
+    public UserProcessDetailsDTO(UserProcess userProcess, Integer id,String reqid,Integer noofpositions,Integer noofpositionsclosed, Integer depId, String departmentName, Integer desId, String designationName) {
         this.userProcess = userProcess;
         this.recrutmentId = id;
+        this.reqid = reqid;
         this.noofpositions = noofpositions;
-        this.noofpositionsclosed = noofpositions;
+        this.noofpositionsclosed = noofpositionsclosed;
         this.departmentId = depId;
         this.departmentName = departmentName;
         this.designationId = desId;
@@ -86,4 +88,12 @@ public class UserProcessDetailsDTO {
 	public Integer getNoofpositionsclosed() {
 		return noofpositionsclosed;
 	}
+	
+	  public String getReqid() {
+	        return reqid;
+	    }
+
+	    public void setReqid(String departmentName) {
+	        this.reqid = departmentName;
+	    }
 }

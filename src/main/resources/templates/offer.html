@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Congratulation</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-     
-    }
-    h2 {
-      color: #333;
-      text-align: center;
-    }
-    .field {
-      margin-bottom: 15px;
-    }
-    .label {
-      font-weight: bold;
-      color: #555;
-    }
-    .value {
-      display: block;
-      color: #000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Congratulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .field {
+            margin-bottom: 15px;
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .value {
+            display: block;
+            color: #000;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <h2>Hi Mr/Mrs</h2>
+    <div class="container">
+        <h2>Hi Mr/Mrs {{name}}</h2>
 
-    <div class="field">
-      <span class="label">Name:</span>
-      <span class="value">{{name}}</span>
-    </div>
+        <h2>Login With Email & Password</h2>
 
-    <div class="field">
-      <span class="label">Email:</span>
-      <span class="value">{{email}}</span>
-    </div>
+        <div class="field">
+            <span class="label">Email:</span>
+            <span class="value">{{email}}</span>
+        </div>
 
-    <div class="field">
-      <span class="label">Password:</span>
-      <span class="value">{{password}}</span>
-    </div>
+        <div class="field">
+            <span class="label" style="width:auto;margin:15px; padding:5px">Password:</span>
+            <span class="value"><span  style="background-color: green;width:auto;margin:15px; padding:5px">{{password}}</span></span>
+        </div>
 
-    <div class="field">
-      <span class="label">Offer Generated Date:</span>
-      <span class="value">{{offergeneratedon}}</span>
-    </div>
+        <div class="field">
+            <span class="label">Offer Generated Date:</span>
+            <span class="value">{{offergeneratedon}}</span>
+        </div>
 
-    <div class="field">
-      <span class="label">Joining Date:</span>
-      <span class="value">{{joingdate}}</span>
-    </div>
+        <div class="field">
+            <span class="label">Joining Date:</span>
+            <span class="value">{{joingdate}}</span>
+        </div>
 
-    <div class="field">
-      <span class="label">Link Date:</span>
-      <span class="value"><a href="http://localhost:4200" target="_blank">Login</a></span>
+        <div class="field">
+            <span class="label">Link Date:</span>
+            <span class="value"><a href="http://localhost:4200" target="_blank">Login</a></span>
+        </div>
     </div>
-  </div>
 </body>
+
 </html>

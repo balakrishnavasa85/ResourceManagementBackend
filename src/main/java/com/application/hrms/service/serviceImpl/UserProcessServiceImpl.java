@@ -204,6 +204,14 @@ public class UserProcessServiceImpl implements UserProcessService {
 						userProcessDao.updateOnboard(userProcessId,newuser.getUniqueId());
 						Integer noofopositionsCount = rval.get().getNoofpositionsclosed() + 1;						
 						recrutmentDao.updatePositions(noofopositionsCount,recrutmentId);						
+						
+						
+						Map<String, String> info = new HashMap<>();
+						info.put("name", newuser.getName());
+						info.put("email", newuser.getOfficelMail());
+						info.put("password", newuser.getPassword());
+						emailUtil.sendHtmlEmail(up.get().getEmail(), "Onboarded", info, null, "onboard");
+						
 						return HrmsUtils.getResponeEntity("Successfully  Onboareded.", HttpStatus.OK);
 					} 
 					else

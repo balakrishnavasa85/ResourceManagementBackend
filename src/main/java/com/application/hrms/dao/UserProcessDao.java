@@ -48,7 +48,7 @@ public interface UserProcessDao extends JpaRepository<UserProcess, Integer> {
 			@Param("name") String name, @Param("id") Integer id);
  
 
-	@Query("SELECT new com.application.hrms.wrapper.UserProcessDetailsDTO(" + "up,r.id,r.noofpositions,r.noofpositionsclosed, d.id, d.name,de.id, de.name) "
+	@Query("SELECT new com.application.hrms.wrapper.UserProcessDetailsDTO(" + "up,r.id,r.reqid,r.noofpositions,r.noofpositionsclosed, d.id, d.name,de.id, de.name) "
 			+ "FROM UserProcess up " + "JOIN up.recrutmentassigners ra " + "JOIN ra.recrutment r "
 			+ "JOIN r.department d " + "JOIN r.designation de "
 			+ "WHERE up.userconformation = 'accepted' AND (up.onboard IS NULL OR up.onboard != 'y')")
