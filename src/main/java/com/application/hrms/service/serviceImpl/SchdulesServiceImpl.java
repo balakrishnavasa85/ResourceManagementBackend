@@ -23,6 +23,7 @@ import com.application.hrms.dao.SchdulesDao;
 import com.application.hrms.dao.UserDao;
 import com.application.hrms.dao.UserProcessDao;
 import com.application.hrms.service.SchdulesService;
+import com.application.hrms.utils.EmailUtil;
 import com.application.hrms.utils.HrmsUtils;
 import com.application.hrms.wrapper.RecruitmentDetailsDTO;
 
@@ -43,6 +44,9 @@ public class SchdulesServiceImpl implements SchdulesService {
 
 	@Autowired
 	RecrutmentDao recrutmentDao;
+	
+	@Autowired
+	EmailUtil emailUtil;
 
 	@Override
 	public ResponseEntity<String> create(Map<String, String> requestMap) {
@@ -55,12 +59,21 @@ public class SchdulesServiceImpl implements SchdulesService {
 				sch.setInterviewerid(Integer.parseInt(requestMap.get("interviewerid")));
 				sch.setInterviewername(name);
 				sch.setInterviewtime(requestMap.get("interviewtime"));
+				sch.setInterviewlink(requestMap.get("interviewlink"));
+				sch.setInterviewTitle(requestMap.get("title"));
 				sch.setStatus(requestMap.get("status"));
 				sch.setUserprocess(useri.get());
 				sch.setAssigner(Integer.parseInt(requestMap.get("assignerid")));
 				sch.setTakentime(null);
 				sch.setComment(null);
 				sDao.save(sch);
+
+				Map<String, String> info = new HashMap<>();
+				info.put("interviewlink", requestMap.get("interviewlink"));
+				info.put("interviewername", useri.get().getName());
+				info.put("interviewtime", requestMap.get("interviewtime"));
+				emailUtil.sendHtmlEmail(useri.get().getEmail(),
+						requestMap.get("title"), info, null, "schdule");
 
 				return HrmsUtils.getResponeEntity("Successfully Schduled.", HttpStatus.OK);
 			} else {

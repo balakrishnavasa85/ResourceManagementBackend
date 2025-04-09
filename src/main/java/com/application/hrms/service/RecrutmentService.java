@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,5 +21,5 @@ public interface RecrutmentService {
 	
 	ResponseEntity<List<Recrutment>> getRecruitmentsByUserId(Integer userid);
 	
-	ResponseEntity<String> creatUserProcess(String data, MultipartFile file) throws JSONException, IOException;
+	ResponseEntity<String> creatUserProcess(String data, MultipartFile file) throws JSONException, IOException, MessagingException;
 }

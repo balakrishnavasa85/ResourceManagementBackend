@@ -3,6 +3,7 @@ package com.application.hrms.service.serviceImpl;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import com.application.hrms.dao.UserDao;
 import com.application.hrms.dao.UserProcessDao;
 import com.application.hrms.service.UserProcessService;
 import com.application.hrms.service.UserService;
+import com.application.hrms.utils.EmailUtil;
 import com.application.hrms.utils.HrmsUtils;
 import com.application.hrms.wrapper.UserProcessDetailsDTO;
 import com.application.hrms.wrapper.UserProcessWrapper;
@@ -42,6 +44,9 @@ public class UserProcessServiceImpl implements UserProcessService {
 	
 	@Autowired
 	RecrutmentDao recrutmentDao;
+	
+	@Autowired
+	EmailUtil emailUtil;
 
 	@Override
 	public ResponseEntity<List<UserProcess>> check(Map<String, String> requestMap) {
@@ -73,8 +78,16 @@ public class UserProcessServiceImpl implements UserProcessService {
 				String userconformation = requestMap.get("userConformation");
 				String operationdate = currentDate.format(formatter);
 				Integer id = Integer.parseInt(requestMap.get("userProcessId"));
-				
 				userProcessDao.updateOperationData(opuserid,opusername,opusercomment,preferedjoingdate,userconformation,operationdate,id);
+				
+				if(requestMap.get("userConformation").equals("accepted")) {					
+				Map<String, String> info = new HashMap<>();
+				info.put("name", up.get().getName());
+				emailUtil.sendHtmlEmail(up.get().getEmail(),
+						"User Conformation", info, null, "conformation");
+				}
+				
+				
 				return HrmsUtils.getResponeEntity("Successfully  Updated.", HttpStatus.OK);
 			}
 			else
@@ -96,9 +109,18 @@ public class UserProcessServiceImpl implements UserProcessService {
 				String offergenerateddate = requestMap.get("offergenerateddate");
 				String password = requestMap.get("password");
 				String userlink = requestMap.get("userlink");
-				Integer id = Integer.parseInt(requestMap.get("userProcessId"));
-				
+				Integer id = Integer.parseInt(requestMap.get("userProcessId"));				
 				userProcessDao.offerInitiate(offergenerateddate,password,userlink,id);
+				
+				Map<String, String> info = new HashMap<>();
+				info.put("name", up.get().getName());
+				info.put("email", up.get().getEmail());
+				info.put("password", password);
+				info.put("offergeneratedon", offergenerateddate);
+				info.put("joingdate", up.get().getpreferedjoingdate());
+				emailUtil.sendHtmlEmail(up.get().getEmail(),
+						"Congratulations", info, null, "offer");
+				
 				return HrmsUtils.getResponeEntity("Successfully  Updated.", HttpStatus.OK);
 			}
 			else

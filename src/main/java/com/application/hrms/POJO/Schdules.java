@@ -46,7 +46,13 @@ public class Schdules implements Serializable {
 
 	@Column(name = "interviewerid")
 	private Integer interviewerid;
+	
+	@Column(name="interviewlink")
+	private String interviewlink;
 
+	@Column(name="interviewtitle")
+	private String interviewtitle;
+	
 	@Column(name = "assigner")
 	private Integer assigner;
 
@@ -136,5 +142,21 @@ public class Schdules implements Serializable {
 
 	public String getComment() {
 		return comment;
+	}
+	
+	public void setInterviewlink(String str) {
+		this.interviewlink= str;
+	}
+
+	public String getInterviewlink() {
+		return interviewlink;
+	}
+
+	public void setInterviewTitle(String str) {
+		this.interviewtitle= str;
+	}
+
+	public String getInterviewTitle() {
+		return interviewtitle;
 	}
 }
