@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.application.hrms.POJO.AppraisalCategories;
 import com.application.hrms.POJO.AppraisalCriteria;
+import com.application.hrms.wrapper.GoalsetDTO;
 
 public interface AppraisalCriteriaService {
 	ResponseEntity<List<AppraisalCriteria>> getAll();
@@ -20,4 +21,6 @@ public interface AppraisalCriteriaService {
 	ResponseEntity<List<AppraisalCriteria>> getInfo(Integer id);
 
 	ResponseEntity<String> create(Map<String, String> requestMap);
+	
+	ResponseEntity<List<GoalsetDTO>> getGoalSet();
 }

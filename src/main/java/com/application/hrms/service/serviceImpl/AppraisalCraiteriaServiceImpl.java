@@ -27,6 +27,7 @@ import com.application.hrms.service.AppraisalCriteriaService;
 import com.application.hrms.service.DepartmentService;
 import com.application.hrms.utils.HrmsUtils;
 import com.application.hrms.wrapper.DepartmentWrapper;
+import com.application.hrms.wrapper.GoalsetDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -154,6 +155,37 @@ public class AppraisalCraiteriaServiceImpl implements AppraisalCriteriaService {
 		ac.setMaxmarks(requestMap.get("maxmarks"));
 		ac.setCategory(optional.get());		
 		return ac;
+	}
+
+	@Override
+	public ResponseEntity<List<GoalsetDTO>> getGoalSet() {
+		List<GoalsetDTO> list = new ArrayList<GoalsetDTO>();
+		try { 
+				List<Object[]> results = appraisalCriteriaDao.getGoalset();
+				List<Object> goals = new ArrayList<>();
+				for (Object[] result : results) {					
+					Integer cid =  (Integer) result[0];
+					String came = (String) result[1];
+					Integer ca_id =  (Integer) result[2];
+					String ca_title = (String) result[3];
+					String ca_name = (String) result[4];
+					Integer marks =  Integer.valueOf((String) result[5]);
+					GoalsetDTO gst = new GoalsetDTO();
+					gst.setCategoryId(cid);
+					gst.setCategoryName(came);
+					gst.setCriteriaId(ca_id);
+					gst.setCriteriaTitle(ca_title);
+					gst.setCriteriaName(ca_name);
+					gst.setCriteriaMaxmarks(marks);
+					list.add(gst);					
+				}							
+				return new ResponseEntity<List<GoalsetDTO>>(list, HttpStatus.OK);
+			 
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ResponseEntity<List<GoalsetDTO>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

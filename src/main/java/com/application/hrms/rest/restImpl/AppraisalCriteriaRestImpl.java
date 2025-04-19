@@ -16,7 +16,8 @@ import com.application.hrms.constents.HrmsConstants;
 import com.application.hrms.rest.AppraisalCriteriaRest;
 import com.application.hrms.service.AppraisalCategoriesService;
 import com.application.hrms.service.AppraisalCriteriaService;
-import com.application.hrms.utils.HrmsUtils; 
+import com.application.hrms.utils.HrmsUtils;
+import com.application.hrms.wrapper.GoalsetDTO; 
 
 @RestController
 public class AppraisalCriteriaRestImpl implements AppraisalCriteriaRest {
@@ -89,5 +90,15 @@ public class AppraisalCriteriaRestImpl implements AppraisalCriteriaRest {
         return new ResponseEntity<List<AppraisalCriteria>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
   
 	}
+
+	@Override
+	public ResponseEntity<List<GoalsetDTO>> getGoalSet() {
+		try {
+            return appraisalCriteriaService.getGoalSet();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<GoalsetDTO>>((MultiValueMap<String, String>) new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
+  }
 
 }

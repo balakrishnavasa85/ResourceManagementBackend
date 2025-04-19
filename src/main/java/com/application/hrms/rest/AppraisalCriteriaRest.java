@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.application.hrms.POJO.AppraisalCategories;
 import com.application.hrms.POJO.AppraisalCriteria;
 import com.application.hrms.wrapper.DepartmentWrapper;
+import com.application.hrms.wrapper.GoalsetDTO;
 
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping(path = "/appraisalCriteria/")
+@RequestMapping(path = "/appraisalCriteria")
 public interface AppraisalCriteriaRest {
 
 	@GetMapping(path = "/get")
@@ -37,5 +38,9 @@ public interface AppraisalCriteriaRest {
 
 	@PostMapping(path = "/create")
 	public ResponseEntity<String> create(@RequestBody(required = true) Map<String, String> requestMap);
+	
+
+	@GetMapping(path = "/getGoalSet")
+	public ResponseEntity<List<GoalsetDTO>> getGoalSet();
 
 }

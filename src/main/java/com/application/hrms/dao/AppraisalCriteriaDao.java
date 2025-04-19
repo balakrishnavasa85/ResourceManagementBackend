@@ -53,4 +53,7 @@ public interface AppraisalCriteriaDao extends JpaRepository<AppraisalCriteria, I
 	@Query("select u from AppraisalCriteria u  where u.category.id =:id")
 	List<AppraisalCriteria> loadCriterias(@Param("id") Integer id);
 	
+	@Query(value ="SELECT ac.category_id as cid,ac.name as cname, a.id as caid,a.title as catitle,a.name as caname ,a.maxmarks as camarks FROM appraisalcriteria a "
+			+ "JOIN appraisalcategories ac ON a.appraisalcategories_id = ac.category_id ", nativeQuery = true)
+	List<Object[]> getGoalset();
 }
