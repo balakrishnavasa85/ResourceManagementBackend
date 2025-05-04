@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.application.hrms.POJO.ApplicationAccess;
-import com.application.hrms.POJO.AppraisalCycles;
 import com.application.hrms.POJO.Appraisals;
 import com.application.hrms.POJO.DeductionGroup;
 import com.application.hrms.POJO.DeductionGroup;

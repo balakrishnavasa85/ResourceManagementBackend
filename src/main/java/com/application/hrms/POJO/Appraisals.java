@@ -48,22 +48,15 @@ public class Appraisals implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name = "cycle_id", nullable = false)
-	private AppraisalCycles appraisalcycle;
-
-	@Column(name = "reviewerid")
-	private Integer reviewerid;
-
-	@Column(name = "totalscore")
-	private Integer totalscore;
-
-	@Column(name = "createdat")
-	private String createdat;
-
-	@OneToMany(mappedBy = "appraisals", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<AppraisalScores> scores;
-
+	@Column(name = "score")
+	private String score;
+	
+	@Column(name = "comments")
+	private String comments;
+	
+	@Column(name= "data")
+	private String data;
+	
 	public void setId(Integer inte) {
 		this.appraisalid = inte;
 	}
@@ -76,40 +69,33 @@ public class Appraisals implements Serializable {
 		this.user = upi;
 	}
 
-	public void setAppraisalCycle(AppraisalCycles upi) {
-		this.appraisalcycle = upi;
-	}
-
-	public void setReviewerid(Integer inte) {
-		this.reviewerid = inte;
-	}
-
-	public Integer getReviewerid() {
-		return reviewerid;
-	}
-
-	public void setTotalscore(Integer inte) {
-		this.totalscore = inte;
-	}
-
-	public Integer getTotalscore() {
-		return totalscore;
-	}
-
-	public void setCreatedat(String inte) {
-		this.createdat = inte;
-	}
-
-	public String getCreatedat() {
-		return createdat;
+	public User getUser()
+	{
+		return user;
 	}
 	
-	public void setScores(List<AppraisalScores> lis) {
-		this.scores = lis;
-	}
-	public List<AppraisalScores> getScores()
+	public void setScore(String score)
 	{
-		return scores;
+		this.score = score;
 	}
-
+	public String getScore()
+	{
+		return score;
+	}
+	public void setComments(String score)
+	{
+		this.comments = score;
+	}
+	public String getComments()
+	{
+		return comments;
+	}
+	public void setData(String score)
+	{
+		this.data = score;
+	}
+	public String getData()
+	{
+		return data;
+	}
 }
